@@ -2,7 +2,7 @@
 
 namespace BankAccount.Infrastructure.Commanding
 {
-    public interface ICommand : IDomainMessage
+    public interface ICommand
     {
         Guid Id { get; }
     }
