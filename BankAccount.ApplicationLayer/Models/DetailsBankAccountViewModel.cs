@@ -6,6 +6,7 @@ namespace BankAccount.ApplicationLayer.Models
     public class DetailsBankAccountViewModel
     {
         public Guid AggregateId { get; set; }
+        public int Version { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string IdCard { get; set; }
