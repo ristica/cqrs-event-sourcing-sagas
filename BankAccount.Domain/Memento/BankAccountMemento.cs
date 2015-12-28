@@ -6,6 +6,8 @@ namespace BankAccount.Domain.Memento
 {
     public class BankAccountMemento : BaseMemento
     {
+        public Guid Id { get; set; }
+        public int Version { get; set; }
         public Customer Customer { get; private set; }
         public Contact Contact { get; private set; }
         public Money Money { get; private set; }
@@ -19,6 +21,8 @@ namespace BankAccount.Domain.Memento
             Money money,
             Address address)
         {
+            this.Id = id;
+            this.Version = version;
             this.Customer = customer;
             this.Contact = contact;
             this.Money = money;
