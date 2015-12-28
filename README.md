@@ -4,7 +4,7 @@ As event store / snapshoting => NEventStore (in my case I'm using SQL Server as 
 
 As state store => SQL Server
 
-<hr\>
+---------------------------------------------------------------------------------------
 
 How to use it?
 
