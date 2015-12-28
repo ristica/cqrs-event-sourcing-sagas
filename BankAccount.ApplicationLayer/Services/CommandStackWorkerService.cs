@@ -28,11 +28,10 @@ namespace BankAccount.ApplicationLayer.Services
                     vm.State));
         }
 
-        public void DeleteBankAccount(Guid id)
+        public void DeleteBankAccount(Guid id, int version)
         {
-            var account = IoCServiceLocator.QueryStackRepository.GetBankAccount(id);
             IoCServiceLocator.CommandBus.Send(
-                new DeleteBankAccountCommand(id, account.Version));
+                new DeleteBankAccountCommand(id, version));
         }
 
         public void EditCustomerDetails(CustomerViewModel vm)
