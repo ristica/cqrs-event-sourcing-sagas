@@ -1,0 +1,121 @@
+﻿@model BankAccount.ApplicationLayer.Models.DetailsBankAccountViewModel
+
+@{
+    ViewBag.Title = "Bank account details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    fieldset {
+        margin-bottom: 20px;
+    }
+</style>
+
+<fieldset>
+    <legend>Customer details</legend>
+
+    <table>
+        <tr>
+            <td style="width: 200px; font-weight: bold;">@Html.DisplayNameFor(model => model.AggregateId)</td>
+            <td>@Html.DisplayFor(model => model.AggregateId)</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">@Html.DisplayNameFor(model => model.FirstName)</td>
+            <td>@Html.DisplayFor(model => model.FirstName)</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">@Html.DisplayNameFor(model => model.LastName)</td>
+            <td>@Html.DisplayFor(model => model.LastName)</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">@Html.DisplayNameFor(model => model.IdCard)</td>
+            <td>@Html.DisplayFor(model => model.IdCard)</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">@Html.DisplayNameFor(model => model.IdNumber)</td>
+            <td>@Html.DisplayFor(model => model.IdNumber)</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">@Html.DisplayNameFor(model => model.Dob)</td>
+            <td>@Html.DisplayFor(model => model.Dob)</td>
+        </tr>
+    </table>
+    <hr/>
+    <p>
+        @Html.ActionLink("Edit customer details", "EditCustomer", new {id = Model.AggregateId})
+    </p>
+
+</fieldset>
+
+<fieldset>
+    <legend>Contact details</legend>
+
+    <table>
+        <tr>
+            <td style="width: 200px; font-weight: bold;">@Html.DisplayNameFor(model => model.Email)</td>
+            <td>@Html.DisplayFor(model => model.Email)</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">@Html.DisplayNameFor(model => model.Phone)</td>
+            <td>@Html.DisplayFor(model => model.Phone)</td>
+        </tr>
+    </table>
+    <hr />
+    <p>
+        @Html.ActionLink("Edit contact details", "EditContact", new { id = Model.AggregateId })
+    </p>
+
+</fieldset>
+
+<fieldset>
+    <legend>Address details</legend>
+
+    <table>
+        <tr>
+            <td style="width: 200px; font-weight: bold;">@Html.DisplayNameFor(model => model.Street)</td>
+            <td>@Html.DisplayFor(model => model.Street)</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">@Html.DisplayNameFor(model => model.Zip)</td>
+            <td>@Html.DisplayFor(model => model.Zip)</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">@Html.DisplayNameFor(model => model.Hausnumber)</td>
+            <td>@Html.DisplayFor(model => model.Hausnumber)</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">@Html.DisplayNameFor(model => model.City)</td>
+            <td>@Html.DisplayFor(model => model.City)</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">@Html.DisplayNameFor(model => model.State)</td>
+            <td>@Html.DisplayFor(model => model.State)</td>
+        </tr>
+    </table>
+    <hr/>
+    <p>
+        @Html.ActionLink("Edit address details", "EditAddress", new { id = Model.AggregateId })
+    </p>
+
+</fieldset>
+
+<fieldset>
+    <legend>Acocunt details</legend>
+
+    <table>
+        <tr>
+            <td style="width: 200px; font-weight: bold;">@Html.DisplayNameFor(model => model.Currency)</td>
+            <td>@Html.DisplayFor(model => model.Currency)</td>
+        </tr>
+    </table>
+    <hr/>
+    <p>
+        @Html.ActionLink("Edit currency", "EditMoney", new { id = Model.AggregateId })
+    </p>
+
+</fieldset>
+
+<hr/>
+<p>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+</p>

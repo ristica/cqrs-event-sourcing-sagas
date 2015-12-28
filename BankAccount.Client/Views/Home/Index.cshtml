@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BankAccount.ApplicationLayer.Models.BankAccountViewModel>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+    <fieldset>
+        <h4>Current accounts</h4>
+
+        @if (Model == null || !Model.Any())
+        {
+            <div style="margin-bottom: 40px;"><b>No accounts in the bank yet...</b></div>
+        }
+        else
+        {
+            <table class="table">
+                <tr>
+                    <th>Account Nr.</th>
+                    <th>Account owner</th>
+                    <th>Current balance</th>
+                    <th></th>
+                </tr>
+                @foreach (var ba in Model)
+                {
+                    <tr>
+                        <td>@ba.Id</td>
+                        <td>@ba.FirstName @ba.LastName</td>
+                        <td>@ba.Currency @ba.Balance</td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", new {id = ba.Id}, new {@class = "btn btn-danger btn-sm pull-right", style = "margin-left: 2px;"})
+                            @Html.ActionLink("Details", "Details", new {id = ba.Id}, new {@class = "btn btn-default btn-sm pull-right", style = "margin-left: 15px;"})
+                            @Html.ActionLink("Bank statement", "History", new {id = ba.Id, name = ba.FirstName + " " + ba.LastName, balance = ba.Balance}, new {@class = "btn btn-default btn-sm pull-right", style = "margin-left: 2px;"})
+                            @Html.ActionLink("Money transfer", "TransferMoney", new {id = ba.Id}, new {@class = "btn btn-default btn-sm pull-right"})
+                        </td>
+                    </tr>
+                }
+            </table>
+            <hr/>
+        }
+    </fieldset>
+
+    @Html.ActionLink("Add new account", "Add", null, new { @class = "btn btn-primary" })
+</div>
