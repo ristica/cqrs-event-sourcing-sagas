@@ -8,7 +8,7 @@ As state store => SQL Server
 
 How to use it?
 
-Just change the connection strings in the BankAccount.Client project. 
+Just change the connection strings in the BankAccount.Client project (web.config). 
 
 Build the solution (nuget packages will be downloaded and installed).
 
