@@ -5,6 +5,7 @@ CQRS with ES
 ------------------------------------------------------------------------------------------
 
 As event store / snapshoting => NEventStore (in my case I'm using SQL Server as the DB)
+
 As state store => SQl Server
 
 -------------------------------------------------------------------------------------------
