@@ -1,19 +1,13 @@
 ﻿using System;
 using BankAccount.Infrastructure.Commanding;
 using BankAccount.ValueTypes;
-using Microsoft.SqlServer.Server;
 
 namespace BankAccount.Commands
 {
     public class CreateBankAccountCommand : Command
     {
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public DateTime Dob { get; private set; }
-        public string IdCard { get; private set; }
-        public string IdNumber { get; private set; }
-        public string Email { get; private set; }
-        public string Phone { get; private set; }
+        public Contact Contact { get; private set; }
+        public Customer Customer { get; private set; }
         public Money Money { get; private set; }
         public Address Address { get; private set; }
 
@@ -35,13 +29,19 @@ namespace BankAccount.Commands
             string state) 
             : base(aggregateId, version)
         {
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.Dob = dob;
-            this.IdCard = idCard;
-            this.IdNumber = idNumber;
-            this.Email = email;
-            this.Phone = phone;
+            this.Customer = new Customer
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                IdCard = idCard,
+                IdNumber = idNumber,
+                Dob = dob
+            };
+            this.Contact = new Contact
+            {
+                Email = email,
+                PhoneNumber = phone
+            };
             this.Money = new Money
             {
                 Balance = 0,

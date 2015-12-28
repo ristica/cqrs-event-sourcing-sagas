@@ -156,25 +156,29 @@ namespace BankAccount.Domain
 
         public void Handle(BankAccountCreatedEvent e)
         {
-            this.Money = e.Money;
-            this.Customer = e.Customer;
             this.Id = e.AggregateId;
             this.Version = e.Version;
-            this.Address = e.Address;
+
+            this.Customer = e.Customer;
             this.Contact = e.Contact;
+            this.Address = e.Address;
+            this.Money = e.Money;
         }
 
         public void Handle(CustomerChangedEvent e)
         {
+            this.Version = e.Version;
+
             this.Customer.FirstName = e.FirstName;
             this.Customer.LastName = e.LastName;
             this.Customer.IdCard = e.IdCard;
             this.Customer.IdNumber = e.IdNumber;
-            this.Version = e.Version;
         }
 
         public void Handle(ContactChangedEvent e)
         {
+            this.Version = e.Version;
+
             this.Contact.Email = e.Email;
             this.Contact.PhoneNumber = e.Phone;
         }
@@ -186,24 +190,27 @@ namespace BankAccount.Domain
 
         public void Handle(BalanceChangedEvent e)
         {
-            this.Money.Balance = this.Money.Balance + e.Amount;
             this.Version = e.Version;
+
+            this.Money.Balance = this.Money.Balance + e.Amount;
         }
 
         public void Handle(CurrencyChangedEvent e)
         {
-            this.Money.Currency = e.Currency;
             this.Version = e.Version;
+
+            this.Money.Currency = e.Currency;
         }
 
         public void Handle(AddressChangedEvent e)
         {
+            this.Version = e.Version;
+
             this.Address.Street = e.Street;
             this.Address.Hausnumber = e.Hausnumber;
             this.Address.Zip = e.Zip;
             this.Address.City = e.City;
             this.Address.State = e.State;
-            this.Version = e.Version;
         }
 
         #endregion
