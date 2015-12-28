@@ -69,7 +69,8 @@ namespace BankAccount.Client.Controllers
 
         public ActionResult Delete(Guid id)
         {
-            this._commandService.DeleteBankAccount(id);
+            var model = this._queryService.GetDetails(id);
+            this._commandService.DeleteBankAccount(model.AggregateId, model.Version);
             return RedirectToAction("Index");
         }
 
