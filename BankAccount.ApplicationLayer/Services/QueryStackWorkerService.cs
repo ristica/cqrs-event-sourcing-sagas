@@ -44,7 +44,8 @@ namespace BankAccount.ApplicationLayer.Services
                 Street = account.Address.Street,
                 City = account.Address.City,
                 Currency = account.Money.Currency,
-                AggregateId = account.AggregateId
+                AggregateId = account.AggregateId,
+                Version = account.Version
             };
         }
 
