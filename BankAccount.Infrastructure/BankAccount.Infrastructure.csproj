@@ -75,7 +75,6 @@
     <Compile Include="Eventing\IEventProvider.cs" />
     <Compile Include="EventHandling\IHandle.cs" />
     <Compile Include="Exceptions\ConcurrencyException.cs" />
-    <Compile Include="IDomainMessage.cs" />
     <Compile Include="Storage\ICommandStackRepository.cs" />
     <Compile Include="Storage\IEventStore.cs" />
     <Compile Include="Exceptions\UnregisteredDomainCommandException.cs" />
