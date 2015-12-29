@@ -35,7 +35,6 @@ namespace BankAccount.Configuration
 
                 CommandBus = _container.Resolve<ICommandBus>();
                 QueryStackRepository = _container.Resolve<IQueryStackRepository>();
-                CommandDatabase = _container.Resolve<ICommandStackDatabase>();
 
                 IsInitialized = true;
             }
@@ -50,8 +49,6 @@ namespace BankAccount.Configuration
         public static ICommandBus CommandBus { get; }
 
         public static IQueryStackRepository QueryStackRepository { get; }
-
-        public static ICommandStackDatabase CommandDatabase { get; }
 
         #endregion
     }
