@@ -5,7 +5,7 @@ using BankAccount.Infrastructure.Exceptions;
 
 namespace BankAccount.Configuration.Buses.Base
 {
-    public class Bus
+    public abstract class Bus
     {
         private static readonly IList<Type> RegisteredHandlers = new List<Type>();
 

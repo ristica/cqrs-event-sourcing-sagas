@@ -7,7 +7,7 @@ using Microsoft.Practices.Unity;
 
 namespace BankAccount.Configuration.Buses
 {
-    public class CommandBus : Bus, ICommandBus
+    public sealed class CommandBus : Bus, ICommandBus
     {
         public void Send<T>(T command) where T : Command
         {

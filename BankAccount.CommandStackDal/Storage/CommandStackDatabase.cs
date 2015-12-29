@@ -9,7 +9,7 @@ using BankAccount.DbModel.ItemDb;
 
 namespace BankAccount.CommandStackDal.Storage
 {
-    public class CommandStackDatabase : ICommandStackDatabase
+    public sealed class CommandStackDatabase : ICommandStackDatabase
     {
         private static readonly List<Domain.BankAccount> Cache = new List<Domain.BankAccount>();
 
@@ -40,7 +40,7 @@ namespace BankAccount.CommandStackDal.Storage
                 var entity = ctx.BankAccountSet.SingleOrDefault(b => b.AggregateId == id);
                 if (entity == null)
                 {
-                    throw new AggregateNotFoundException();
+                    throw new AggregateNotFoundException($"Aggregate with the id {id} was not found");
                 }
                 ctx.BankAccountSet.Remove(entity);
                 ctx.SaveChanges();
@@ -84,33 +84,33 @@ namespace BankAccount.CommandStackDal.Storage
             {
                 ctx.BankAccountSet.Add(new BankAccountEntity
                 {
-                    AggregateId = item.Id,
-                    Version = item.Version,
+                    AggregateId         = item.Id,
+                    Version             = item.Version,
                     Money = new Money
                     {
-                        Balance = item.Money.Balance,
-                        Currency = item.Money.Currency
+                        Balance         = item.Money.Balance,
+                        Currency        = item.Money.Currency
                     },
                     Customer = new Customer
                     {
-                        Dob = item.Customer.Dob,
-                        FirstName = item.Customer.FirstName,
-                        LastName = item.Customer.LastName,
-                        IdCard = item.Customer.IdCard,
-                        IdNumber = item.Customer.IdNumber
+                        Dob             = item.Customer.Dob,
+                        FirstName       = item.Customer.FirstName,
+                        LastName        = item.Customer.LastName,
+                        IdCard          = item.Customer.IdCard,
+                        IdNumber        = item.Customer.IdNumber
                     },
                     Contact = new Contact
                     {
-                        Email = item.Contact.Email,
-                        Phone = item.Contact.PhoneNumber
+                        Email           = item.Contact.Email,
+                        Phone           = item.Contact.PhoneNumber
                     },
                     Address = new Address
                     {
-                        Street = item.Address.Street,
-                        Zip = item.Address.Zip,
-                        Hausnumber = item.Address.Hausnumber,
-                        City = item.Address.City,
-                        State = item.Address.State
+                        Street          = item.Address.Street,
+                        Zip             = item.Address.Zip,
+                        Hausnumber      = item.Address.Hausnumber,
+                        City            = item.Address.City,
+                        State           = item.Address.State
                     }
                 });
                 ctx.SaveChanges();
@@ -127,26 +127,26 @@ namespace BankAccount.CommandStackDal.Storage
                     throw new AggregateNotFoundException("Bank account");
                 }
 
-                entity.Version = item.Version;
-                entity.Customer.FirstName = item.Customer.FirstName;
-                entity.Customer.LastName = item.Customer.LastName;
-                entity.Customer.IdCard = item.Customer.IdCard;
-                entity.Customer.IdNumber = item.Customer.IdNumber;
-                entity.Customer.Dob = item.Customer.Dob;
+                entity.Version              = item.Version;
+                entity.Customer.FirstName   = item.Customer.FirstName;
+                entity.Customer.LastName    = item.Customer.LastName;
+                entity.Customer.IdCard      = item.Customer.IdCard;
+                entity.Customer.IdNumber    = item.Customer.IdNumber;
+                entity.Customer.Dob         = item.Customer.Dob;
 
-                entity.Contact.Email = item.Contact.Email;
-                entity.Contact.Phone = item.Contact.PhoneNumber;
+                entity.Contact.Email        = item.Contact.Email;
+                entity.Contact.Phone        = item.Contact.PhoneNumber;
 
-                entity.Money.Balance = item.Money.Balance;
-                entity.Money.Currency = item.Money.Currency;
+                entity.Address.Street       = item.Address.Street;
+                entity.Address.Zip          = item.Address.Zip;
+                entity.Address.Hausnumber   = item.Address.Hausnumber;
+                entity.Address.City         = item.Address.City;
+                entity.Address.State        = item.Address.State;
 
-                entity.Address.Street = item.Address.Street;
-                entity.Address.Zip = item.Address.Zip;
-                entity.Address.Hausnumber = item.Address.Hausnumber;
-                entity.Address.City = item.Address.City;
-                entity.Address.State = item.Address.State;
+                entity.Money.Balance        = item.Money.Balance;
+                entity.Money.Currency       = item.Money.Currency;
 
-                ctx.Entry(entity).State = EntityState.Modified;
+                ctx.Entry(entity).State     = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }

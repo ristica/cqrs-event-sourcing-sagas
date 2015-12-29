@@ -10,7 +10,7 @@ using Microsoft.Practices.Unity;
 
 namespace BankAccount.ApplicationLayer.Services
 {
-    public class QueryStackWorkerService
+    public sealed class QueryStackWorkerService
     {
         public static List<BankAccountViewModel> GetAllBankAccounts()
         {

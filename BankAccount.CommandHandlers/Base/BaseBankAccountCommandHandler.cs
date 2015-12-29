@@ -3,7 +3,7 @@ using BankAccount.Infrastructure.Storage;
 
 namespace BankAccount.CommandHandlers.Base
 {
-    public class BaseBankAccountCommandHandler
+    public abstract class BaseBankAccountCommandHandler
     {
         protected readonly ICommandStackRepository<Domain.BankAccount> Repository;
 

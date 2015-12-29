@@ -7,7 +7,7 @@ using Microsoft.Practices.Unity;
 
 namespace BankAccount.Configuration.Buses
 {
-    public class EventBus : Bus, IEventBus
+    public sealed class EventBus : Bus, IEventBus
     {
         public void Publish<T>(T @event) where T : Event
         {

@@ -9,7 +9,7 @@ using EventStore;
 
 namespace BankAccount.CommandStackDal.Storage.NEventStore
 {
-    public class NEventStoreCommandStackRepository<T> : ICommandStackRepository<T> where T : AggregateRoot, new()
+    public sealed class NEventStoreCommandStackRepository<T> : ICommandStackRepository<T> where T : AggregateRoot, new()
     {
         #region Fields
 
@@ -50,11 +50,7 @@ namespace BankAccount.CommandStackDal.Storage.NEventStore
                 var latestSnapshot = this._eventStore.Advanced.GetSnapshot(id, int.MaxValue);
                 if (latestSnapshot?.Payload != null)
                 {
-                    // 1) set object through snapshot
-                    // ReSharper disable once AssignNullToNotNullAttribute
                     obj = (T)Convert.ChangeType(latestSnapshot.Payload, latestSnapshot.Payload.GetType());
-
-                    // 2) load events due the snapshot revision id
                     commits = this._eventStore.Advanced.GetFrom(id, latestSnapshot.StreamRevision + 1, int.MaxValue).ToList();
                 }
                 else
@@ -84,7 +80,6 @@ namespace BankAccount.CommandStackDal.Storage.NEventStore
             if (!aggregate.GetUncommittedChanges().Any()) return;
 
             var changes = aggregate.GetUncommittedChanges().ToList();
-
             using (var stream = store.OpenStream(aggregate.Id, 0, int.MaxValue))
             {
                 var version = aggregate.Version < 0 ? 0 : aggregate.Version;
@@ -96,7 +91,6 @@ namespace BankAccount.CommandStackDal.Storage.NEventStore
                     stream.CommitChanges(Guid.NewGuid());
 
                     // make a snapshot every 10th event
-                    // due to Greg Young => do it every 1.000.000th event...
                     if (version % 10 != 0) continue;
 
                     aggregate.Version = version;

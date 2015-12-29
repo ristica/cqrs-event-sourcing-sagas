@@ -5,7 +5,7 @@ using BankAccount.Configuration;
 
 namespace BankAccount.ApplicationLayer.Services
 {
-    public class CommandStackWorkerService
+    public sealed class CommandStackWorkerService
     {
         public static void AddBankAccount(NewBankAccountViewModel vm)
         {

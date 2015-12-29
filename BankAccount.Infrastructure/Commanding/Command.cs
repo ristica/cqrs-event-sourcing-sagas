@@ -3,7 +3,7 @@
 namespace BankAccount.Infrastructure.Commanding
 {
     [Serializable]
-    public class Command : ICommand
+    public abstract class Command : ICommand
     {
         public Guid Id { get; }
         public int Version { get; private set; }

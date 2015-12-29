@@ -3,7 +3,7 @@ using BankAccount.CommandStackDal.Storage.Abstraction;
 
 namespace BankAccount.EventHandlers.Base
 {
-    public class BaseBankAccountEventHandler
+    public abstract class BaseBankAccountEventHandler
     {
         protected readonly ICommandStackDatabase Database;
 

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BankAccount.DbModel.Entities;
 using BankAccount.DbModel.ItemDb;
 using BankAccount.ReadModel;
 
 namespace BankAccount.QueryStackDal
 {
-    public class QueryStackRepository : IQueryStackRepository
+    public sealed class QueryStackRepository : IQueryStackRepository
     {
         public BankAccountReadModel GetBankAccount(Guid aggregateId)
         {

@@ -2,6 +2,9 @@
 
 namespace BankAccount.CommandStackDal.Storage.Abstraction
 {
+    /// <summary>
+    /// only write actions
+    /// </summary>
     public interface ICommandStackDatabase
     {
         void Save(Domain.BankAccount item);
