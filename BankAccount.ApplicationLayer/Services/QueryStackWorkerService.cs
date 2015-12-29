@@ -12,7 +12,7 @@ namespace BankAccount.ApplicationLayer.Services
 {
     public class QueryStackWorkerService
     {
-        public List<BankAccountViewModel> GetAllBankAccounts()
+        public static List<BankAccountViewModel> GetAllBankAccounts()
         {
             var accounts = IoCServiceLocator.QueryStackRepository.GetAccounts();
             return accounts.Select(acc => new BankAccountViewModel
@@ -25,7 +25,7 @@ namespace BankAccount.ApplicationLayer.Services
             }).ToList();
         }
 
-        public DetailsBankAccountViewModel GetDetails(Guid id)
+        public static DetailsBankAccountViewModel GetDetails(Guid id)
         {
             var account = IoCServiceLocator.QueryStackRepository.GetBankAccount(id);
             return new DetailsBankAccountViewModel
@@ -49,7 +49,7 @@ namespace BankAccount.ApplicationLayer.Services
             };
         }
 
-        public List<BalanceHistoryViewModel> GetBankAccountHistory(Guid id)
+        public static List<BalanceHistoryViewModel> GetBankAccountHistory(Guid id)
         {
             var commits = IoCServiceLocator.Container.Resolve<IStoreEvents>().Advanced.GetFrom(id, 0, int.MaxValue);
             var transactions = new List<BalanceHistoryViewModel>();
@@ -64,7 +64,7 @@ namespace BankAccount.ApplicationLayer.Services
             return transactions;
         }
 
-        public CustomerViewModel GetCustomerForBankAccount(Guid id)
+        public static CustomerViewModel GetCustomerForBankAccount(Guid id)
         {
             var account = IoCServiceLocator.QueryStackRepository.GetBankAccount(id);
             return new CustomerViewModel
@@ -78,7 +78,7 @@ namespace BankAccount.ApplicationLayer.Services
             };
         }
 
-        public ContactViewModel GetContactForBankAccount(Guid id)
+        public static ContactViewModel GetContactForBankAccount(Guid id)
         {
             var account = IoCServiceLocator.QueryStackRepository.GetBankAccount(id);
             return new ContactViewModel
@@ -90,7 +90,7 @@ namespace BankAccount.ApplicationLayer.Services
             };
         }
 
-        public AddressViewModel GetAddressForBankAccount(Guid id)
+        public static AddressViewModel GetAddressForBankAccount(Guid id)
         {
             var account = IoCServiceLocator.QueryStackRepository.GetBankAccount(id);
             return new AddressViewModel
@@ -105,7 +105,7 @@ namespace BankAccount.ApplicationLayer.Services
             };
         }
 
-        public MoneyViewModel GetMoneyForBankAccount(Guid id)
+        public static MoneyViewModel GetMoneyForBankAccount(Guid id)
         {
             var account = IoCServiceLocator.QueryStackRepository.GetBankAccount(id);
             return new MoneyViewModel

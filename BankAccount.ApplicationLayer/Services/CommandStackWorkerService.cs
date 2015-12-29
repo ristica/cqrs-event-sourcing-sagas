@@ -7,7 +7,7 @@ namespace BankAccount.ApplicationLayer.Services
 {
     public class CommandStackWorkerService
     {
-        public void AddBankAccount(NewBankAccountViewModel vm)
+        public static void AddBankAccount(NewBankAccountViewModel vm)
         {
             IoCServiceLocator.CommandBus.Send(
                 new CreateBankAccountCommand(
@@ -28,13 +28,13 @@ namespace BankAccount.ApplicationLayer.Services
                     vm.State));
         }
 
-        public void DeleteBankAccount(Guid id, int version)
+        public static void DeleteBankAccount(Guid id, int version)
         {
             IoCServiceLocator.CommandBus.Send(
                 new DeleteBankAccountCommand(id, version));
         }
 
-        public void EditCustomerDetails(CustomerViewModel vm)
+        public static void EditCustomerDetails(CustomerViewModel vm)
         {
             IoCServiceLocator.CommandBus.Send(
                 new ChangeCustomerDetailsCommand(
@@ -46,7 +46,7 @@ namespace BankAccount.ApplicationLayer.Services
                     vm.IdNumber));
         }
 
-        public void EditContactDetails(ContactViewModel vm)
+        public static void EditContactDetails(ContactViewModel vm)
         {
             IoCServiceLocator.CommandBus.Send(
                 new ChangeContactDetailsCommand(
@@ -56,7 +56,7 @@ namespace BankAccount.ApplicationLayer.Services
                     vm.PhoneNumber));
         }
 
-        public void EditAddressDetails(AddressViewModel vm)
+        public static void EditAddressDetails(AddressViewModel vm)
         {
             IoCServiceLocator.CommandBus.Send(
                 new ChangeAddressDetailsCommand(
@@ -69,7 +69,7 @@ namespace BankAccount.ApplicationLayer.Services
                     vm.State));
         }
 
-        public void EditMoneyDetails(MoneyViewModel vm)
+        public static void EditMoneyDetails(MoneyViewModel vm)
         {
             IoCServiceLocator.CommandBus.Send(
                 new ChangeCurrencyCommand(
@@ -78,7 +78,7 @@ namespace BankAccount.ApplicationLayer.Services
                     vm.Currency));
         }
 
-        public void TransferMoney(TransferViewModel vm)
+        public static void TransferMoney(TransferViewModel vm)
         {
             IoCServiceLocator.CommandBus.Send(
                 new TransferMoneyCommand(

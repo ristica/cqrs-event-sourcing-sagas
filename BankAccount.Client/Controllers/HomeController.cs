@@ -7,34 +7,17 @@ namespace BankAccount.Client.Controllers
 {
     public class HomeController : Controller
     {
-        #region Fields
-
-        private readonly QueryStackWorkerService _queryService;
-        private readonly CommandStackWorkerService _commandService;
-
-        #endregion
-
-        #region C-Tor
-
-        public HomeController()
-        {
-            this._queryService = new QueryStackWorkerService();
-            this._commandService = new CommandStackWorkerService();
-        }
-
-        #endregion
-
         #region GET
 
         public ActionResult Index()
         {
-            var model = this._queryService.GetAllBankAccounts();
+            var model = QueryStackWorkerService.GetAllBankAccounts();
             return View(model);
         }
 
         public ActionResult Details(Guid id)
         {
-            var model = this._queryService.GetDetails(id);
+            var model = QueryStackWorkerService.GetDetails(id);
             return View(model);
         }
 
@@ -45,47 +28,47 @@ namespace BankAccount.Client.Controllers
 
         public ActionResult EditCustomer(Guid id)
         {
-            var model = this._queryService.GetCustomerForBankAccount(id);
+            var model = QueryStackWorkerService.GetCustomerForBankAccount(id);
             return View(model);
         }
 
         public ActionResult EditContact(Guid id)
         {
-            var model = this._queryService.GetContactForBankAccount(id);
+            var model = QueryStackWorkerService.GetContactForBankAccount(id);
             return View(model);
         }
 
         public ActionResult EditAddress(Guid id)
         {
-            var model = this._queryService.GetAddressForBankAccount(id);
+            var model = QueryStackWorkerService.GetAddressForBankAccount(id);
             return View(model);
         }
 
         public ActionResult EditMoney(Guid id)
         {
-            var model = this._queryService.GetMoneyForBankAccount(id);
+            var model = QueryStackWorkerService.GetMoneyForBankAccount(id);
             return View(model);
         }
 
         public ActionResult Delete(Guid id)
         {
-            var model = this._queryService.GetDetails(id);
-            this._commandService.DeleteBankAccount(model.AggregateId, model.Version);
+            var model = QueryStackWorkerService.GetDetails(id);
+            CommandStackWorkerService.DeleteBankAccount(model.AggregateId, model.Version);
             return RedirectToAction("Index");
         }
 
         public ActionResult History(Guid id, string name, string balance)
         {
-            var model = this._queryService.GetBankAccountHistory(id);
+            var model = QueryStackWorkerService.GetBankAccountHistory(id);
             ViewBag.AccountName = name;
             ViewBag.CurrentBalance = balance;
-            ViewBag.Currency = this._queryService.GetDetails(id).Currency;
+            ViewBag.Currency = QueryStackWorkerService.GetDetails(id).Currency;
             return View(model);
         }
 
         public ActionResult TransferMoney(Guid id)
         {
-            var model = this._queryService.GetMoneyForBankAccount(id);
+            var model = QueryStackWorkerService.GetMoneyForBankAccount(id);
             return View(new TransferViewModel
             {
                 Version = model.Version,
@@ -106,7 +89,7 @@ namespace BankAccount.Client.Controllers
                 return View(vm);
             }
 
-            this._commandService.AddBankAccount(vm);
+            CommandStackWorkerService.AddBankAccount(vm);
             return RedirectToAction("Index");
         }
 
@@ -123,7 +106,7 @@ namespace BankAccount.Client.Controllers
                 return RedirectToAction("Index");
             }
 
-            this._commandService.EditCustomerDetails(vm);
+            CommandStackWorkerService.EditCustomerDetails(vm);
             return RedirectToAction("Index");
         }
 
@@ -140,7 +123,7 @@ namespace BankAccount.Client.Controllers
                 return RedirectToAction("Index");
             }
 
-            this._commandService.EditContactDetails(vm);
+            CommandStackWorkerService.EditContactDetails(vm);
             return RedirectToAction("Index");
         }
 
@@ -157,7 +140,7 @@ namespace BankAccount.Client.Controllers
                 return RedirectToAction("Index");
             }
 
-            this._commandService.EditAddressDetails(vm);
+            CommandStackWorkerService.EditAddressDetails(vm);
             return RedirectToAction("Index");
         }
 
@@ -174,7 +157,7 @@ namespace BankAccount.Client.Controllers
                 return RedirectToAction("Index");
             }
 
-            this._commandService.EditMoneyDetails(vm);
+            CommandStackWorkerService.EditMoneyDetails(vm);
             return RedirectToAction("Index");
         }
 
@@ -191,7 +174,7 @@ namespace BankAccount.Client.Controllers
                 return RedirectToAction("Index");
             }
 
-            this._commandService.TransferMoney(vm);
+            CommandStackWorkerService.TransferMoney(vm);
             return RedirectToAction("Index");
         }
 
@@ -201,7 +184,7 @@ namespace BankAccount.Client.Controllers
 
         private bool IsCustomerDirty(CustomerViewModel vm)
         {
-            var model = this._queryService.GetCustomerForBankAccount(vm.AggregateId);
+            var model = QueryStackWorkerService.GetCustomerForBankAccount(vm.AggregateId);
             if (model.FirstName.Equals(vm.FirstName.Trim()) &&
                 model.LastName.Equals(vm.LastName.Trim()) &&
                 model.IdCard.Equals(vm.IdCard.Trim()) && 
@@ -214,7 +197,7 @@ namespace BankAccount.Client.Controllers
 
         private bool IsContactDirty(ContactViewModel vm)
         {
-            var model = this._queryService.GetContactForBankAccount(vm.AggregateId);
+            var model = QueryStackWorkerService.GetContactForBankAccount(vm.AggregateId);
             if (model.Email.Equals(vm.Email.Trim()) &&
                 model.PhoneNumber.Equals(vm.PhoneNumber.Trim()))
             {
@@ -225,7 +208,7 @@ namespace BankAccount.Client.Controllers
 
         private bool ÎsAddressDirty(AddressViewModel vm)
         {
-            var model = this._queryService.GetAddressForBankAccount(vm.AggregateId);
+            var model = QueryStackWorkerService.GetAddressForBankAccount(vm.AggregateId);
             if (model.City.Equals(vm.City.Trim()) && 
                 model.Hausnumber.Equals(vm.Hausnumber.Trim()) &&
                 model.State.Equals(vm.State.Trim()) &&
@@ -239,7 +222,7 @@ namespace BankAccount.Client.Controllers
 
         private bool IsMoneyDirty(MoneyViewModel vm)
         {
-            var model = this._queryService.GetMoneyForBankAccount(vm.AggregateId);
+            var model = QueryStackWorkerService.GetMoneyForBankAccount(vm.AggregateId);
             if (model.Currency.Equals(vm.Currency.Trim()))
             {
                 return false;
