@@ -61,7 +61,6 @@
   <ItemGroup>
     <Compile Include="Exceptions\AggregateNotFoundException.cs" />
     <Compile Include="Exceptions\UnregisteredDomainEventException.cs" />
-    <Compile Include="Mappings\Mapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage\Abstraction\ICommandStackDatabase.cs" />
     <Compile Include="Storage\CommandStackDatabase.cs" />

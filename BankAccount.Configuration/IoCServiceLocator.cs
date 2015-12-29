@@ -5,7 +5,6 @@ using BankAccount.CommandStackDal.Storage.NEventStore;
 using BankAccount.Configuration.Buses;
 using BankAccount.EventHandlers;
 using BankAccount.Infrastructure.Buses;
-using BankAccount.Infrastructure.Snapshoting;
 using BankAccount.Infrastructure.Storage;
 using BankAccount.QueryStackDal;
 using EventStore;
@@ -36,8 +35,6 @@ namespace BankAccount.Configuration
 
                 CommandBus = _container.Resolve<ICommandBus>();
                 QueryStackRepository = _container.Resolve<IQueryStackRepository>();
-                SnapshotStore = _container.Resolve<ISnapshotStore>();
-                EventStore = _container.Resolve<IEventStore>();
                 CommandDatabase = _container.Resolve<ICommandStackDatabase>();
 
                 IsInitialized = true;
@@ -53,10 +50,6 @@ namespace BankAccount.Configuration
         public static ICommandBus CommandBus { get; }
 
         public static IQueryStackRepository QueryStackRepository { get; }
-
-        public static ISnapshotStore SnapshotStore { get; }
-
-        public static IEventStore EventStore { get; }
 
         public static ICommandStackDatabase CommandDatabase { get; }
 
