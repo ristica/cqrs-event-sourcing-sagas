@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Web.Script.Serialization;
-using BankAccount.Domain.Memento;
 using BankAccount.Events;
 using BankAccount.Infrastructure.Domain;
 using BankAccount.Infrastructure.EventHandling;
-using BankAccount.Infrastructure.Memento;
-using BankAccount.Infrastructure.Snapshoting;
 using BankAccount.ValueTypes;
 
 namespace BankAccount.Domain
@@ -17,9 +13,7 @@ namespace BankAccount.Domain
         IHandle<ContactChangedEvent>,
         IHandle<AddressChangedEvent>,
         IHandle<CurrencyChangedEvent>,
-        IHandle<BalanceChangedEvent>,
-        IOriginator,
-        ISnapshotOriginator
+        IHandle<BalanceChangedEvent>
     {
         #region Properties
 
@@ -106,6 +100,21 @@ namespace BankAccount.Domain
             });
         }
 
+        public void ChangeAddress(string street, string hausnumber, string zip, string city, string state)
+        {
+            ApplyChange(
+                new AddressChangedEvent
+                {
+                    AggregateId = this.Id,
+                    Version = this.Version,
+                    Street = street,
+                    Hausnumber = hausnumber,
+                    Zip = zip,
+                    City = city,
+                    State = state
+                });
+        }
+
         public void ChangeBalance(int amount)
         {
             ApplyChange(new BalanceChangedEvent
@@ -126,28 +135,13 @@ namespace BankAccount.Domain
             });
         }
 
-        public void Delete()
+        public void DeleteBankAccount()
         {
             ApplyChange(new BankAccountDeletedEvent
             {
                 AggregateId = this.Id,
                 Version = this.Version
             });
-        }
-
-        public void ChangeAddress(string street, string hausnumber, string zip, string city, string state)
-        {
-            ApplyChange(
-                new AddressChangedEvent
-                {
-                    AggregateId = this.Id,
-                    Version = this.Version,
-                    Street = street,
-                    Hausnumber = hausnumber,
-                    Zip = zip,
-                    City = city,
-                    State = state
-                });
         }
 
         #endregion
@@ -183,9 +177,15 @@ namespace BankAccount.Domain
             this.Contact.PhoneNumber = e.Phone;
         }
 
-        public void Handle(BankAccountDeletedEvent e)
+        public void Handle(AddressChangedEvent e)
         {
             this.Version = e.Version;
+
+            this.Address.Street = e.Street;
+            this.Address.Hausnumber = e.Hausnumber;
+            this.Address.Zip = e.Zip;
+            this.Address.City = e.City;
+            this.Address.State = e.State;
         }
 
         public void Handle(BalanceChangedEvent e)
@@ -202,59 +202,9 @@ namespace BankAccount.Domain
             this.Money.Currency = e.Currency;
         }
 
-        public void Handle(AddressChangedEvent e)
+        public void Handle(BankAccountDeletedEvent e)
         {
             this.Version = e.Version;
-
-            this.Address.Street = e.Street;
-            this.Address.Hausnumber = e.Hausnumber;
-            this.Address.Zip = e.Zip;
-            this.Address.City = e.City;
-            this.Address.State = e.State;
-        }
-
-        #endregion
-
-        #region IOriginator
-
-        public BaseMemento GetMemento()
-        {
-            return new BankAccountMemento(Id, Version, Customer, Contact, Money, Address);
-        }
-
-        public void SetMemento(BaseMemento memento)
-        {
-            Version = memento.Version;
-            Id = memento.Id;
-            Customer = ((BankAccountMemento) memento).Customer;
-            Address = ((BankAccountMemento) memento).Address;
-            Money = ((BankAccountMemento) memento).Money;
-            Contact = ((BankAccountMemento) memento).Contact;
-        }
-
-        #endregion
-
-        #region ISnapshotOriginator
-
-        public Snapshot GetCurrentSnapshot(int? lastEventVersion)
-        {
-            this.Version = lastEventVersion ?? 0;
-            return new Snapshot
-            {
-                AggregateRootId = this.Id,
-                Body = new JavaScriptSerializer().Serialize(this),
-                EntityTape = this.ToString()
-            };
-        }
-
-        public void LoadSnapshot(Snapshot snapshot)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool ShouldTakeSnapshot()
-        {
-            return true;
         }
 
         #endregion

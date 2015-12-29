@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BankAccount.cs" />
-    <Compile Include="Memento\BankAccountMemento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using BankAccount.CommandHandlers;
 using BankAccount.CommandStackDal.Storage;
 using BankAccount.CommandStackDal.Storage.Abstraction;
-using BankAccount.CommandStackDal.Storage.CustomEventStore;
 using BankAccount.CommandStackDal.Storage.NEventStore;
 using BankAccount.Configuration.Buses;
 using BankAccount.EventHandlers;
@@ -68,9 +67,6 @@ namespace BankAccount.Configuration
     {
         public static void Initialize(IUnityContainer container)
         {
-            container.RegisterType <IEventStore, CustomEventStore> (new ContainerControlledLifetimeManager());
-            container.RegisterType <ISnapshotStore, CustomSnapshotStore> (new ContainerControlledLifetimeManager());
-
             //container.RegisterType <ICommandHandlerFactory, CommandHandlerFactory> ();
             //container.RegisterType <IEventHandlerFactory, EventHandlerFactory> ();
 

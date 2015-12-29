@@ -60,7 +60,6 @@
   <ItemGroup>
     <Compile Include="Buses\IBus.cs" />
     <Compile Include="Domain\AggregateRoot.cs" />
-    <Compile Include="Domain\BaseMemento.cs" />
     <Compile Include="Commanding\Command.cs" />
     <Compile Include="Converter.cs" />
     <Compile Include="Eventing\Event.cs" />
@@ -78,8 +77,6 @@
     <Compile Include="Storage\ICommandStackRepository.cs" />
     <Compile Include="Storage\IEventStore.cs" />
     <Compile Include="Exceptions\UnregisteredDomainCommandException.cs" />
-    <Compile Include="Memento\IOriginator.cs" />
-    <Compile Include="Memento\Memento.cs" />
     <Compile Include="Snapshoting\ISnapshotOriginator.cs" />
     <Compile Include="Snapshoting\ISnapshotStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

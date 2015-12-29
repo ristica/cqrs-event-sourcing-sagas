@@ -22,7 +22,7 @@ namespace BankAccount.CommandHandlers
 
             var aggregate = this.Repository.GetById(command.Id);
 
-            aggregate.Delete();
+            aggregate.DeleteBankAccount();
 
             this.Repository.Save(aggregate, aggregate.Version);
         } 

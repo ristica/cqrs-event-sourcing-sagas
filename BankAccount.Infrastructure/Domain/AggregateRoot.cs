@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using BankAccount.Infrastructure.Eventing;
 using EventStore;
 
@@ -49,19 +48,9 @@ namespace BankAccount.Infrastructure.Domain
                 ApplyChangeFromHistory(e);
             }
 
-            #region CustomEventStore
-
-            //Version = ((Event)history.Last()).Version;
-
-            #endregion
-
-            #region NEventStore
-
             var ev = (EventMessage)history.Last();
             var @event = Converter.ChangeTo(ev.Body, ev.Body.GetType());
             Version = @event.Version;
-
-            #endregion
         }
 
         protected void ApplyChange(Event @event, bool addToUncommitedChanges = true)
@@ -78,15 +67,6 @@ namespace BankAccount.Infrastructure.Domain
         private void ApplyChangeFromHistory(object @event)
         {
             dynamic d = this;
-
-            #region CustomEventStore
-
-            //d.Handle(Converter.ChangeTo(@event, @event.GetType()));
-
-            #endregion
-
-            #region NEventStore
-
             var ev = @event as EventMessage;
             if (ev != null)
             {
@@ -96,8 +76,6 @@ namespace BankAccount.Infrastructure.Domain
             {
                 throw new ArgumentNullException($"@event is not of type EventMessage");
             }
-
-            #endregion
         }
     }
 }
