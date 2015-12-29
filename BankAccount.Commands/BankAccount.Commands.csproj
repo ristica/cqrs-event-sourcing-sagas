@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChangeAddressDetailsCommand.cs" />
-    <Compile Include="ChangeBankAccountCommand.cs" />
     <Compile Include="ChangeContactDetailsCommand.cs" />
     <Compile Include="ChangeCustomerDetailsCommand.cs" />
     <Compile Include="ChangeCurrencyCommand.cs" />

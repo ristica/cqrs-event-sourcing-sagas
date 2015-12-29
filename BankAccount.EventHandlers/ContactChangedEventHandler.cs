@@ -11,7 +11,8 @@ namespace BankAccount.EventHandlers
     {
         private readonly ICommandStackRepository<Domain.BankAccount> _repository;
 
-        public ContactChangedEventHandler(ICommandStackRepository<Domain.BankAccount> repository, ICommandStackDatabase database) : base(database)
+        public ContactChangedEventHandler(ICommandStackRepository<Domain.BankAccount> repository, ICommandStackDatabase database) 
+            : base(database)
         {
             if (repository == null)
             {
@@ -25,8 +26,8 @@ namespace BankAccount.EventHandlers
         {
             var ba = this._repository.GetById(handle.AggregateId);
 
-            ba.Contact.Email = handle.Email;
-            ba.Contact.PhoneNumber = handle.Phone;
+            ba.Contact.Email        = handle.Email;
+            ba.Contact.PhoneNumber  = handle.Phone;
 
             this.Database.AddToCache(ba);
         }

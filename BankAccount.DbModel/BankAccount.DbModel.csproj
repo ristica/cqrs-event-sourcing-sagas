@@ -53,11 +53,7 @@
     <Compile Include="Entities\BankAccountEntity.cs" />
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\Customer.cs" />
-    <Compile Include="Entities\EventEntity.cs" />
     <Compile Include="Entities\Money.cs" />
-    <Compile Include="Entities\SnapshotEntity.cs" />
-    <Compile Include="EventDb\EventDbContext.cs" />
-    <Compile Include="EventDb\EventInitializer.cs" />
     <Compile Include="ItemDb\BankAccountInitializer.cs" />
     <Compile Include="ItemDb\BankAccountDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

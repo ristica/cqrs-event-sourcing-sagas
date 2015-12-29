@@ -11,7 +11,8 @@ namespace BankAccount.EventHandlers
     {
         private readonly ICommandStackRepository<Domain.BankAccount> _repository;
 
-        public AddressChangedEventHandler(ICommandStackRepository<Domain.BankAccount> repository, ICommandStackDatabase database) : base(database)
+        public AddressChangedEventHandler(ICommandStackRepository<Domain.BankAccount> repository, ICommandStackDatabase database) 
+            : base(database)
         {
             if (repository == null)
             {
@@ -25,11 +26,11 @@ namespace BankAccount.EventHandlers
         {
             var ba = this._repository.GetById(handle.AggregateId);
 
-            ba.Address.Street = handle.Street;
-            ba.Address.Hausnumber = handle.Hausnumber;
-            ba.Address.Zip = handle.Zip;
-            ba.Address.City = handle.City;
-            ba.Address.State = handle.State;
+            ba.Address.Street       = handle.Street;
+            ba.Address.Hausnumber   = handle.Hausnumber;
+            ba.Address.Zip          = handle.Zip;
+            ba.Address.City         = handle.City;
+            ba.Address.State        = handle.State;
 
             this.Database.AddToCache(ba);
         }

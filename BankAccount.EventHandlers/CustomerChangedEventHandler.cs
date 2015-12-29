@@ -26,8 +26,8 @@ namespace BankAccount.EventHandlers
         {
             var ba = this._repository.GetById(handle.AggregateId);
 
-            ba.Customer.FirstName = handle.FirstName;
-            ba.Customer.LastName = handle.LastName;
+            ba.Customer.FirstName   = handle.FirstName;
+            ba.Customer.LastName    = handle.LastName;
 
             this.Database.AddToCache(ba);
         }

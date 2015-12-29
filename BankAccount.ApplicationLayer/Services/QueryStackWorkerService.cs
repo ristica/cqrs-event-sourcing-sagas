@@ -17,11 +17,11 @@ namespace BankAccount.ApplicationLayer.Services
             var accounts = IoCServiceLocator.QueryStackRepository.GetAccounts();
             return accounts.Select(acc => new BankAccountViewModel
             {
-                Id = acc.AggregateId,
-                FirstName = acc.Customer.FirstName,
-                LastName = acc.Customer.LastName,
-                Balance = acc.Money.Balance,
-                Currency = acc.Money.Currency
+                Id              = acc.AggregateId,
+                FirstName       = acc.Customer.FirstName,
+                LastName        = acc.Customer.LastName,
+                Balance         = acc.Money.Balance,
+                Currency        = acc.Money.Currency
             }).ToList();
         }
 
@@ -30,22 +30,22 @@ namespace BankAccount.ApplicationLayer.Services
             var account = IoCServiceLocator.QueryStackRepository.GetBankAccount(id);
             return new DetailsBankAccountViewModel
             {
-                Balance = account.Money.Balance,
-                LastName = account.Customer.LastName,
-                FirstName = account.Customer.FirstName,
-                IdCard = account.Customer.IdCard,
-                IdNumber = account.Customer.IdNumber,
-                Dob = account.Customer.Dob,
-                Email = account.Contact.Email,
-                Phone = account.Contact.Phone,
-                Hausnumber = account.Address.Hausnumber,
-                State = account.Address.State,
-                Zip = account.Address.Zip,
-                Street = account.Address.Street,
-                City = account.Address.City,
-                Currency = account.Money.Currency,
-                AggregateId = account.AggregateId,
-                Version = account.Version
+                AggregateId     = account.AggregateId,
+                Version         = account.Version,
+                Balance         = account.Money.Balance,
+                LastName        = account.Customer.LastName,
+                FirstName       = account.Customer.FirstName,
+                IdCard          = account.Customer.IdCard,
+                IdNumber        = account.Customer.IdNumber,
+                Dob             = account.Customer.Dob,
+                Email           = account.Contact.Email,
+                Phone           = account.Contact.Phone,
+                Hausnumber      = account.Address.Hausnumber,
+                State           = account.Address.State,
+                Zip             = account.Address.Zip,
+                Street          = account.Address.Street,
+                City            = account.Address.City,
+                Currency        = account.Money.Currency
             };
         }
 
@@ -69,12 +69,12 @@ namespace BankAccount.ApplicationLayer.Services
             var account = IoCServiceLocator.QueryStackRepository.GetBankAccount(id);
             return new CustomerViewModel
             {
-                AggregateId = account.AggregateId,
-                Version = account.Version,
-                LastName = account.Customer.LastName,
-                FirstName = account.Customer.FirstName,
-                IdCard = account.Customer.IdCard,
-                IdNumber = account.Customer.IdNumber
+                AggregateId     = account.AggregateId,
+                Version         = account.Version,
+                LastName        = account.Customer.LastName,
+                FirstName       = account.Customer.FirstName,
+                IdCard          = account.Customer.IdCard,
+                IdNumber        = account.Customer.IdNumber
             };
         }
 
@@ -83,10 +83,10 @@ namespace BankAccount.ApplicationLayer.Services
             var account = IoCServiceLocator.QueryStackRepository.GetBankAccount(id);
             return new ContactViewModel
             {
-                AggregateId = account.AggregateId,
-                Version = account.Version,
-                Email = account.Contact.Email,
-                PhoneNumber = account.Contact.Phone
+                AggregateId     = account.AggregateId,
+                Version         = account.Version,
+                Email           = account.Contact.Email,
+                PhoneNumber     = account.Contact.Phone
             };
         }
 
@@ -95,13 +95,13 @@ namespace BankAccount.ApplicationLayer.Services
             var account = IoCServiceLocator.QueryStackRepository.GetBankAccount(id);
             return new AddressViewModel
             {
-                AggregateId = account.AggregateId,
-                Version = account.Version,
-                Hausnumber = account.Address.Hausnumber,
-                State = account.Address.State,
-                Street = account.Address.Street,
-                City = account.Address.City,
-                Zip = account.Address.Zip
+                AggregateId     = account.AggregateId,
+                Version         = account.Version,
+                Hausnumber      = account.Address.Hausnumber,
+                State           = account.Address.State,
+                Street          = account.Address.Street,
+                City            = account.Address.City,
+                Zip             = account.Address.Zip
             };
         }
 
@@ -110,10 +110,10 @@ namespace BankAccount.ApplicationLayer.Services
             var account = IoCServiceLocator.QueryStackRepository.GetBankAccount(id);
             return new MoneyViewModel
             {
-                AggregateId = account.AggregateId,
-                Version = account.Version,
-                Balance = account.Money.Balance,
-                Currency = account.Money.Currency
+                AggregateId     = account.AggregateId,
+                Version         = account.Version,
+                Balance         = account.Money.Balance,
+                Currency        = account.Money.Currency
             };
         }
     }

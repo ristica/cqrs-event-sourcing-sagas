@@ -22,7 +22,9 @@ namespace BankAccount.CommandHandlers
 
             var aggregate = this.Repository.GetById(command.Id);
 
-            aggregate.ChangeContact(command.Email, command.Phone);
+            aggregate.ChangeContact(
+                command.Email, 
+                command.Phone);
 
             this.Repository.Save(aggregate, aggregate.Version);
         }

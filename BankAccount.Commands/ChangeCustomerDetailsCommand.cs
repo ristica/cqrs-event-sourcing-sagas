@@ -13,10 +13,10 @@ namespace BankAccount.Commands
         public ChangeCustomerDetailsCommand(Guid id, int version, string firstName, string lastname, string idCard, string idNumber) 
             : base(id, version)
         {
-            this.FirstName = firstName;
-            this.LastName = lastname;
-            this.IdCard = idCard;
-            this.IdNumber = idNumber;
+            this.FirstName      = firstName;
+            this.LastName       = lastname;
+            this.IdCard         = idCard;
+            this.IdNumber       = idNumber;
         }
     }
 }

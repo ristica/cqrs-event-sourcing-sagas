@@ -31,7 +31,9 @@ namespace BankAccount.ApplicationLayer.Services
         public static void DeleteBankAccount(Guid id, int version)
         {
             IoCServiceLocator.CommandBus.Send(
-                new DeleteBankAccountCommand(id, version));
+                new DeleteBankAccountCommand(
+                    id, 
+                    version));
         }
 
         public static void EditCustomerDetails(CustomerViewModel vm)

@@ -17,12 +17,12 @@ namespace BankAccount.EventHandlers
         {
             this.Database.Save(new Domain.BankAccount
             {
-                Id = handle.AggregateId,
-                Customer = handle.Customer,
-                Money = handle.Money,
-                Version = handle.Version,
-                Address = handle.Address,
-                Contact = handle.Contact
+                Id          = handle.AggregateId,
+                Customer    = handle.Customer,
+                Money       = handle.Money,
+                Version     = handle.Version,
+                Address     = handle.Address,
+                Contact     = handle.Contact
             });
         }
     }

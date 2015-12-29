@@ -7,7 +7,8 @@ namespace BankAccount.Commands
     {
         public int Amount { get; private set; }
 
-        public TransferMoneyCommand(Guid id, int version, int amount) : base(id, version)
+        public TransferMoneyCommand(Guid id, int version, int amount) 
+            : base(id, version)
         {
             this.Amount = amount;
         }

@@ -22,7 +22,12 @@ namespace BankAccount.CommandHandlers
 
             var aggregate = this.Repository.GetById(command.Id);
 
-            aggregate.ChangeAddress(command.Street, command.Hausnumber, command.Zip, command.City, command.State);
+            aggregate.ChangeAddress(
+                command.Street, 
+                command.Hausnumber, 
+                command.Zip, 
+                command.City, 
+                command.State);
 
             this.Repository.Save(aggregate, aggregate.Version);
         }

@@ -31,29 +31,29 @@ namespace BankAccount.Commands
         {
             this.Customer = new Customer
             {
-                FirstName = firstName,
-                LastName = lastName,
-                IdCard = idCard,
-                IdNumber = idNumber,
-                Dob = dob
+                FirstName       = firstName,
+                LastName        = lastName,
+                IdCard          = idCard,
+                IdNumber        = idNumber,
+                Dob             = dob
             };
             this.Contact = new Contact
             {
-                Email = email,
-                PhoneNumber = phone
+                Email           = email,
+                PhoneNumber     = phone
             };
             this.Money = new Money
             {
-                Balance = 0,
-                Currency = currency
+                Balance         = 0,
+                Currency        = currency
             };
             this.Address = new Address
             {
-                State = state,
-                Hausnumber = hausnumber,
-                City = city,
-                Zip = zip,
-                Street = street
+                State           = state,
+                Hausnumber      = hausnumber,
+                City            = city,
+                Zip             = zip,
+                Street          = street
             };
         }
     }

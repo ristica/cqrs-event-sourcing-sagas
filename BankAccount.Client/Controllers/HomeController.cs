@@ -185,49 +185,33 @@ namespace BankAccount.Client.Controllers
         private bool IsCustomerDirty(CustomerViewModel vm)
         {
             var model = QueryStackWorkerService.GetCustomerForBankAccount(vm.AggregateId);
-            if (model.FirstName.Equals(vm.FirstName.Trim()) &&
-                model.LastName.Equals(vm.LastName.Trim()) &&
-                model.IdCard.Equals(vm.IdCard.Trim()) && 
-                model.IdNumber.Equals(vm.IdNumber.Trim()))
-            {
-                return false;
-            }
-            return true;
+            return !model.FirstName.Equals(vm.FirstName.Trim())     || 
+                   !model.LastName.Equals(vm.LastName.Trim())       || 
+                   !model.IdCard.Equals(vm.IdCard.Trim())           || 
+                   !model.IdNumber.Equals(vm.IdNumber.Trim());
         }
 
         private bool IsContactDirty(ContactViewModel vm)
         {
             var model = QueryStackWorkerService.GetContactForBankAccount(vm.AggregateId);
-            if (model.Email.Equals(vm.Email.Trim()) &&
-                model.PhoneNumber.Equals(vm.PhoneNumber.Trim()))
-            {
-                return false;
-            }
-            return true;
+            return !model.Email.Equals(vm.Email.Trim())             || 
+                   !model.PhoneNumber.Equals(vm.PhoneNumber.Trim());
         }
 
         private bool ÎsAddressDirty(AddressViewModel vm)
         {
             var model = QueryStackWorkerService.GetAddressForBankAccount(vm.AggregateId);
-            if (model.City.Equals(vm.City.Trim()) && 
-                model.Hausnumber.Equals(vm.Hausnumber.Trim()) &&
-                model.State.Equals(vm.State.Trim()) &&
-                model.Street.Equals(vm.Street.Trim()) &&
-                model.Zip.Equals(vm.Zip.Trim()))
-            {
-                return false;
-            }
-            return true;
+            return !model.City.Equals(vm.City.Trim())               || 
+                   !model.Hausnumber.Equals(vm.Hausnumber.Trim())   || 
+                   !model.State.Equals(vm.State.Trim())             || 
+                   !model.Street.Equals(vm.Street.Trim())           || 
+                   !model.Zip.Equals(vm.Zip.Trim());
         }
 
         private bool IsMoneyDirty(MoneyViewModel vm)
         {
             var model = QueryStackWorkerService.GetMoneyForBankAccount(vm.AggregateId);
-            if (model.Currency.Equals(vm.Currency.Trim()))
-            {
-                return false;
-            }
-            return true;
+            return !model.Currency.Equals(vm.Currency.Trim());
         }
 
         #endregion
