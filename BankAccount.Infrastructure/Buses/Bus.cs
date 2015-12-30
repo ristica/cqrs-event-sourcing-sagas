@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BankAccount.Infrastructure.Exceptions;
 
-namespace BankAccount.Configuration.Buses.Base
+namespace BankAccount.Infrastructure.Buses
 {
     public abstract class Bus
     {

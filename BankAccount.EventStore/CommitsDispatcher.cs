@@ -5,7 +5,7 @@ using BankAccount.Infrastructure.Buses;
 using EventStore;
 using EventStore.Dispatcher;
 
-namespace BankAccount.CommandStackDal.Storage.NEventStore
+namespace BankAccount.EventStore
 {
     public class CommitsDispatcher : IDispatchCommits
     {

@@ -58,7 +58,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buses\Bus.cs" />
     <Compile Include="Buses\IBus.cs" />
+    <Compile Include="Buses\ISagaBus.cs" />
+    <Compile Include="Commanding\IAmStartedBy.cs" />
+    <Compile Include="Commanding\IHandleMessage.cs" />
     <Compile Include="Domain\AggregateRoot.cs" />
     <Compile Include="Commanding\Command.cs" />
     <Compile Include="Converter.cs" />

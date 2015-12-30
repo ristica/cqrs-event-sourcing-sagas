@@ -64,9 +64,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buses\Base\Bus.cs" />
     <Compile Include="Buses\CommandBus.cs" />
     <Compile Include="Buses\EventBus.cs" />
+    <Compile Include="Buses\SagaBus.cs" />
     <Compile Include="IoCServiceLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -85,6 +85,10 @@
     <ProjectReference Include="..\BankAccount.EventHandlers\BankAccount.EventHandlers.csproj">
       <Project>{fbcaa02b-5416-451e-9ab6-5333ced5e737}</Project>
       <Name>BankAccount.EventHandlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankAccount.EventStore\BankAccount.EventStore.csproj">
+      <Project>{21230a46-0b24-413e-b89a-cf1a2ee4a17b}</Project>
+      <Name>BankAccount.EventStore</Name>
     </ProjectReference>
     <ProjectReference Include="..\BankAccount.Infrastructure\BankAccount.Infrastructure.csproj">
       <Project>{4631996a-9ef1-481c-8fd8-bb895890973e}</Project>

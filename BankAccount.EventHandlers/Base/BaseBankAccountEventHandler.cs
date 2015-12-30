@@ -1,5 +1,5 @@
 ﻿using System;
-using BankAccount.CommandStackDal.Storage.Abstraction;
+using BankAccount.CommandStackDal.Abstraction;
 
 namespace BankAccount.EventHandlers.Base
 {

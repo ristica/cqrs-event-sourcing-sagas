@@ -1,7 +1,7 @@
 using System;
 using EventStore;
 
-namespace BankAccount.CommandStackDal.Storage.NEventStore
+namespace BankAccount.EventStore
 {
     public class AuthorizationPipelineHook : IPipelineHook
     {

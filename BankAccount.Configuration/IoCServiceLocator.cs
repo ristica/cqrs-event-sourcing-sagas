@@ -1,9 +1,9 @@
 ﻿using BankAccount.CommandHandlers;
-using BankAccount.CommandStackDal.Storage;
-using BankAccount.CommandStackDal.Storage.Abstraction;
-using BankAccount.CommandStackDal.Storage.NEventStore;
+using BankAccount.CommandStackDal;
+using BankAccount.CommandStackDal.Abstraction;
 using BankAccount.Configuration.Buses;
 using BankAccount.EventHandlers;
+using BankAccount.EventStore;
 using BankAccount.Infrastructure.Buses;
 using BankAccount.Infrastructure.Storage;
 using BankAccount.QueryStackDal;
@@ -33,10 +33,11 @@ namespace BankAccount.Configuration
             {
                 Bootstrapper.Initialize(Container);
 
-                CommandBus = _container.Resolve<ICommandBus>();
-                QueryStackRepository = _container.Resolve<IQueryStackRepository>();
+                CommandBus              = _container.Resolve<ICommandBus>();
+                SagaBus                 = _container.Resolve<ISagaBus>();
+                QueryStackRepository    = _container.Resolve<IQueryStackRepository>();
 
-                IsInitialized = true;
+                IsInitialized           = true;
             }
         }
 
@@ -45,9 +46,8 @@ namespace BankAccount.Configuration
         #region Properties
 
         public static IUnityContainer Container => _container;
-
         public static ICommandBus CommandBus { get; }
-
+        public static ISagaBus SagaBus { get; }
         public static IQueryStackRepository QueryStackRepository { get; }
 
         #endregion
@@ -62,6 +62,7 @@ namespace BankAccount.Configuration
 
             container.RegisterType <ICommandBus, CommandBus> ();
             container.RegisterType <IEventBus, EventBus> ();
+            container.RegisterType <ISagaBus, SagaBus>();
 
             container.RegisterType <IQueryStackRepository, QueryStackRepository> ();
             container.RegisterType(typeof(ICommandStackRepository<>), typeof(NEventStoreCommandStackRepository<>));
@@ -74,6 +75,7 @@ namespace BankAccount.Configuration
             // Bus handlers
             RegisterCommandHandlers(container);
             RegisterEventHandlers(container);
+            ConfigureOrderBoundedContext(container);
         }
 
         private static void RegisterEventHandlers(IUnityContainer container)
@@ -100,6 +102,11 @@ namespace BankAccount.Configuration
             bus.RegisterHandler<TransferMoneyCommandHandler>();
             bus.RegisterHandler<ChangeCustomerDetailsCommandHandler>();
             bus.RegisterHandler<ChangeContactDetailsCommandHandler>();
+        }
+        private static void ConfigureOrderBoundedContext(IUnityContainer container)
+        {
+            var sagaBus = container.Resolve<ISagaBus>();
+            //bus.RegisterSaga<Saga>();
         }
 
         private static IStoreEvents CreateEventStore(IDispatchCommits bus)

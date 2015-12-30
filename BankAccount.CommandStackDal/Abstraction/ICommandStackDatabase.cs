@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BankAccount.CommandStackDal.Storage.Abstraction
+namespace BankAccount.CommandStackDal.Abstraction
 {
     /// <summary>
     /// only write actions

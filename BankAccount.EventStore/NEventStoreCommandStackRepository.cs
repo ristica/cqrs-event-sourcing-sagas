@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
-using BankAccount.CommandStackDal.Storage.Abstraction;
+using BankAccount.CommandStackDal.Abstraction;
 using BankAccount.Infrastructure.Domain;
 using BankAccount.Infrastructure.Storage;
 using EventStore;
 
-namespace BankAccount.CommandStackDal.Storage.NEventStore
+namespace BankAccount.EventStore
 {
     public sealed class NEventStoreCommandStackRepository<T> : ICommandStackRepository<T> where T : AggregateRoot, new()
     {

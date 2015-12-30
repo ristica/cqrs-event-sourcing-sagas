@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using BankAccount.CommandStackDal.Abstraction;
 using BankAccount.CommandStackDal.Exceptions;
-using BankAccount.CommandStackDal.Storage.Abstraction;
 using BankAccount.DbModel.Entities;
 using BankAccount.DbModel.ItemDb;
 
-namespace BankAccount.CommandStackDal.Storage
+namespace BankAccount.CommandStackDal
 {
     public sealed class CommandStackDatabase : ICommandStackDatabase
     {

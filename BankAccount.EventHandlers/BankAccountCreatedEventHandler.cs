@@ -1,4 +1,4 @@
-﻿using BankAccount.CommandStackDal.Storage.Abstraction;
+﻿using BankAccount.CommandStackDal.Abstraction;
 using BankAccount.EventHandlers.Base;
 using BankAccount.Events;
 using BankAccount.Infrastructure.EventHandling;

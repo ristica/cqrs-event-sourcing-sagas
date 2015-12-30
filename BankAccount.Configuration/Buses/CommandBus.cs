@@ -1,5 +1,4 @@
 ﻿using System;
-using BankAccount.Configuration.Buses.Base;
 using BankAccount.Infrastructure.Buses;
 using BankAccount.Infrastructure.CommandHandling;
 using BankAccount.Infrastructure.Commanding;
