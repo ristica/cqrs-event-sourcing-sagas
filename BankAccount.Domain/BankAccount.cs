@@ -221,5 +221,66 @@ namespace BankAccount.Domain
         }
 
         #endregion
+
+        #region Factory
+
+        public static class Factory
+        {
+            public static BankAccount CreateNewInstance(
+                Guid id,
+                int version,
+                string firstName,
+                string lastName,
+                string idCard,
+                string idNumber,
+                DateTime dob,
+                string email,
+                string phone,
+                int balance,
+                string currency,
+                string street,
+                string zip,
+                string hausnumber,
+                string city,
+                string state)
+            {
+                var @event = new BankAccountCreatedEvent
+                {
+                    AggregateId         = id,
+                    Version             = version,
+                    Customer = new Customer
+                    {
+                        FirstName       = firstName,
+                        LastName        = lastName,
+                        IdCard          = idCard,
+                        IdNumber        = idNumber,
+                        Dob             = dob
+                    },
+                    Contact = new Contact
+                    {
+                        Email           = email,
+                        PhoneNumber     = phone
+                    },
+                    Address = new Address
+                    {
+                        Street          = street,
+                        Hausnumber      = hausnumber,
+                        State           = state,
+                        City            = city,
+                        Zip             = zip
+                    },
+                    Money = new Money
+                    {
+                        Balance         = balance,
+                        Currency        = currency
+                    }
+                };
+                var ba = new BankAccount();
+                ba.ApplyChange(@event);
+                return ba;
+            }
+        }
+
+        #endregion
     }
 }

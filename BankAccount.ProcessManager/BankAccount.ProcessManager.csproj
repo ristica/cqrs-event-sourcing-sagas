@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{000723DD-A2A4-4EEF-8C25-91AD19A5A943}</ProjectGuid>
+    <ProjectGuid>{57CA9FD6-6125-46BE-B24C-B036699DA122}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BankAccount.Configuration</RootNamespace>
-    <AssemblyName>BankAccount.Configuration</AssemblyName>
+    <RootNamespace>BankAccount.ProcessManager</RootNamespace>
+    <AssemblyName>BankAccount.ProcessManager</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,29 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EventStore, Version=3.2.0.0, Culture=neutral, PublicKeyToken=7735eb81c0bd9948, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="EventStore">
       <HintPath>..\BankAccount.Libs\EventStore.dll</HintPath>
     </Reference>
-    <Reference Include="EventStore.Serialization.Json, Version=3.2.0.0, Culture=neutral, PublicKeyToken=7735eb81c0bd9948, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="EventStore.Serialization.Json">
       <HintPath>..\BankAccount.Libs\EventStore.Serialization.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -64,43 +46,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buses\CommandBus.cs" />
-    <Compile Include="Buses\EventBus.cs" />
-    <Compile Include="Buses\SagaBus.cs" />
-    <Compile Include="IoCServiceLocator.cs" />
+    <Compile Include="Base\Saga.cs" />
+    <Compile Include="CreateBankAccountSaga.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BankAccount.CommandHandlers\BankAccount.CommandHandlers.csproj">
-      <Project>{f479d4be-0ce7-4aed-8bd1-72c08501c91e}</Project>
-      <Name>BankAccount.CommandHandlers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BankAccount.CommandStackDal\BankAccount.CommandStackDal.csproj">
       <Project>{00e4f0c6-6135-4c03-ad6d-7da42d1aefa4}</Project>
       <Name>BankAccount.CommandStackDal</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BankAccount.EventHandlers\BankAccount.EventHandlers.csproj">
-      <Project>{fbcaa02b-5416-451e-9ab6-5333ced5e737}</Project>
-      <Name>BankAccount.EventHandlers</Name>
+    <ProjectReference Include="..\BankAccount.Commands\BankAccount.Commands.csproj">
+      <Project>{23b15498-75b1-4567-804d-6dc09b940c08}</Project>
+      <Name>BankAccount.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankAccount.Domain\BankAccount.Domain.csproj">
+      <Project>{b08af9bc-675b-414d-8fc2-a2d06393b377}</Project>
+      <Name>BankAccount.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\BankAccount.EventStore\BankAccount.EventStore.csproj">
       <Project>{21230a46-0b24-413e-b89a-cf1a2ee4a17b}</Project>
       <Name>BankAccount.EventStore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BankAccount.Events\BankAccount.Events.csproj">
+      <Project>{b5ca27ec-4d6c-4d3a-ad88-72c8b82b2873}</Project>
+      <Name>BankAccount.Events</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BankAccount.Infrastructure\BankAccount.Infrastructure.csproj">
       <Project>{4631996a-9ef1-481c-8fd8-bb895890973e}</Project>
       <Name>BankAccount.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BankAccount.ProcessManager\BankAccount.ProcessManager.csproj">
-      <Project>{57ca9fd6-6125-46be-b24c-b036699da122}</Project>
-      <Name>BankAccount.ProcessManager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BankAccount.QueryStackDal\BankAccount.QueryStackDal.csproj">
-      <Project>{b6c7c79c-ffff-4f2f-99a2-fcc5960fbc9f}</Project>
-      <Name>BankAccount.QueryStackDal</Name>
+    <ProjectReference Include="..\BankAccount.ValueTypes\BankAccount.ValueTypes.csproj">
+      <Project>{3f44e1cd-cb5c-4df5-81fa-6220ae0effa7}</Project>
+      <Name>BankAccount.ValueTypes</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

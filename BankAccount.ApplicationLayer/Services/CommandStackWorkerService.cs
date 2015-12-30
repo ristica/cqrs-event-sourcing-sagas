@@ -16,15 +16,33 @@ namespace BankAccount.ApplicationLayer.Services
     {
         public static void AddBankAccount(NewBankAccountViewModel vm)
         {
+            //IoCServiceLocator.SagaBus.Send(
+            //    new CreateBankAccountCommand(
+            //        Guid.NewGuid(), 
+            //        0, 
+            //        vm.FirstName, 
+            //        vm.LastName, 
+            //        vm.IdCard,
+            //        vm.IdNumber,
+            //        vm.Dob, 
+            //        vm.Email,
+            //        vm.Phone,
+            //        vm.Currency,
+            //        vm.Street,
+            //        vm.ZIP,
+            //        vm.Hausnumber,
+            //        vm.City,
+            //        vm.State));
+
             IoCServiceLocator.CommandBus.Send(
                 new CreateBankAccountCommand(
-                    Guid.NewGuid(), 
-                    0, 
-                    vm.FirstName, 
-                    vm.LastName, 
+                    Guid.NewGuid(),
+                    0,
+                    vm.FirstName,
+                    vm.LastName,
                     vm.IdCard,
                     vm.IdNumber,
-                    vm.Dob, 
+                    vm.Dob,
                     vm.Email,
                     vm.Phone,
                     vm.Currency,

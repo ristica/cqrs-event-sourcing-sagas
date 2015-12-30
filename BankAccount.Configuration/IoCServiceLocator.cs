@@ -6,6 +6,7 @@ using BankAccount.EventHandlers;
 using BankAccount.EventStore;
 using BankAccount.Infrastructure.Buses;
 using BankAccount.Infrastructure.Storage;
+using BankAccount.ProcessManager;
 using BankAccount.QueryStackDal;
 using EventStore;
 using EventStore.Dispatcher;
@@ -104,9 +105,9 @@ namespace BankAccount.Configuration
 
         private static void RegisterSagasHandlers(IUnityContainer container)
         {
-            var sagaBus = container.Resolve<ISagaBus>();
+            var bus = container.Resolve<ISagaBus>();
 
-            //bus.RegisterSaga<Saga>();
+            bus.RegisterSaga<CreateBankAccountSaga>();
         }
 
         private static IStoreEvents CreateEventStore(IDispatchCommits bus)
