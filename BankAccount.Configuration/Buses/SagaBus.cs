@@ -15,15 +15,13 @@ namespace BankAccount.Configuration.Buses
 
         private static readonly IDictionary<Type, Type> RegisteredSagas = new Dictionary<Type, Type>();
         private static readonly IList<Type> RegisteredHandlers = new List<Type>();
-        //private readonly IStoreEvents _eventStore;
 
         #endregion
 
         #region C-Tor
 
-        public SagaBus(/*IStoreEvents eventStore*/)
+        public SagaBus()
         {
-            //this._eventStore = eventStore;
         }
 
         #endregion
@@ -37,7 +35,6 @@ namespace BankAccount.Configuration.Buses
 
         public void RaiseEvent<T>(T @event) where T : Event
         {
-            //this.SaveEvent(@event);
             this._Send(@event);
         }
 
@@ -66,27 +63,6 @@ namespace BankAccount.Configuration.Buses
         #endregion
 
         #region Helpers
-
-        private void SaveEvent(Event @event)
-        {
-            //using (var scope = new TransactionScope())
-            //{
-            //    using (var stream = this._eventStore.OpenStream(@event.AggregateId, 0, int.MaxValue))
-            //    {
-            //        var latesteventSaved =
-            //            this._eventStore.Advanced.GetFrom(@event.AggregateId, 0, int.MaxValue).LastOrDefault();
-
-            //        var lastOrDefault = latesteventSaved?.Events.LastOrDefault();
-            //        if (lastOrDefault != null)
-            //            @event.Version = ((Event)lastOrDefault.Body).Version + 1;
-
-            //        stream.Add(new EventMessage { Body = @event });
-            //        stream.CommitChanges(Guid.NewGuid());
-            //    }
-
-            //    scope.Complete();
-            //}
-        }
 
         private void _Send<T>(T message)
         {
