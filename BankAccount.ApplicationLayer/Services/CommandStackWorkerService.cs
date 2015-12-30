@@ -5,6 +5,13 @@ using BankAccount.Configuration;
 
 namespace BankAccount.ApplicationLayer.Services
 {
+    /// <summary>
+    /// here we can decide to go all over the 
+    /// command bus / command handler / event bus / event handler
+    ///     IoCServiceLocator.CommandBus.Send (....)
+    /// or we are going to use process manager (aka Saga) to handle commands / events 
+    ///     IoCServiceLocator.SagaBus.Send (....)
+    /// </summary>
     public sealed class CommandStackWorkerService
     {
         public static void AddBankAccount(NewBankAccountViewModel vm)

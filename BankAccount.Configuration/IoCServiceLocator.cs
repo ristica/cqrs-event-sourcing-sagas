@@ -57,9 +57,6 @@ namespace BankAccount.Configuration
     {
         public static void Initialize(IUnityContainer container)
         {
-            //container.RegisterType <ICommandHandlerFactory, CommandHandlerFactory> ();
-            //container.RegisterType <IEventHandlerFactory, EventHandlerFactory> ();
-
             container.RegisterType <ICommandBus, CommandBus> ();
             container.RegisterType <IEventBus, EventBus> ();
             container.RegisterType <ISagaBus, SagaBus>();
@@ -75,7 +72,8 @@ namespace BankAccount.Configuration
             // Bus handlers
             RegisterCommandHandlers(container);
             RegisterEventHandlers(container);
-            ConfigureOrderBoundedContext(container);
+
+            RegisterSagasHandlers(container);
         }
 
         private static void RegisterEventHandlers(IUnityContainer container)
@@ -103,9 +101,11 @@ namespace BankAccount.Configuration
             bus.RegisterHandler<ChangeCustomerDetailsCommandHandler>();
             bus.RegisterHandler<ChangeContactDetailsCommandHandler>();
         }
-        private static void ConfigureOrderBoundedContext(IUnityContainer container)
+
+        private static void RegisterSagasHandlers(IUnityContainer container)
         {
             var sagaBus = container.Resolve<ISagaBus>();
+
             //bus.RegisterSaga<Saga>();
         }
 
