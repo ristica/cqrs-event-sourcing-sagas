@@ -17,11 +17,11 @@ namespace BankAccount.ApplicationLayer.Services
             var accounts = IoCServiceLocator.QueryStackRepository.GetAccounts();
             return accounts.Select(acc => new BankAccountViewModel
             {
-                Id              = acc.AggregateId,
-                FirstName       = acc.Customer.FirstName,
-                LastName        = acc.Customer.LastName,
-                Balance         = acc.Money.Balance,
-                Currency        = acc.Money.Currency
+                Id              = acc.AggregateId
+                //FirstName       = acc.Customer.FirstName,
+                //LastName        = acc.Customer.LastName,
+                //Balance         = acc.Money.Balance,
+                //Currency        = acc.Money.Currency
             }).ToList();
         }
 

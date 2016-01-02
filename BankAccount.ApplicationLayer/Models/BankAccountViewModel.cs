@@ -6,12 +6,12 @@ namespace BankAccount.ApplicationLayer.Models
     {
         public Guid Id { get; set; }
 
-        public string FirstName { get; set; }
+        //public string FirstName { get; set; }
 
-        public string LastName { get; set; }
+        //public string LastName { get; set; }
 
-        public int Balance { get; set; }
+        //public int Balance { get; set; }
 
-        public string Currency { get; set; }
+        //public string Currency { get; set; }
     }
 }

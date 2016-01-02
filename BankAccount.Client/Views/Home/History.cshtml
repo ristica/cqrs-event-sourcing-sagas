@@ -1,4 +1,4 @@
-﻿@model System.Collections.Generic.IEnumerable<BankAccount.ApplicationLayer.Models.BalanceHistoryViewModel>
+﻿@model IEnumerable<BankAccount.ApplicationLayer.Models.BalanceHistoryViewModel>
 
 @{
     ViewBag.Title = "Transactions";
@@ -24,5 +24,5 @@
         </ul>
     </fieldset>
     <hr/>
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default", style = "margin-left: 15px;" })
+    @Html.ActionLink("Back to List", "Details", new { id = ViewBag.Id }, new { @class = "btn btn-default" })
 </div>

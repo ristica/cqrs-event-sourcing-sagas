@@ -3,7 +3,6 @@ using BankAccount.Infrastructure.Buses;
 using BankAccount.Infrastructure.Commanding;
 using BankAccount.Infrastructure.Storage;
 using BankAccount.ProcessManager.Base;
-using EventStore;
 
 namespace BankAccount.ProcessManager
 {
@@ -14,9 +13,8 @@ namespace BankAccount.ProcessManager
 
         public CreateBankAccountSaga(
             ISagaBus bus, 
-            IStoreEvents eventStore, 
             ICommandStackRepository<Domain.BankAccount> repository) 
-            : base(bus, eventStore, repository)
+            : base(bus, repository)
         {
         }
 

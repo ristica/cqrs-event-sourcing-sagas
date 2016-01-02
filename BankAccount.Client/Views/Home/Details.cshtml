@@ -12,7 +12,7 @@
 </style>
 
 <fieldset>
-    <legend>Customer details</legend>
+    <legend>Customer</legend>
 
     <table>
         <tr>
@@ -48,7 +48,7 @@
 </fieldset>
 
 <fieldset>
-    <legend>Contact details</legend>
+    <legend>Contact</legend>
 
     <table>
         <tr>
@@ -68,7 +68,7 @@
 </fieldset>
 
 <fieldset>
-    <legend>Address details</legend>
+    <legend>Address</legend>
 
     <table>
         <tr>
@@ -100,12 +100,16 @@
 </fieldset>
 
 <fieldset>
-    <legend>Acocunt details</legend>
+    <legend>Acocunt</legend>
 
     <table>
         <tr>
             <td style="width: 200px; font-weight: bold;">@Html.DisplayNameFor(model => model.Currency)</td>
             <td>@Html.DisplayFor(model => model.Currency)</td>
+        </tr>
+        <tr>
+            <td style="width: 200px; font-weight: bold;">@Html.DisplayNameFor(model => model.Balance)</td>
+            <td style="font-weight: bold;">@Html.DisplayFor(model => model.Balance)</td>
         </tr>
     </table>
     <hr/>
@@ -118,4 +122,8 @@
 <hr/>
 <p>
     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+
+    @Html.ActionLink("Bank statement", "History", new { id = Model.AggregateId, name = Model.FirstName + " " + Model.LastName, balance = Model.Balance }, new { @class = "btn btn-primary", style = "margin-left: 2px;" })
+    @Html.ActionLink("Money transfer", "TransferMoney", new { id = Model.AggregateId }, new { @class = "btn btn-primary", style = "margin-left: 2px;" })
+    @Html.ActionLink("Delete", "Delete", new { id = Model.AggregateId }, new { @class = "btn btn-danger", style = "margin-left: 2px;" })
 </p>

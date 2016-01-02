@@ -1,4 +1,5 @@
 ﻿@using System
+@using BankAccount.ApplicationLayer.Models
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,10 @@
     <title>DDD, Cqrs, EventSourcing</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @{
+        var user = ViewBag.User as UserViewModel;
+    }
 
 </head>
 <body>
@@ -19,12 +24,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Contoso Bank Corp.", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Contoso Bank Corp.", "LogIn", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse pull-right">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Accounts", "Index", "Home")</li>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav pull-left">
+                    <li>@Html.ActionLink("Accounts", "LogIn", "Home")</li>
                 </ul>
+                <div class="pull-right" style="padding-top: 14px;">
+                    @if (user != null)
+                    {
+                        <span style="color: #fff;">Wellcome, @user.Name !</span>
+                    }
+                </div>
             </div>
         </div>
     </div>

@@ -7,45 +7,63 @@ namespace BankAccount.Client.Controllers
 {
     public class HomeController : Controller
     {
+        #region Fields
+
+        private static UserViewModel _user;
+
+        #endregion
+
         #region GET
+
+        public ActionResult LogIn()
+        {
+            return View(new UserViewModel());
+        }
 
         public ActionResult Index()
         {
             var model = QueryStackWorkerService.GetAllBankAccounts();
+            ViewBag.User = _user;
             return View(model);
         }
 
         public ActionResult Details(Guid id)
         {
             var model = QueryStackWorkerService.GetDetails(id);
+            ViewBag.User = _user;
             return View(model);
         }
 
         public ActionResult Add()
         {
+            ViewBag.User = _user;
             return View(new NewBankAccountViewModel());
         }
 
         public ActionResult EditCustomer(Guid id)
         {
+            ViewBag.User = _user;
             var model = QueryStackWorkerService.GetCustomerForBankAccount(id);
             return View(model);
         }
 
         public ActionResult EditContact(Guid id)
         {
+            ViewBag.User = _user;
             var model = QueryStackWorkerService.GetContactForBankAccount(id);
             return View(model);
         }
 
         public ActionResult EditAddress(Guid id)
         {
+            ViewBag.User = _user;
             var model = QueryStackWorkerService.GetAddressForBankAccount(id);
             return View(model);
         }
 
         public ActionResult EditMoney(Guid id)
         {
+            ViewBag.User = _user;
             var model = QueryStackWorkerService.GetMoneyForBankAccount(id);
             return View(model);
         }
@@ -59,6 +77,8 @@ namespace BankAccount.Client.Controllers
 
         public ActionResult History(Guid id, string name, string balance)
         {
+            ViewBag.User = _user;
+            ViewBag.Id = id;
             var model = QueryStackWorkerService.GetBankAccountHistory(id);
             ViewBag.AccountName = name;
             ViewBag.CurrentBalance = balance;
@@ -68,6 +88,7 @@ namespace BankAccount.Client.Controllers
 
         public ActionResult TransferMoney(Guid id)
         {
+            ViewBag.User = _user;
             var model = QueryStackWorkerService.GetMoneyForBankAccount(id);
             return View(new TransferViewModel
             {
@@ -80,6 +101,29 @@ namespace BankAccount.Client.Controllers
         #endregion
 
         #region POST
+
+        [HttpPost]
+        public ActionResult Index(string Account)
+        {
+            return RedirectToAction("Details", new { id = new Guid(Account) });
+        }
+
+        [HttpPost]
+        public ActionResult LogIn(UserViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            _user = new UserViewModel
+            {
+                EmployeeId = vm.EmployeeId,
+                Name = "Mr. Pingo",
+                UserName = vm.UserName
+            };
+            return RedirectToAction("Index");
+        }
  
         [HttpPost]
         public ActionResult Add(NewBankAccountViewModel vm)

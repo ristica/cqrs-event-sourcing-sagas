@@ -99,6 +99,7 @@
     <Compile Include="Models\MoneyViewModel.cs" />
     <Compile Include="Models\NewBankAccountViewModel.cs" />
     <Compile Include="Models\TransferViewModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CommandStackWorkerService.cs" />
     <Compile Include="Services\QueryStackWorkerService.cs" />

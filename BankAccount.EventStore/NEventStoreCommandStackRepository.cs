@@ -99,6 +99,9 @@ namespace BankAccount.EventStore
             }
 
             aggregate.MarkChangesAsCommitted();
+
+            // eventually save the current state to the db
+            // as we did it before :)
             this._database.UpdateFromCache();
         }
 
