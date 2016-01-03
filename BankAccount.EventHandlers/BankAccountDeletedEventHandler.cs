@@ -5,7 +5,7 @@ using BankAccount.Infrastructure.EventHandling;
 
 namespace BankAccount.EventHandlers
 {
-    public class BankAccountDeletedEventHandler : BaseBankAccountEventHandler, IEventHandler<BankAccountDeletedEvent>
+    public class BankAccountDeletedEventHandler : BaseCustomerEventHandler, IEventHandler<BankAccountDeletedEvent>
     {
         public BankAccountDeletedEventHandler(ICommandStackDatabase database) 
             : base (database)

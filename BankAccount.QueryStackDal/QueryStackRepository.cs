@@ -16,7 +16,7 @@ namespace BankAccount.QueryStackDal
             _eventStore = eventStore;
         }
 
-        public CustomerReadModel GetBankAccount(Guid aggregateId)
+        public CustomerReadModel GetCustomerById(Guid aggregateId)
         {
             var obj = new Domain.CustomerDomainModel();
 
@@ -57,7 +57,38 @@ namespace BankAccount.QueryStackDal
             };
         }
 
-        public IEnumerable<CustomerReadModel> GetAccounts()
+        public IEnumerable<AccountReadModel> GetAccountsByCustomerId(Guid customerId)
+        {
+            using (var ctx = new BankAccountDbContext())
+            {
+                return ctx.AccountSet.Where(a => a.CustomerAggregateId == customerId).Select(e => new AccountReadModel
+                {
+                    Currency = e.Currency,
+                    Id = e.AggregateId
+                }).ToList();
+            }
+        }
+
+        public AccountReadModel GetAccountById(Guid aggregateId)
+        {
+            using (var ctx = new BankAccountDbContext())
+            {
+                var model = ctx.AccountSet.SingleOrDefault(a => a.AggregateId == aggregateId);
+                if (model == null)
+                {
+                    throw new ArgumentNullException("account");
+                }
+
+                return new AccountReadModel
+                {
+                    Currency = model.Currency,
+                    Id = model.AggregateId,
+                    CustomerId = model.CustomerAggregateId
+                };
+            }
+        }
+
+        public IEnumerable<CustomerReadModel> GetCustomers()
         {
             using (var ctx = new BankAccountDbContext())
             {

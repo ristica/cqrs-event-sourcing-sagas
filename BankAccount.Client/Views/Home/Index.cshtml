@@ -9,15 +9,15 @@
         <h4>Choose an account</h4>
         @using (Html.BeginForm())
         {
-            <select id="Account" name="Account" class="form-control" style="width: 350px;">
-                <option selected>Please choose an account</option>
+            <select id="Account" name="Account" class="form-control" style="width: 350px; float: left;">
+                <option selected>Please choose a customer</option>
                 @foreach (var acc in Model)
                 {
                     <option value="@acc.Id">@acc.FirstName @acc.LastName</option>
                 }
             </select>
-            <br />
-            <input type="submit" value="Submit" class="btn btn-primary" />
+            <input type="submit" value="Show customer details" class="btn btn-primary" style="margin-left: 15px;"/>
+            <hr/>
             @Html.ActionLink("Add new customer", "Add", null, new { @class = "btn btn-default" })
         }
 

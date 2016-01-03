@@ -80,7 +80,7 @@ namespace BankAccount.ApplicationLayer.Services
         public static void TransferMoney(TransferViewModel vm)
         {
             IoCServiceLocator.CommandBus.Send(
-                new TransferMoneyCommand(
+                new ChangeBalanceCommand(
                     vm.AggregateId,
                     vm.Version,
                     vm.Amount));
@@ -92,7 +92,7 @@ namespace BankAccount.ApplicationLayer.Services
                 new AddAccountCommand(
                     Guid.NewGuid(),
                     0,
-                    vm.BankAccountId,
+                    vm.CustomerId,
                     vm.Currency));
         }
     }

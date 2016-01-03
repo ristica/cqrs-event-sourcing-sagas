@@ -48,7 +48,7 @@
     <Compile Include="CreateCustomerCommand.cs" />
     <Compile Include="DeleteCustomerCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TransferMoneyCommand.cs" />
+    <Compile Include="ChangeBalanceCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BankAccount.Infrastructure\BankAccount.Infrastructure.csproj">

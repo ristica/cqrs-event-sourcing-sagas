@@ -7,11 +7,11 @@ using BankAccount.Infrastructure.Storage;
 
 namespace BankAccount.EventHandlers
 {
-    public class BalanceChangedEventHandler : BaseBankAccountEventHandler, IEventHandler<BalanceChangedEvent>
+    public class BalanceChangedEventHandler : BaseCustomerEventHandler, IEventHandler<BalanceChangedEvent>
     {
-        private readonly ICommandStackRepository<Domain.CustomerDomainModel> _repository;
+        private readonly ICommandStackRepository<Domain.AccountDomainModel> _repository;
 
-        public BalanceChangedEventHandler(ICommandStackRepository<Domain.CustomerDomainModel> repository, ICommandStackDatabase database) 
+        public BalanceChangedEventHandler(ICommandStackRepository<Domain.AccountDomainModel> repository, ICommandStackDatabase database) 
             : base(database)
         {
             if (repository == null)

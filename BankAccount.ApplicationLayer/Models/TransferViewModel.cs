@@ -10,6 +10,9 @@ namespace BankAccount.ApplicationLayer.Models
         public Guid AggregateId { get; set; }
 
         [HiddenInput(DisplayValue = false)]
+        public Guid CustomerId { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
         public int Version { get; set; }
 
         [Required]

@@ -1,8 +1,10 @@
-﻿@model BankAccount.ApplicationLayer.Models.DetailsBankAccountViewModel
+﻿@using BankAccount.ApplicationLayer.Models
+@model BankAccount.ApplicationLayer.Models.DetailsBankAccountViewModel
 
 @{
     ViewBag.Title = "Bank account details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var accounts = ViewBag.Accounts as IEnumerable<AccountViewModel>;
 }
 
 <style>
@@ -12,7 +14,7 @@
 </style>
 
 <fieldset>
-    <legend>Person</legend>
+    <legend>Person details</legend>
 
     <table>
         <tr>
@@ -48,7 +50,7 @@
 </fieldset>
 
 <fieldset>
-    <legend>Contact</legend>
+    <legend>Contact data</legend>
 
     <table>
         <tr>
@@ -94,16 +96,39 @@
     </table>
     <hr/>
     <p>
-        @Html.ActionLink("Edit address details", "EditAddress", new { id = Model.AggregateId })
+        @Html.ActionLink("Edit address details", "EditAddress", new {id = Model.AggregateId})
     </p>
 
+</fieldset>
+
+<fieldset>
+    <legend>Bank accounts <span style="font-size: 10pt;">(acount number / currency / current balance)</span></legend>
+
+    @if (accounts == null || !accounts.Any())
+    {
+        <div>There are no bank account for this customer yet!</div>
+    }
+    else
+    {
+        <table style="width: 100%;">
+            @foreach (var a in accounts.ToList())
+            {
+                <tr>
+                    <td style="width: 400px; font-weight: bold;">@a.AggregateId</td>
+                    <td>@a.Currency @a.CurrentBalance</td>
+                    <td style="text-align: right;">
+                        @Html.ActionLink("Money transfer", "TransferMoney", new { aggregateId = a.AggregateId }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Bank statement", "History", new { id = a.AggregateId, name = Model.FirstName + " " + Model.LastName, customerId = Model.AggregateId, currency = a.Currency }, new { @class = "btn btn-default" })
+                    </td>
+                </tr>
+            }
+        </table>
+    }
 </fieldset>
 <hr/>
 <p>
     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Add new account", "Create", new { customerId = Model.AggregateId }, new { @class = "btn btn-default" })
-
-    @*@Html.ActionLink("Bank statement", "History", new { id = Model.AggregateId, name = Model.FirstName + " " + Model.LastName, balance = Model.Balance }, new { @class = "btn btn-primary", style = "margin-left: 2px;" })
-    @Html.ActionLink("Money transfer", "TransferMoney", new { id = Model.AggregateId }, new { @class = "btn btn-primary", style = "margin-left: 2px;" })*@
-    @Html.ActionLink("Delete", "Delete", new { id = Model.AggregateId }, new { @class = "btn btn-danger", style = "margin-left: 2px;" })
+    
+    @Html.ActionLink("Delete", "Delete", new { id = Model.AggregateId }, new { @class = "btn btn-danger pull-right" })
+    @Html.ActionLink("Add new account", "Create", new { customerId = Model.AggregateId }, new { @class = "btn btn-default pull-right", style = "margin-right: 5px;" })
 </p>

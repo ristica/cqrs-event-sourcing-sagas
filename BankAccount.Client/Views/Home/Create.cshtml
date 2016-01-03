@@ -16,7 +16,7 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.BankAccountId)
+        @Html.HiddenFor(model => model.CustomerId)
         @Html.ValidationMessageFor(model => model.FirstName)
         @Html.ValidationMessageFor(model => model.LastName)
 
@@ -30,12 +30,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Submit" class="btn btn-primary"/>
-                @Html.ActionLink("Back to customer details", "Details", new { id = Model.BankAccountId }, new { @class = "btn btn-default", style = "margin-left: 15px;" })
+                <input type="submit" value="Save" class="btn btn-primary"/>
             </div>
         </div>
     </div>
 }
+
+<hr/>
+@Html.ActionLink("Back to customer details", "Details", new { id = Model.CustomerId }, new { @class = "btn btn-default", style = "margin-left: 15px;" })
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -11,7 +11,7 @@ namespace BankAccount.DbModel.Entities
         public Guid AggregateId { get; set; }
         public Guid CustomerAggregateId { get; set; }
         public int Version { get; set; }
-        public Money Money { get; set; }
+        public string Currency { get; set; }
 
         public virtual CustomerEntity CustomerEntity { get; set; }
         public Int64 CustomerEntityId { get; set; }

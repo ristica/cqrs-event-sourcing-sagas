@@ -7,7 +7,7 @@ using BankAccount.Infrastructure.Storage;
 
 namespace BankAccount.EventHandlers
 {
-    public class CurrencyChangedEventHandler : BaseBankAccountEventHandler, IEventHandler<CurrencyChangedEvent>
+    public class CurrencyChangedEventHandler : BaseCustomerEventHandler, IEventHandler<CurrencyChangedEvent>
     {
         private readonly ICommandStackRepository<Domain.CustomerDomainModel> _repository;
 

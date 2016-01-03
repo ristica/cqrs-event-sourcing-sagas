@@ -6,7 +6,7 @@ using BankAccount.Infrastructure.Storage;
 
 namespace BankAccount.CommandHandlers
 {
-    public class ChangeCurrencyCommandHandler : BaseBankAccountCommandHandler, ICommandHandler<ChangeCurrencyCommand>
+    public class ChangeCurrencyCommandHandler : BaseCustomerCommandHandler, ICommandHandler<ChangeCurrencyCommand>
     {
         public ChangeCurrencyCommandHandler(ICommandStackRepository<Domain.CustomerDomainModel> repository) 
             : base(repository)

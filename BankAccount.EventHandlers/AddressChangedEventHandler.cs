@@ -7,7 +7,7 @@ using BankAccount.Infrastructure.Storage;
 
 namespace BankAccount.EventHandlers
 {
-    public class AddressChangedEventHandler : BaseBankAccountEventHandler, IEventHandler<AddressChangedEvent>
+    public class AddressChangedEventHandler : BaseCustomerEventHandler, IEventHandler<AddressChangedEvent>
     {
         private readonly ICommandStackRepository<Domain.CustomerDomainModel> _repository;
 

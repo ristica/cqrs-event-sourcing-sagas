@@ -5,7 +5,7 @@ using BankAccount.Infrastructure.EventHandling;
 
 namespace BankAccount.EventHandlers
 {
-    public class CustomerCreatedEventHandler : BaseBankAccountEventHandler, IEventHandler<CustomerCreatedEvent>
+    public class CustomerCreatedEventHandler : BaseCustomerEventHandler, IEventHandler<CustomerCreatedEvent>
     {
         public CustomerCreatedEventHandler(ICommandStackDatabase database) 
             : base(database)

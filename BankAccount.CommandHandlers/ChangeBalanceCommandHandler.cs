@@ -6,14 +6,13 @@ using BankAccount.Infrastructure.Storage;
 
 namespace BankAccount.CommandHandlers
 {
-    public class ChangeContactDetailsCommandHandler : BaseCustomerCommandHandler, ICommandHandler<ChangeContactDetailsCommand>
+    public class ChangeBalanceCommandHandler : BaseAccountCommandHandler, ICommandHandler<ChangeBalanceCommand>
     {
-        public ChangeContactDetailsCommandHandler(ICommandStackRepository<Domain.CustomerDomainModel> repository) 
-            : base(repository)
+        public ChangeBalanceCommandHandler(ICommandStackRepository<Domain.AccountDomainModel> repository) : base(repository)
         {
         }
 
-        public void Execute(ChangeContactDetailsCommand command)
+        public void Execute(ChangeBalanceCommand command)
         {
             if (command == null)
             {
@@ -22,9 +21,7 @@ namespace BankAccount.CommandHandlers
 
             var aggregate = this.Repository.GetById(command.Id);
 
-            aggregate.ChangeContact(
-                command.Email, 
-                command.Phone);
+            aggregate.ChangeBalance(command.Amount, aggregate.Version);
 
             this.Repository.Save(aggregate, aggregate.Version);
         }

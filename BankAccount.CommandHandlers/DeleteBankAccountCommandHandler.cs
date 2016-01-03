@@ -6,7 +6,7 @@ using BankAccount.Infrastructure.Storage;
 
 namespace BankAccount.CommandHandlers
 {
-    public class DeleteBankAccountCommandHandler : BaseBankAccountCommandHandler, ICommandHandler<DeleteCustomerCommand>
+    public class DeleteBankAccountCommandHandler : BaseCustomerCommandHandler, ICommandHandler<DeleteCustomerCommand>
     {
         public DeleteBankAccountCommandHandler(ICommandStackRepository<Domain.CustomerDomainModel> repository) 
             : base(repository)

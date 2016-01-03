@@ -7,7 +7,7 @@ using BankAccount.Infrastructure.Storage;
 
 namespace BankAccount.EventHandlers
 {
-    public class ContactChangedEventHandler : BaseBankAccountEventHandler, IEventHandler<ContactChangedEvent>
+    public class ContactChangedEventHandler : BaseCustomerEventHandler, IEventHandler<ContactChangedEvent>
     {
         private readonly ICommandStackRepository<Domain.CustomerDomainModel> _repository;
 

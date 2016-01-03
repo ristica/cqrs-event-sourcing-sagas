@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using BankAccount.ApplicationLayer.Models;
 using BankAccount.ApplicationLayer.Services;
@@ -30,7 +31,9 @@ namespace BankAccount.Client.Controllers
         public ActionResult Details(Guid id)
         {
             var model = QueryStackWorkerService.GetDetails(id);
+            var accounts = QueryStackWorkerService.GetAccountsByCustomerId(model.AggregateId);
             ViewBag.User = _user;
+            ViewBag.Accounts = accounts;
             return View(model);
         }
 
@@ -43,7 +46,7 @@ namespace BankAccount.Client.Controllers
         public ActionResult Create(Guid customerId)
         {
             ViewBag.User = _user;
-            return View(new AccountViewModel { BankAccountId = customerId });
+            return View(new AccountViewModel { CustomerId = customerId });
         }
 
         public ActionResult EditCustomer(Guid id)
@@ -72,6 +75,23 @@ namespace BankAccount.Client.Controllers
             var model = QueryStackWorkerService.GetDetails(id);
             CommandStackWorkerService.DeleteBankAccount(model.AggregateId, model.Version);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult History(Guid id, string name, Guid customerId, string currency)
+        {
+            ViewBag.AccountName = name;
+            var model = QueryStackWorkerService.GetBankAccountHistory(id);
+            ViewBag.CurrentBalance = model.Sum(b => b.Amount);
+            ViewBag.CustomerId = customerId;
+            ViewBag.AccountId = id;
+            ViewBag.Currency = currency;
+            return View(model);
+        }
+
+        public ActionResult TransferMoney(Guid aggregateId)
+        {
+            var account = QueryStackWorkerService.GetAccountById(aggregateId);
+            return View(account);
         }
 
         #endregion
@@ -122,7 +142,7 @@ namespace BankAccount.Client.Controllers
             }
 
             CommandStackWorkerService.AddAccount(vm);
-            return RedirectToAction("Details", new { id = vm.BankAccountId });
+            return RedirectToAction("Details", new { id = vm.CustomerId });
         }
 
         [HttpPost]
@@ -190,7 +210,7 @@ namespace BankAccount.Client.Controllers
             }
 
             CommandStackWorkerService.TransferMoney(vm);
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", new { id = vm.CustomerId });
         }
 
         #endregion
@@ -222,12 +242,6 @@ namespace BankAccount.Client.Controllers
                    !model.Street.Equals(vm.Street.Trim())           || 
                    !model.Zip.Equals(vm.Zip.Trim());
         }
-
-        //private bool IsMoneyDirty(MoneyViewModel vm)
-        //{
-        //    var model = QueryStackWorkerService.GetMoneyForBankAccount(vm.AggregateId);
-        //    return !model.Currency.Equals(vm.Currency.Trim());
-        //}
 
         #endregion
     }

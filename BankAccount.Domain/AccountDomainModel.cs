@@ -7,12 +7,14 @@ using BankAccount.ValueTypes;
 namespace BankAccount.Domain
 {
     public class AccountDomainModel : AggregateRoot,
-        IHandle<AccountAddedEvent>
+        IHandle<AccountAddedEvent>,
+        IHandle<BalanceChangedEvent>
     {
         #region Properties
 
         public Guid CustomerId { get; set; }
-        public Money Money { get; set; }
+        public string Currency { get; set; }
+        public int Balance { get; set; }
 
         #endregion
 
@@ -29,11 +31,21 @@ namespace BankAccount.Domain
                     AggregateId = aggregateId,
                     CustomerId = customerId,
                     Version = version,
-                    Money = new Money
-                    {
-                        Balance = 0,
-                        Currency = currency
-                    }});
+                    Currency = currency
+                });
+        }
+
+        public void ChangeBalance(
+            int amount,
+            int version)
+        {
+            ApplyChange(
+                new BalanceChangedEvent
+                {
+                    AggregateId = this.Id,
+                    Version = version,
+                    Amount = amount
+                });
         }
 
         #endregion
@@ -45,7 +57,15 @@ namespace BankAccount.Domain
             this.Id = e.AggregateId;
             this.Version = e.Version;
             this.CustomerId = e.CustomerId;
-            this.Money = e.Money;
+            this.Currency = e.Currency;
+            this.Balance = 0;
+        }
+
+        public void Handle(BalanceChangedEvent e)
+        {
+            this.Id = e.AggregateId;
+            this.Version = e.Version;
+            this.Balance += e.Amount;
         }
 
         #endregion

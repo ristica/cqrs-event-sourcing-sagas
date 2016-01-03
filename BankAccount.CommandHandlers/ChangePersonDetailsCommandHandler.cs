@@ -6,7 +6,7 @@ using BankAccount.Infrastructure.Storage;
 
 namespace BankAccount.CommandHandlers
 {
-    public class ChangePersonDetailsCommandHandler : BaseBankAccountCommandHandler, ICommandHandler<ChangePersonDetailsCommand>
+    public class ChangePersonDetailsCommandHandler : BaseCustomerCommandHandler, ICommandHandler<ChangePersonDetailsCommand>
     {
         public ChangePersonDetailsCommandHandler(ICommandStackRepository<Domain.CustomerDomainModel> repository) 
             : base(repository)

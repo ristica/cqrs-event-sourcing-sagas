@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace BankAccount.ApplicationLayer.Models
@@ -11,10 +7,10 @@ namespace BankAccount.ApplicationLayer.Models
     public class AccountViewModel
     {
         [HiddenInput(DisplayValue = false)]
-        public Guid BankAccountId { get; set; }
+        public Guid CustomerId { get; set; }
 
         [HiddenInput(DisplayValue = false)]
-        public Guid Id { get; set; }
+        public Guid AggregateId { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         public string FirstName { get; set; }
@@ -24,5 +20,8 @@ namespace BankAccount.ApplicationLayer.Models
 
         [Required]
         public string Currency { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public int CurrentBalance { get; set; }
     }
 }

@@ -43,11 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountAddedEventHandler.cs" />
+    <Compile Include="Base\BaseAccountEventHandler.cs" />
     <Compile Include="CustomerCreatedEventHandler.cs" />
     <Compile Include="BankAccountDeletedEventHandler.cs" />
     <Compile Include="ContactChangedEventHandler.cs" />
     <Compile Include="PersonChangedEventHandler.cs" />
-    <Compile Include="Base\BaseBankAccountEventHandler.cs" />
+    <Compile Include="Base\BaseCustomerEventHandler.cs" />
     <Compile Include="BalanceChangedEventHandler.cs" />
     <Compile Include="CurrencyChangedEventHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

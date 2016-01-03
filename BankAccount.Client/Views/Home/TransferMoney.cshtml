@@ -17,6 +17,7 @@
 
         @Html.HiddenFor(model => model.AggregateId)
         @Html.HiddenFor(model => model.Version)
+        @Html.HiddenFor(model => model.CustomerId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -28,7 +29,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
         </div>
     </div>

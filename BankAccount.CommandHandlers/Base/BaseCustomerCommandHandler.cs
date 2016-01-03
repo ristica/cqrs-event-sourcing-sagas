@@ -3,11 +3,11 @@ using BankAccount.Infrastructure.Storage;
 
 namespace BankAccount.CommandHandlers.Base
 {
-    public abstract class BaseBankAccountCommandHandler
+    public abstract class BaseCustomerCommandHandler
     {
         protected readonly ICommandStackRepository<Domain.CustomerDomainModel> Repository;
 
-        protected BaseBankAccountCommandHandler(ICommandStackRepository<Domain.CustomerDomainModel> repository)
+        protected BaseCustomerCommandHandler(ICommandStackRepository<Domain.CustomerDomainModel> repository)
         {
             if (repository == null)
             {

@@ -3,11 +3,11 @@ using BankAccount.Infrastructure.Commanding;
 
 namespace BankAccount.Commands
 {
-    public class TransferMoneyCommand : Command
+    public class ChangeBalanceCommand : Command
     {
         public int Amount { get; private set; }
 
-        public TransferMoneyCommand(Guid id, int version, int amount) 
+        public ChangeBalanceCommand(Guid id, int version, int amount) 
             : base(id, version)
         {
             this.Amount = amount;

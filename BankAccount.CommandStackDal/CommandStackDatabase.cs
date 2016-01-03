@@ -148,11 +148,7 @@ namespace BankAccount.CommandStackDal
                     Version = item.Version,
                     CustomerEntityId = customerEntityId.CustomerEntityId,
                     CustomerAggregateId = item.CustomerId,
-                    Money = new Money
-                    {
-                        Balance = item.Money.Balance,
-                        Currency = item.Money.Currency
-                    }
+                    Currency = item.Currency
                 });
                 ctx.SaveChanges();
             }
@@ -176,11 +172,7 @@ namespace BankAccount.CommandStackDal
                 }
 
                 entity.Version = item.Version;
-                entity.Money = new Money
-                {
-                    Balance = item.Money.Balance,
-                    Currency = item.Money.Currency
-                };
+                entity.Currency = item.Currency;
                 entity.CustomerEntityId = customerEntityId.CustomerEntityId;
                 entity.CustomerAggregateId = item.CustomerId;
 

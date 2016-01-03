@@ -6,7 +6,7 @@ using BankAccount.Infrastructure.EventHandling;
 
 namespace BankAccount.EventHandlers
 {
-    public class AccountAddedEventHandler : BaseBankAccountEventHandler, IEventHandler<AccountAddedEvent>
+    public class AccountAddedEventHandler : BaseCustomerEventHandler, IEventHandler<AccountAddedEvent>
     {
         public AccountAddedEventHandler(ICommandStackDatabase database) 
             : base(database)
@@ -20,7 +20,7 @@ namespace BankAccount.EventHandlers
                Id = handle.AggregateId,
                CustomerId = handle.CustomerId,
                Version = handle.Version,
-               Money = handle.Money
+               Currency = handle.Currency
             });
         }
     }
