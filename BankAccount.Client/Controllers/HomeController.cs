@@ -122,7 +122,7 @@ namespace BankAccount.Client.Controllers
             }
 
             CommandStackWorkerService.AddAccount(vm);
-            return RedirectToAction("Details", new { customerId = vm.BankAccountId });
+            return RedirectToAction("Details", new { id = vm.BankAccountId });
         }
 
         [HttpPost]

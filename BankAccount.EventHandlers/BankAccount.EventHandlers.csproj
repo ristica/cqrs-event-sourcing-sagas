@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountAddedEventHandler.cs" />
     <Compile Include="CustomerCreatedEventHandler.cs" />
     <Compile Include="BankAccountDeletedEventHandler.cs" />
     <Compile Include="ContactChangedEventHandler.cs" />

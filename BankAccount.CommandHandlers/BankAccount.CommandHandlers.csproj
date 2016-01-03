@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAccountCommandHandler.cs" />
     <Compile Include="Base\BaseBankAccountCommandHandler.cs" />
     <Compile Include="ChangeContactDetailsCommandHandler.cs" />
     <Compile Include="ChangePersonDetailsCommandHandler.cs" />

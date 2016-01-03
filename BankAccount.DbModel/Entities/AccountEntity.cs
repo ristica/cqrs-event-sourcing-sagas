@@ -7,10 +7,13 @@ namespace BankAccount.DbModel.Entities
     public class AccountEntity
     {
         [Key]
-        public Guid AccountEntityId { get; set; }
+        public Int64 AccountEntityId { get; set; }
+        public Guid AggregateId { get; set; }
+        public Guid CustomerAggregateId { get; set; }
+        public int Version { get; set; }
         public Money Money { get; set; }
 
         public virtual CustomerEntity CustomerEntity { get; set; }
-        public Guid CustomerEntityId { get; set; }
+        public Int64 CustomerEntityId { get; set; }
     }
 }

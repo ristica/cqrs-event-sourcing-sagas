@@ -88,6 +88,8 @@ namespace BankAccount.Configuration
             bus.RegisterHandler<BalanceChangedEventHandler>();
             bus.RegisterHandler<CurrencyChangedEventHandler>();
             bus.RegisterHandler<AddressChangedEventHandler>();
+
+            bus.RegisterHandler<AccountAddedEventHandler>();
         }
 
         private static void RegisterCommandHandlers(IUnityContainer container)
@@ -101,6 +103,8 @@ namespace BankAccount.Configuration
             bus.RegisterHandler<TransferMoneyCommandHandler>();
             bus.RegisterHandler<ChangePersonDetailsCommandHandler>();
             bus.RegisterHandler<ChangeContactDetailsCommandHandler>();
+
+            bus.RegisterHandler<AddAccountCommandHandler>();
         }
 
         private static void RegisterSagasHandlers(IUnityContainer container)
