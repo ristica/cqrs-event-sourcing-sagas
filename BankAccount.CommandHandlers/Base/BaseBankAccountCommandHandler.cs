@@ -5,9 +5,9 @@ namespace BankAccount.CommandHandlers.Base
 {
     public abstract class BaseBankAccountCommandHandler
     {
-        protected readonly ICommandStackRepository<Domain.BankAccount> Repository;
+        protected readonly ICommandStackRepository<Domain.CustomerDomainModel> Repository;
 
-        protected BaseBankAccountCommandHandler(ICommandStackRepository<Domain.BankAccount> repository)
+        protected BaseBankAccountCommandHandler(ICommandStackRepository<Domain.CustomerDomainModel> repository)
         {
             if (repository == null)
             {

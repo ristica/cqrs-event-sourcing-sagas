@@ -50,8 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Address.cs" />
-    <Compile Include="Entities\BankAccountEntity.cs" />
-    <Compile Include="Entities\BankAccountBalanceEntity.cs" />
+    <Compile Include="Entities\CustomerEntity.cs" />
+    <Compile Include="Entities\AccountEntity.cs" />
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\Money.cs" />

@@ -15,7 +15,7 @@ namespace BankAccount.EventHandlers
 
         public void Handle(CustomerCreatedEvent handle)
         {
-            this.Database.Save(new Domain.BankAccount
+            this.Database.Save(new Domain.CustomerDomainModel
             {
                 Id          = handle.AggregateId,
                 Person      = handle.Person,

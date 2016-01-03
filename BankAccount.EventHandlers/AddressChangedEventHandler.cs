@@ -9,9 +9,9 @@ namespace BankAccount.EventHandlers
 {
     public class AddressChangedEventHandler : BaseBankAccountEventHandler, IEventHandler<AddressChangedEvent>
     {
-        private readonly ICommandStackRepository<Domain.BankAccount> _repository;
+        private readonly ICommandStackRepository<Domain.CustomerDomainModel> _repository;
 
-        public AddressChangedEventHandler(ICommandStackRepository<Domain.BankAccount> repository, ICommandStackDatabase database) 
+        public AddressChangedEventHandler(ICommandStackRepository<Domain.CustomerDomainModel> repository, ICommandStackDatabase database) 
             : base(database)
         {
             if (repository == null)

@@ -13,7 +13,7 @@ namespace BankAccount.ProcessManager
 
         public CreateBankAccountSaga(
             ISagaBus bus, 
-            ICommandStackRepository<Domain.BankAccount> repository) 
+            ICommandStackRepository<Domain.CustomerDomainModel> repository) 
             : base(bus, repository)
         {
         }
@@ -24,7 +24,7 @@ namespace BankAccount.ProcessManager
 
         public void Handle(CreateCustomerCommand message)
         {
-            var aggregate = Domain.BankAccount.Factory.CreateNewInstance(
+            var aggregate = Domain.CustomerDomainModel.Factory.CreateNewInstance(
                 message.Id,
                 message.Version,
                 message.Person.FirstName,

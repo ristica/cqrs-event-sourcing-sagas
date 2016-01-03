@@ -8,7 +8,7 @@ namespace BankAccount.CommandHandlers
 {
     public class ChangeContactDetailsCommandHandler : BaseBankAccountCommandHandler, ICommandHandler<ChangeContactDetailsCommand>
     {
-        public ChangeContactDetailsCommandHandler(ICommandStackRepository<Domain.BankAccount> repository) 
+        public ChangeContactDetailsCommandHandler(ICommandStackRepository<Domain.CustomerDomainModel> repository) 
             : base(repository)
         {
         }

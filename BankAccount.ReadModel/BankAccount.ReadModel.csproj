@@ -41,9 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressReadModel.cs" />
-    <Compile Include="BankAccountReadModel.cs" />
-    <Compile Include="ContactReadModel.cs" />
     <Compile Include="CustomerReadModel.cs" />
+    <Compile Include="ContactReadModel.cs" />
+    <Compile Include="PersonReadModel.cs" />
     <Compile Include="MoneyReadModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

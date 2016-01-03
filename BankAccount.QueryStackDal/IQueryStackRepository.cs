@@ -9,7 +9,7 @@ namespace BankAccount.QueryStackDal
     /// </summary>
     public interface IQueryStackRepository
     {
-        BankAccountReadModel GetBankAccount(Guid aggregateId);
-        IEnumerable<BankAccountReadModel> GetAccounts();
+        CustomerReadModel GetBankAccount(Guid aggregateId);
+        IEnumerable<CustomerReadModel> GetAccounts();
     }
 }

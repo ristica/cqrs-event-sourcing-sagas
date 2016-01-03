@@ -8,7 +8,7 @@ namespace BankAccount.CommandHandlers
 {
     public class CreateCustomerCommandHandler : BaseBankAccountCommandHandler, ICommandHandler<CreateCustomerCommand>
     {
-        public CreateCustomerCommandHandler(ICommandStackRepository<Domain.BankAccount> repository) 
+        public CreateCustomerCommandHandler(ICommandStackRepository<Domain.CustomerDomainModel> repository) 
             : base(repository)
         {
         }
@@ -20,8 +20,8 @@ namespace BankAccount.CommandHandlers
                 throw new ArgumentNullException(nameof(command));
             }
 
-            var aggregate = new Domain.BankAccount();
-            aggregate.CreateNewBankAccount(
+            var aggregate = new Domain.CustomerDomainModel();
+            aggregate.CreateNewCustomer(
                 command.Id, 
                 command.Person.FirstName, 
                 command.Person.LastName, 

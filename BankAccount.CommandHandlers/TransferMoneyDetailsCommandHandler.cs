@@ -8,7 +8,7 @@ namespace BankAccount.CommandHandlers
 {
     public class TransferMoneyCommandHandler : BaseBankAccountCommandHandler, ICommandHandler<TransferMoneyCommand>
     {
-        public TransferMoneyCommandHandler(ICommandStackRepository<Domain.BankAccount> repository) : base(repository)
+        public TransferMoneyCommandHandler(ICommandStackRepository<Domain.CustomerDomainModel> repository) : base(repository)
         {
         }
 

@@ -11,16 +11,16 @@ namespace BankAccount.CommandStackDal
 {
     public sealed class CommandStackDatabase : ICommandStackDatabase
     {
-        private static readonly List<Domain.BankAccount> Cache = new List<Domain.BankAccount>();
+        private static readonly List<Domain.CustomerDomainModel> Cache = new List<Domain.CustomerDomainModel>();
 
         #region ICommandStackDatabase implementation
 
-        public void Save(Domain.BankAccount item)
+        public void Save(Domain.CustomerDomainModel item)
         {
-            BankAccountEntity entity;
+            CustomerEntity entity;
             using (var ctx = new BankAccountDbContext())
             {
-                entity = ctx.BankAccountSet.SingleOrDefault(b => b.AggregateId == item.Id);
+                entity = ctx.CustomerSet.SingleOrDefault(b => b.AggregateId == item.Id);
             }
 
             if (entity == null)
@@ -37,17 +37,17 @@ namespace BankAccount.CommandStackDal
         {
             using (var ctx = new BankAccountDbContext())
             {
-                var entity = ctx.BankAccountSet.SingleOrDefault(b => b.AggregateId == id);
+                var entity = ctx.CustomerSet.SingleOrDefault(b => b.AggregateId == id);
                 if (entity == null)
                 {
                     throw new AggregateNotFoundException($"Aggregate with the id {id} was not found");
                 }
-                ctx.BankAccountSet.Remove(entity);
+                ctx.CustomerSet.Remove(entity);
                 ctx.SaveChanges();
             }
         }
 
-        public void AddToCache(Domain.BankAccount ba)
+        public void AddToCache(Domain.CustomerDomainModel ba)
         {
             var acc = Cache.SingleOrDefault(b => b.Id == ba.Id);
             if (acc == null)
@@ -78,11 +78,11 @@ namespace BankAccount.CommandStackDal
 
         #region Helpers
 
-        private void AddBankAccount(Domain.BankAccount item)
+        private void AddBankAccount(Domain.CustomerDomainModel item)
         {
             using (var ctx = new BankAccountDbContext())
             {
-                ctx.BankAccountSet.Add(new BankAccountEntity
+                ctx.CustomerSet.Add(new CustomerEntity
                 {
                     AggregateId         = item.Id,
                     Version             = item.Version,
@@ -93,11 +93,11 @@ namespace BankAccount.CommandStackDal
             }
         }
 
-        private void UpdateBankAccount(Domain.BankAccount item)
+        private void UpdateBankAccount(Domain.CustomerDomainModel item)
         {
             using (var ctx = new BankAccountDbContext())
             {
-                var entity = ctx.BankAccountSet.SingleOrDefault(b => b.AggregateId == item.Id);
+                var entity = ctx.CustomerSet.SingleOrDefault(b => b.AggregateId == item.Id);
                 if (entity == null)
                 {
                     throw new AggregateNotFoundException("Bank account");

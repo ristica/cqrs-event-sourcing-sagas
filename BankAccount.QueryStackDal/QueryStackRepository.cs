@@ -16,16 +16,16 @@ namespace BankAccount.QueryStackDal
             _eventStore = eventStore;
         }
 
-        public BankAccountReadModel GetBankAccount(Guid aggregateId)
+        public CustomerReadModel GetBankAccount(Guid aggregateId)
         {
-            var obj = new Domain.BankAccount();
+            var obj = new Domain.CustomerDomainModel();
 
             IEnumerable<Commit> commits;
 
             var latestSnapshot = this._eventStore.Advanced.GetSnapshot(aggregateId, int.MaxValue);
             if (latestSnapshot?.Payload != null)
             {
-                obj = (Domain.BankAccount)Convert.ChangeType(latestSnapshot.Payload, latestSnapshot.Payload.GetType());
+                obj = (Domain.CustomerDomainModel)Convert.ChangeType(latestSnapshot.Payload, latestSnapshot.Payload.GetType());
                 commits = this._eventStore.Advanced.GetFrom(aggregateId, latestSnapshot.StreamRevision + 1, int.MaxValue).ToList();
             }
             else
@@ -38,7 +38,7 @@ namespace BankAccount.QueryStackDal
                 obj.LoadsFromHistory(c.Events);
             }
 
-            return new BankAccountReadModel
+            return new CustomerReadModel
             {
                 AggregateId = aggregateId,
                 Version = obj.Version,
@@ -57,11 +57,11 @@ namespace BankAccount.QueryStackDal
             };
         }
 
-        public IEnumerable<BankAccountReadModel> GetAccounts()
+        public IEnumerable<CustomerReadModel> GetAccounts()
         {
             using (var ctx = new BankAccountDbContext())
             {
-                return ctx.BankAccountSet.Select(e => new BankAccountReadModel
+                return ctx.CustomerSet.Select(e => new CustomerReadModel
                 {
                     AggregateId         = e.AggregateId,
                     Version             = e.Version,

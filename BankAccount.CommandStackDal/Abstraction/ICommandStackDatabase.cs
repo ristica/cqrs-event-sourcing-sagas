@@ -7,9 +7,9 @@ namespace BankAccount.CommandStackDal.Abstraction
     /// </summary>
     public interface ICommandStackDatabase
     {
-        void Save(Domain.BankAccount item);
+        void Save(Domain.CustomerDomainModel item);
         void Delete(Guid id);
-        void AddToCache(Domain.BankAccount ba);
+        void AddToCache(Domain.CustomerDomainModel ba);
         void UpdateFromCache();
     }
 }
