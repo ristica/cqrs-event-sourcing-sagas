@@ -24,11 +24,11 @@ namespace BankAccount.EventHandlers
 
         public void Handle(BalanceChangedEvent handle)
         {
-            var ba = this._repository.GetById(handle.AggregateId);
+            //var ba = this._repository.GetById(handle.AggregateId);
 
-            ba.Money.Balance = ba.Money.Balance;
+            //ba.Money.Balance = ba.Money.Balance;
 
-            this.Database.Save(ba);
+            //this.Database.Save(ba);
         }
     }
 }

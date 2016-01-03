@@ -3,11 +3,10 @@ using BankAccount.ValueTypes;
 
 namespace BankAccount.Events
 {
-    public class BankAccountCreatedEvent : Event
+    public class CustomerCreatedEvent : Event
     {
-        public Customer Customer { get; set; }
+        public Person Person { get; set; }
         public Contact Contact { get; set; }
-        public Money Money { get; set; }
         public Address Address { get; set; }
     }
 }

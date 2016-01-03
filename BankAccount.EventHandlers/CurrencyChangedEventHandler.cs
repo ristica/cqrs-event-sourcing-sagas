@@ -24,11 +24,11 @@ namespace BankAccount.EventHandlers
 
         public void Handle(CurrencyChangedEvent handle)
         {
-            var ba = this._repository.GetById(handle.AggregateId);
+            //var ba = this._repository.GetById(handle.AggregateId);
 
-            ba.Money.Currency = handle.Currency;
+            //ba.Money.Currency = handle.Currency;
 
-            this.Database.AddToCache(ba);
+            //this.Database.AddToCache(ba);
         }
     }
 }

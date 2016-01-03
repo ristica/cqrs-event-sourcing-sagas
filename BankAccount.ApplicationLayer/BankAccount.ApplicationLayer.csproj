@@ -88,16 +88,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\BalanceHistoryViewModel.cs" />
     <Compile Include="Models\BankAccountViewModel.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\DetailsBankAccountViewModel.cs" />
     <Compile Include="Models\AddressViewModel.cs" />
     <Compile Include="Models\BalanceViewModel.cs" />
-    <Compile Include="Models\CustomerViewModel.cs" />
+    <Compile Include="Models\PersonViewModel.cs" />
     <Compile Include="Models\EditBankAccountViewModel.cs" />
     <Compile Include="Models\MoneyViewModel.cs" />
-    <Compile Include="Models\NewBankAccountViewModel.cs" />
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\TransferViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

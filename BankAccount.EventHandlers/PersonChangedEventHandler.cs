@@ -7,11 +7,11 @@ using BankAccount.Infrastructure.Storage;
 
 namespace BankAccount.EventHandlers
 {
-    public class CustomerChangedEventHandler : BaseBankAccountEventHandler, IEventHandler<CustomerChangedEvent>
+    public class PersonChangedEventHandler : BaseBankAccountEventHandler, IEventHandler<PersonChangedEvent>
     {
         private readonly ICommandStackRepository<Domain.BankAccount> _repository;
 
-        public CustomerChangedEventHandler(ICommandStackRepository<Domain.BankAccount> repository, ICommandStackDatabase database)
+        public PersonChangedEventHandler(ICommandStackRepository<Domain.BankAccount> repository, ICommandStackDatabase database)
             : base(database)
         {
             if (repository == null)
@@ -22,12 +22,12 @@ namespace BankAccount.EventHandlers
             this._repository = repository;
         }
 
-        public void Handle(CustomerChangedEvent handle)
+        public void Handle(PersonChangedEvent handle)
         {
             var ba = this._repository.GetById(handle.AggregateId);
 
-            ba.Customer.FirstName   = handle.FirstName;
-            ba.Customer.LastName    = handle.LastName;
+            ba.Person.FirstName   = handle.FirstName;
+            ba.Person.LastName    = handle.LastName;
 
             this.Database.AddToCache(ba);
         }

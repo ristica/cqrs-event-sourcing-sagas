@@ -4,14 +4,14 @@ using BankAccount.ValueTypes;
 
 namespace BankAccount.Commands
 {
-    public class CreateBankAccountCommand : Command
+    public class CreateCustomerCommand : Command
     {
         public Contact Contact { get; private set; }
-        public Customer Customer { get; private set; }
-        public Money Money { get; private set; }
+        public Person Person { get; private set; }
+        //public Money Money { get; private set; }
         public Address Address { get; private set; }
 
-        public CreateBankAccountCommand(
+        public CreateCustomerCommand(
             Guid aggregateId, 
             int version, 
             string firstName, 
@@ -21,7 +21,7 @@ namespace BankAccount.Commands
             DateTime dob, 
             string email,
             string phone,
-            string currency,
+            //string currency,
             string street,
             string zip,
             string hausnumber,
@@ -29,7 +29,7 @@ namespace BankAccount.Commands
             string state) 
             : base(aggregateId, version)
         {
-            this.Customer = new Customer
+            this.Person = new Person
             {
                 FirstName       = firstName,
                 LastName        = lastName,
@@ -42,11 +42,11 @@ namespace BankAccount.Commands
                 Email           = email,
                 PhoneNumber     = phone
             };
-            this.Money = new Money
-            {
-                Balance         = 0,
-                Currency        = currency
-            };
+            //this.Money = new Money
+            //{
+            //    Balance         = 0,
+            //    Currency        = currency
+            //};
             this.Address = new Address
             {
                 State           = state,

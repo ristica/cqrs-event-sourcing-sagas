@@ -28,7 +28,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav pull-left">
-                    <li>@Html.ActionLink("Accounts", "LogIn", "Home")</li>
+                    @if (user != null)
+                    {
+                        <li>@Html.ActionLink("Accounts", "Index", "Home")</li>
+                    }
                 </ul>
                 <div class="pull-right" style="padding-top: 14px;">
                     @if (user != null)

@@ -1,12 +1,11 @@
-﻿using System;
+﻿using BankAccount.Infrastructure.Eventing;
 
-namespace BankAccount.ValueTypes
+namespace BankAccount.Events
 {
-    public class Customer
+    public class PersonChangedEvent : Event
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime Dob { get; set; }
         public string IdCard { get; set; }
         public string IdNumber { get; set; }
     }

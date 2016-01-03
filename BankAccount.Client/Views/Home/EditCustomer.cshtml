@@ -1,4 +1,4 @@
-﻿@model BankAccount.ApplicationLayer.Models.CustomerViewModel
+﻿@model BankAccount.ApplicationLayer.Models.PersonViewModel
 
 @{
     ViewBag.Title = "Customer details";
@@ -59,7 +59,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Details", new { id = Model.AggregateId }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Back to customer details", "Details", new { id = Model.AggregateId }, new { @class = "btn btn-default" })
 </div>
 
 @section Scripts {

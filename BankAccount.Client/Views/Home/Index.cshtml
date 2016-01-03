@@ -13,12 +13,12 @@
                 <option selected>Please choose an account</option>
                 @foreach (var acc in Model)
                 {
-                    <option value="@acc.Id">@acc.Id</option>
+                    <option value="@acc.Id">@acc.FirstName @acc.LastName</option>
                 }
             </select>
             <br />
             <input type="submit" value="Submit" class="btn btn-primary" />
-            @Html.ActionLink("Add new account", "Add", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Add new customer", "Add", null, new { @class = "btn btn-default" })
         }
 
     </fieldset>

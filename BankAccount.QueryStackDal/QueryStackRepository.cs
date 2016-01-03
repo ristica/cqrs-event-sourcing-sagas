@@ -3,52 +3,58 @@ using System.Collections.Generic;
 using System.Linq;
 using BankAccount.DbModel.ItemDb;
 using BankAccount.ReadModel;
+using EventStore;
 
 namespace BankAccount.QueryStackDal
 {
     public sealed class QueryStackRepository : IQueryStackRepository
     {
+        private readonly IStoreEvents _eventStore;
+
+        public QueryStackRepository(IStoreEvents eventStore)
+        {
+            _eventStore = eventStore;
+        }
+
         public BankAccountReadModel GetBankAccount(Guid aggregateId)
         {
-            using (var ctx = new BankAccountDbContext())
+            var obj = new Domain.BankAccount();
+
+            IEnumerable<Commit> commits;
+
+            var latestSnapshot = this._eventStore.Advanced.GetSnapshot(aggregateId, int.MaxValue);
+            if (latestSnapshot?.Payload != null)
             {
-                var entity = ctx.BankAccountSet.SingleOrDefault(b => b.AggregateId == aggregateId);
-                if (entity == null)
-                {
-                    return null;
-                }
-                return new BankAccountReadModel
-                {
-                    AggregateId         = entity.AggregateId,
-                    Version             = entity.Version,
-                    Customer = new CustomerReadModel
-                    {
-                        FirstName       = entity.Customer.FirstName,
-                        LastName        = entity.Customer.LastName,
-                        IdCard          = entity.Customer.IdCard,
-                        IdNumber        = entity.Customer.IdNumber,
-                        Dob             = entity.Customer.Dob
-                    },
-                    Contact = new ContactReadModel
-                    {
-                        Email           = entity.Contact.Email,
-                        Phone           = entity.Contact.Phone
-                    },
-                    Address = new AddressReadModel
-                    {
-                        State           = entity.Address.State,
-                        Street          = entity.Address.Street,
-                        City            = entity.Address.City,
-                        Hausnumber      = entity.Address.Hausnumber,
-                        Zip             = entity.Address.Zip
-                    },
-                    Money = new MoneyReadModel
-                    {
-                        Currency        = entity.Money.Currency,
-                        Balance         = entity.Money.Balance
-                    }
-                };
+                obj = (Domain.BankAccount)Convert.ChangeType(latestSnapshot.Payload, latestSnapshot.Payload.GetType());
+                commits = this._eventStore.Advanced.GetFrom(aggregateId, latestSnapshot.StreamRevision + 1, int.MaxValue).ToList();
             }
+            else
+            {
+                commits = this._eventStore.Advanced.GetFrom(aggregateId, 0, int.MaxValue).ToList();
+            }
+
+            foreach (var c in commits)
+            {
+                obj.LoadsFromHistory(c.Events);
+            }
+
+            return new BankAccountReadModel
+            {
+                AggregateId = aggregateId,
+                Version = obj.Version,
+                LastName = obj.Person.LastName,
+                FirstName = obj.Person.FirstName,
+                IdCard = obj.Person.IdCard,
+                IdNumber = obj.Person.IdNumber,
+                Dob = obj.Person.Dob,
+                Phone = obj.Contact.PhoneNumber,
+                Email = obj.Contact.Email,
+                Street = obj.Address.Street,
+                Hausnumber = obj.Address.Hausnumber,
+                Zip = obj.Address.Zip,
+                State = obj.Address.State,
+                City = obj.Address.City
+            };
         }
 
         public IEnumerable<BankAccountReadModel> GetAccounts()
@@ -59,30 +65,8 @@ namespace BankAccount.QueryStackDal
                 {
                     AggregateId         = e.AggregateId,
                     Version             = e.Version,
-                    Customer = new CustomerReadModel
-                    {
-                        FirstName       = e.Customer.FirstName,
-                        LastName        = e.Customer.LastName,
-                        Dob             = e.Customer.Dob
-                    },
-                    Contact = new ContactReadModel
-                    {
-                        Email           = e.Contact.Email,
-                        Phone           = e.Contact.Phone
-                    },
-                    Address = new AddressReadModel
-                    {
-                        State           = e.Address.State,
-                        Street          = e.Address.Street,
-                        City            = e.Address.City,
-                        Hausnumber      = e.Address.Hausnumber,
-                        Zip             = e.Address.Zip
-                    },
-                    Money = new MoneyReadModel
-                    {
-                        Currency        = e.Money.Currency,
-                        Balance         = e.Money.Balance
-                    }
+                    FirstName           = e.FirstName,
+                    LastName            = e.LastName
                 }).ToList();
             }
         }

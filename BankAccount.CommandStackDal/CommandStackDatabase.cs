@@ -86,32 +86,8 @@ namespace BankAccount.CommandStackDal
                 {
                     AggregateId         = item.Id,
                     Version             = item.Version,
-                    Money = new Money
-                    {
-                        Balance         = item.Money.Balance,
-                        Currency        = item.Money.Currency
-                    },
-                    Customer = new Customer
-                    {
-                        Dob             = item.Customer.Dob,
-                        FirstName       = item.Customer.FirstName,
-                        LastName        = item.Customer.LastName,
-                        IdCard          = item.Customer.IdCard,
-                        IdNumber        = item.Customer.IdNumber
-                    },
-                    Contact = new Contact
-                    {
-                        Email           = item.Contact.Email,
-                        Phone           = item.Contact.PhoneNumber
-                    },
-                    Address = new Address
-                    {
-                        Street          = item.Address.Street,
-                        Zip             = item.Address.Zip,
-                        Hausnumber      = item.Address.Hausnumber,
-                        City            = item.Address.City,
-                        State           = item.Address.State
-                    }
+                    FirstName = item.Person.FirstName,
+                    LastName = item.Person.LastName
                 });
                 ctx.SaveChanges();
             }
@@ -128,23 +104,8 @@ namespace BankAccount.CommandStackDal
                 }
 
                 entity.Version              = item.Version;
-                entity.Customer.FirstName   = item.Customer.FirstName;
-                entity.Customer.LastName    = item.Customer.LastName;
-                entity.Customer.IdCard      = item.Customer.IdCard;
-                entity.Customer.IdNumber    = item.Customer.IdNumber;
-                entity.Customer.Dob         = item.Customer.Dob;
-
-                entity.Contact.Email        = item.Contact.Email;
-                entity.Contact.Phone        = item.Contact.PhoneNumber;
-
-                entity.Address.Street       = item.Address.Street;
-                entity.Address.Zip          = item.Address.Zip;
-                entity.Address.Hausnumber   = item.Address.Hausnumber;
-                entity.Address.City         = item.Address.City;
-                entity.Address.State        = item.Address.State;
-
-                entity.Money.Balance        = item.Money.Balance;
-                entity.Money.Currency       = item.Money.Currency;
+                entity.FirstName            = item.Person.FirstName;
+                entity.LastName             = item.Person.LastName;
 
                 ctx.Entry(entity).State     = EntityState.Modified;
                 ctx.SaveChanges();

@@ -15,16 +15,16 @@ namespace BankAccount.CommandHandlers
 
         public void Execute(ChangeCurrencyCommand command)
         {
-            if (command == null)
-            {
-                throw new ArgumentNullException(nameof(command));
-            }
+            //if (command == null)
+            //{
+            //    throw new ArgumentNullException(nameof(command));
+            //}
 
-            var aggregate = this.Repository.GetById(command.Id);
+            //var aggregate = this.Repository.GetById(command.Id);
 
-            aggregate.ChangeCurrency(command.Currency);
+            //aggregate.ChangeCurrency(command.Currency);
 
-            this.Repository.Save(aggregate, aggregate.Version);
+            //this.Repository.Save(aggregate, aggregate.Version);
         }
     }
 }

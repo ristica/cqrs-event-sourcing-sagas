@@ -12,6 +12,7 @@ namespace BankAccount.DbModel.ItemDb
         }
 
         public DbSet<BankAccountEntity> BankAccountSet { get; set; }
+        public DbSet<BankAccountBalanceEntity> BankAccountBalanceSet { get; set; } 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

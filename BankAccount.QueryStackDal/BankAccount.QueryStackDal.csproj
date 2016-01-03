@@ -38,6 +38,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\BankAccount.Libs\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="EventStore">
+      <HintPath>..\BankAccount.Libs\EventStore.dll</HintPath>
+    </Reference>
+    <Reference Include="EventStore.Serialization.Json">
+      <HintPath>..\BankAccount.Libs\EventStore.Serialization.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -58,9 +64,25 @@
       <Project>{aa7b5305-aa5a-44cb-9096-e08b4f324912}</Project>
       <Name>BankAccount.DbModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BankAccount.Domain\BankAccount.Domain.csproj">
+      <Project>{b08af9bc-675b-414d-8fc2-a2d06393b377}</Project>
+      <Name>BankAccount.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankAccount.EventStore\BankAccount.EventStore.csproj">
+      <Project>{21230a46-0b24-413e-b89a-cf1a2ee4a17b}</Project>
+      <Name>BankAccount.EventStore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankAccount.Infrastructure\BankAccount.Infrastructure.csproj">
+      <Project>{4631996a-9ef1-481c-8fd8-bb895890973e}</Project>
+      <Name>BankAccount.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BankAccount.ReadModel\BankAccount.ReadModel.csproj">
       <Project>{bf4019fd-eb2e-4f52-be73-31b1f37f94a8}</Project>
       <Name>BankAccount.ReadModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankAccount.ValueTypes\BankAccount.ValueTypes.csproj">
+      <Project>{3f44e1cd-cb5c-4df5-81fa-6220ae0effa7}</Project>
+      <Name>BankAccount.ValueTypes</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

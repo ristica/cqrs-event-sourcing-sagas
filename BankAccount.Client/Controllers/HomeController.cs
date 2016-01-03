@@ -37,13 +37,19 @@ namespace BankAccount.Client.Controllers
         public ActionResult Add()
         {
             ViewBag.User = _user;
-            return View(new NewBankAccountViewModel());
+            return View(new CustomerViewModel());
+        }
+
+        public ActionResult Create(Guid customerId)
+        {
+            ViewBag.User = _user;
+            return View(new AccountViewModel { BankAccountId = customerId });
         }
 
         public ActionResult EditCustomer(Guid id)
         {
             ViewBag.User = _user;
-            var model = QueryStackWorkerService.GetCustomerForBankAccount(id);
+            var model = QueryStackWorkerService.GetPersonForBankAccount(id);
             return View(model);
         }
 
@@ -61,41 +67,11 @@ namespace BankAccount.Client.Controllers
             return View(model);
         }
 
-        public ActionResult EditMoney(Guid id)
-        {
-            ViewBag.User = _user;
-            var model = QueryStackWorkerService.GetMoneyForBankAccount(id);
-            return View(model);
-        }
-
         public ActionResult Delete(Guid id)
         {
             var model = QueryStackWorkerService.GetDetails(id);
             CommandStackWorkerService.DeleteBankAccount(model.AggregateId, model.Version);
             return RedirectToAction("Index");
-        }
-
-        public ActionResult History(Guid id, string name, string balance)
-        {
-            ViewBag.User = _user;
-            ViewBag.Id = id;
-            var model = QueryStackWorkerService.GetBankAccountHistory(id);
-            ViewBag.AccountName = name;
-            ViewBag.CurrentBalance = balance;
-            ViewBag.Currency = QueryStackWorkerService.GetDetails(id).Currency;
-            return View(model);
-        }
-
-        public ActionResult TransferMoney(Guid id)
-        {
-            ViewBag.User = _user;
-            var model = QueryStackWorkerService.GetMoneyForBankAccount(id);
-            return View(new TransferViewModel
-            {
-                Version = model.Version,
-                AggregateId = model.AggregateId,
-                Amount = 0
-            });
         }
 
         #endregion
@@ -126,32 +102,44 @@ namespace BankAccount.Client.Controllers
         }
  
         [HttpPost]
-        public ActionResult Add(NewBankAccountViewModel vm)
+        public ActionResult Add(CustomerViewModel vm)
         {
             if (!ModelState.IsValid)
             {
                 return View(vm);
             }
 
-            CommandStackWorkerService.AddBankAccount(vm);
+            CommandStackWorkerService.AddCustomer(vm);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult EditCustomer(CustomerViewModel vm)
+        public ActionResult Create(AccountViewModel vm)
         {
             if (!ModelState.IsValid)
             {
                 return View(vm);
             }
 
-            if (!this.IsCustomerDirty(vm))
+            CommandStackWorkerService.AddAccount(vm);
+            return RedirectToAction("Details", new { customerId = vm.BankAccountId });
+        }
+
+        [HttpPost]
+        public ActionResult EditCustomer(PersonViewModel vm)
+        {
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction("Index");
+                return View(vm);
             }
 
-            CommandStackWorkerService.EditCustomerDetails(vm);
-            return RedirectToAction("Index");
+            if (!this.IsPersonDirty(vm))
+            {
+                return RedirectToAction("Details", new { id = vm.AggregateId });
+            }
+
+            CommandStackWorkerService.EditPersonDetails(vm);
+            return RedirectToAction("Details", new { id = vm.AggregateId });
         }
 
         [HttpPost]
@@ -164,11 +152,11 @@ namespace BankAccount.Client.Controllers
 
             if (!this.IsContactDirty(vm))
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = vm.AggregateId });
             }
 
             CommandStackWorkerService.EditContactDetails(vm);
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", new { id = vm.AggregateId });
         }
 
         [HttpPost]
@@ -181,28 +169,11 @@ namespace BankAccount.Client.Controllers
 
             if (!this.ÎsAddressDirty(vm))
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = vm.AggregateId });
             }
 
             CommandStackWorkerService.EditAddressDetails(vm);
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        public ActionResult EditMoney(MoneyViewModel vm)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(vm);
-            }
-
-            if (!this.IsMoneyDirty(vm))
-            {
-                return RedirectToAction("Index");
-            }
-
-            CommandStackWorkerService.EditMoneyDetails(vm);
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", new { id = vm.AggregateId });
         }
 
         [HttpPost]
@@ -226,9 +197,9 @@ namespace BankAccount.Client.Controllers
 
         #region Helpers
 
-        private bool IsCustomerDirty(CustomerViewModel vm)
+        private bool IsPersonDirty(PersonViewModel vm)
         {
-            var model = QueryStackWorkerService.GetCustomerForBankAccount(vm.AggregateId);
+            var model = QueryStackWorkerService.GetPersonForBankAccount(vm.AggregateId);
             return !model.FirstName.Equals(vm.FirstName.Trim())     || 
                    !model.LastName.Equals(vm.LastName.Trim())       || 
                    !model.IdCard.Equals(vm.IdCard.Trim())           || 
@@ -252,11 +223,11 @@ namespace BankAccount.Client.Controllers
                    !model.Zip.Equals(vm.Zip.Trim());
         }
 
-        private bool IsMoneyDirty(MoneyViewModel vm)
-        {
-            var model = QueryStackWorkerService.GetMoneyForBankAccount(vm.AggregateId);
-            return !model.Currency.Equals(vm.Currency.Trim());
-        }
+        //private bool IsMoneyDirty(MoneyViewModel vm)
+        //{
+        //    var model = QueryStackWorkerService.GetMoneyForBankAccount(vm.AggregateId);
+        //    return !model.Currency.Equals(vm.Currency.Trim());
+        //}
 
         #endregion
     }

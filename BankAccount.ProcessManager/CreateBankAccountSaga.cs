@@ -7,7 +7,7 @@ using BankAccount.ProcessManager.Base;
 namespace BankAccount.ProcessManager
 {
     public class CreateBankAccountSaga : Saga,
-        IAmStartedBy<CreateBankAccountCommand>
+        IAmStartedBy<CreateCustomerCommand>
     {
         #region C-Tor
 
@@ -22,20 +22,20 @@ namespace BankAccount.ProcessManager
 
         #region Handling commands
 
-        public void Handle(CreateBankAccountCommand message)
+        public void Handle(CreateCustomerCommand message)
         {
             var aggregate = Domain.BankAccount.Factory.CreateNewInstance(
                 message.Id,
                 message.Version,
-                message.Customer.FirstName,
-                message.Customer.LastName,
-                message.Customer.IdCard,
-                message.Customer.IdNumber,
-                message.Customer.Dob,
+                message.Person.FirstName,
+                message.Person.LastName,
+                message.Person.IdCard,
+                message.Person.IdNumber,
+                message.Person.Dob,
                 message.Contact.Email,
                 message.Contact.PhoneNumber,
-                message.Money.Balance,
-                message.Money.Currency,
+                //message.Money.Balance,
+                //message.Money.Currency,
                 message.Address.Street,
                 message.Address.Zip,
                 message.Address.Hausnumber,

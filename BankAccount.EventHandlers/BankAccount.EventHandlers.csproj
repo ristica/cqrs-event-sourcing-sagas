@@ -42,10 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BankAccountCreatedEventHandler.cs" />
+    <Compile Include="CustomerCreatedEventHandler.cs" />
     <Compile Include="BankAccountDeletedEventHandler.cs" />
     <Compile Include="ContactChangedEventHandler.cs" />
-    <Compile Include="CustomerChangedEventHandler.cs" />
+    <Compile Include="PersonChangedEventHandler.cs" />
     <Compile Include="Base\BaseBankAccountEventHandler.cs" />
     <Compile Include="BalanceChangedEventHandler.cs" />
     <Compile Include="CurrencyChangedEventHandler.cs" />

@@ -14,16 +14,16 @@ namespace BankAccount.CommandHandlers
 
         public void Execute(TransferMoneyCommand command)
         {
-            if (command == null)
-            {
-                throw new ArgumentNullException(nameof(command));
-            }
+            //if (command == null)
+            //{
+            //    throw new ArgumentNullException(nameof(command));
+            //}
 
-            var aggregate = this.Repository.GetById(command.Id);
+            //var aggregate = this.Repository.GetById(command.Id);
 
-            aggregate.ChangeBalance(command.Amount);
+            //aggregate.ChangeBalance(command.Amount);
 
-            this.Repository.Save(aggregate, aggregate.Version);
+            //this.Repository.Save(aggregate, aggregate.Version);
         }
     }
 }

@@ -81,9 +81,9 @@ namespace BankAccount.Configuration
         {
             var bus = container.Resolve<IEventBus>();
             
-            bus.RegisterHandler<BankAccountCreatedEventHandler>();
+            bus.RegisterHandler<CustomerCreatedEventHandler>();
             bus.RegisterHandler<BankAccountDeletedEventHandler>();
-            bus.RegisterHandler<CustomerChangedEventHandler>();
+            bus.RegisterHandler<PersonChangedEventHandler>();
             bus.RegisterHandler<ContactChangedEventHandler>();
             bus.RegisterHandler<BalanceChangedEventHandler>();
             bus.RegisterHandler<CurrencyChangedEventHandler>();
@@ -94,12 +94,12 @@ namespace BankAccount.Configuration
         {
             var bus = container.Resolve<ICommandBus>();
 
-            bus.RegisterHandler<CreateBankAccountCommandHandler>();
+            bus.RegisterHandler<CreateCustomerCommandHandler>();
             bus.RegisterHandler<DeleteBankAccountCommandHandler>();
             bus.RegisterHandler<ChangeAddressDetailsCommandHandler>();
             bus.RegisterHandler<ChangeCurrencyCommandHandler>();
             bus.RegisterHandler<TransferMoneyCommandHandler>();
-            bus.RegisterHandler<ChangeCustomerDetailsCommandHandler>();
+            bus.RegisterHandler<ChangePersonDetailsCommandHandler>();
             bus.RegisterHandler<ChangeContactDetailsCommandHandler>();
         }
 

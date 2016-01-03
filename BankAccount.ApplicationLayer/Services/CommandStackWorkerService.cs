@@ -14,28 +14,10 @@ namespace BankAccount.ApplicationLayer.Services
     /// </summary>
     public sealed class CommandStackWorkerService
     {
-        public static void AddBankAccount(NewBankAccountViewModel vm)
+        public static void AddCustomer(CustomerViewModel vm)
         {
-            //IoCServiceLocator.SagaBus.Send(
-            //    new CreateBankAccountCommand(
-            //        Guid.NewGuid(), 
-            //        0, 
-            //        vm.FirstName, 
-            //        vm.LastName, 
-            //        vm.IdCard,
-            //        vm.IdNumber,
-            //        vm.Dob, 
-            //        vm.Email,
-            //        vm.Phone,
-            //        vm.Currency,
-            //        vm.Street,
-            //        vm.ZIP,
-            //        vm.Hausnumber,
-            //        vm.City,
-            //        vm.State));
-
             IoCServiceLocator.CommandBus.Send(
-                new CreateBankAccountCommand(
+                new CreateCustomerCommand(
                     Guid.NewGuid(),
                     0,
                     vm.FirstName,
@@ -45,7 +27,6 @@ namespace BankAccount.ApplicationLayer.Services
                     vm.Dob,
                     vm.Email,
                     vm.Phone,
-                    vm.Currency,
                     vm.Street,
                     vm.ZIP,
                     vm.Hausnumber,
@@ -56,15 +37,15 @@ namespace BankAccount.ApplicationLayer.Services
         public static void DeleteBankAccount(Guid id, int version)
         {
             IoCServiceLocator.CommandBus.Send(
-                new DeleteBankAccountCommand(
+                new DeleteCustomerCommand(
                     id, 
                     version));
         }
 
-        public static void EditCustomerDetails(CustomerViewModel vm)
+        public static void EditPersonDetails(PersonViewModel vm)
         {
             IoCServiceLocator.CommandBus.Send(
-                new ChangeCustomerDetailsCommand(
+                new ChangePersonDetailsCommand(
                     vm.AggregateId,
                     vm.Version,
                     vm.FirstName,
@@ -96,15 +77,6 @@ namespace BankAccount.ApplicationLayer.Services
                     vm.State));
         }
 
-        public static void EditMoneyDetails(MoneyViewModel vm)
-        {
-            IoCServiceLocator.CommandBus.Send(
-                new ChangeCurrencyCommand(
-                    vm.AggregateId,
-                    vm.Version,
-                    vm.Currency));
-        }
-
         public static void TransferMoney(TransferViewModel vm)
         {
             IoCServiceLocator.CommandBus.Send(
@@ -112,6 +84,16 @@ namespace BankAccount.ApplicationLayer.Services
                     vm.AggregateId,
                     vm.Version,
                     vm.Amount));
+        }
+
+        public static void AddAccount(AccountViewModel vm)
+        {
+            IoCServiceLocator.CommandBus.Send(
+                new AddAccountCommand(
+                    Guid.NewGuid(),
+                    0,
+                    vm.BankAccountId,
+                    vm.Currency));
         }
     }
 }

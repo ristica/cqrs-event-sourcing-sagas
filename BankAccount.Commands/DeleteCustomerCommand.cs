@@ -3,9 +3,9 @@ using BankAccount.Infrastructure.Commanding;
 
 namespace BankAccount.Commands
 {
-    public class DeleteBankAccountCommand : Command
+    public class DeleteCustomerCommand : Command
     {
-        public DeleteBankAccountCommand(Guid id, int version) 
+        public DeleteCustomerCommand(Guid id, int version) 
             : base(id, version)
         {
         }

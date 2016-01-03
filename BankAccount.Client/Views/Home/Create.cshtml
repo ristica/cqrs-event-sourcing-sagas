@@ -1,0 +1,41 @@
+﻿@using BankAccount.ApplicationLayer.Models
+@model AccountViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = ViewBag.User as UserViewModel;
+}
+
+<h4>Add new account for <b>@user.Name</b></h4>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.BankAccountId)
+        @Html.ValidationMessageFor(model => model.FirstName)
+        @Html.ValidationMessageFor(model => model.LastName)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Currency, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-primary"/>
+                @Html.ActionLink("Back to customer details", "Details", new { id = Model.BankAccountId }, new { @class = "btn btn-default", style = "margin-left: 15px;" })
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

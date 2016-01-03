@@ -339,6 +339,7 @@
     <Content Include="Views\Home\TransferMoney.cshtml" />
     <Content Include="Views\Home\EditContact.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

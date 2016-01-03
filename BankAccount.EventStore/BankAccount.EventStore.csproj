@@ -67,10 +67,6 @@
       <Project>{4631996a-9ef1-481c-8fd8-bb895890973e}</Project>
       <Name>BankAccount.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BankAccount.QueryStackDal\BankAccount.QueryStackDal.csproj">
-      <Project>{b6c7c79c-ffff-4f2f-99a2-fcc5960fbc9f}</Project>
-      <Name>BankAccount.QueryStackDal</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

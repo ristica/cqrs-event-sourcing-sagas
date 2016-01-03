@@ -40,12 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAccountCommand.cs" />
     <Compile Include="ChangeAddressDetailsCommand.cs" />
     <Compile Include="ChangeContactDetailsCommand.cs" />
-    <Compile Include="ChangeCustomerDetailsCommand.cs" />
+    <Compile Include="ChangePersonDetailsCommand.cs" />
     <Compile Include="ChangeCurrencyCommand.cs" />
-    <Compile Include="CreateBankAccountCommand.cs" />
-    <Compile Include="DeleteBankAccountCommand.cs" />
+    <Compile Include="CreateCustomerCommand.cs" />
+    <Compile Include="DeleteCustomerCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransferMoneyCommand.cs" />
   </ItemGroup>

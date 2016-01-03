@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.SqlServer.Server;
 
 namespace BankAccount.ApplicationLayer.Models
 {
@@ -19,7 +18,5 @@ namespace BankAccount.ApplicationLayer.Models
         public string Hausnumber { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        public string Currency { get; set; }
-        public int Balance { get; set; }
     }
 }

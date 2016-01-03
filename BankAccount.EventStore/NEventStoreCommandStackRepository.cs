@@ -82,7 +82,7 @@ namespace BankAccount.EventStore
             var changes = aggregate.GetUncommittedChanges().ToList();
             using (var stream = store.OpenStream(aggregate.Id, 0, int.MaxValue))
             {
-                var version = aggregate.Version < 0 ? 0 : aggregate.Version;
+                var version = aggregate.Version;
                 foreach (var @event in changes)
                 {
                     version++;
@@ -100,9 +100,9 @@ namespace BankAccount.EventStore
 
             aggregate.MarkChangesAsCommitted();
 
-            // eventually save the current state to the db
-            // as we did it before :)
-            this._database.UpdateFromCache();
+            //// eventually save the current state to the db
+            //// as we did it before :)
+            //this._database.UpdateFromCache();
         }
 
         #endregion

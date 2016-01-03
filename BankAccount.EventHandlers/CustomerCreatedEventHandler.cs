@@ -5,24 +5,21 @@ using BankAccount.Infrastructure.EventHandling;
 
 namespace BankAccount.EventHandlers
 {
-    public class BankAccountCreatedEventHandler : BaseBankAccountEventHandler, IEventHandler<BankAccountCreatedEvent>
+    public class CustomerCreatedEventHandler : BaseBankAccountEventHandler, IEventHandler<CustomerCreatedEvent>
     {
-        public BankAccountCreatedEventHandler(ICommandStackDatabase database) 
+        public CustomerCreatedEventHandler(ICommandStackDatabase database) 
             : base(database)
         {
 
         }
 
-        public void Handle(BankAccountCreatedEvent handle)
+        public void Handle(CustomerCreatedEvent handle)
         {
             this.Database.Save(new Domain.BankAccount
             {
                 Id          = handle.AggregateId,
-                Customer    = handle.Customer,
-                Money       = handle.Money,
+                Person      = handle.Person,
                 Version     = handle.Version,
-                Address     = handle.Address,
-                Contact     = handle.Contact
             });
         }
     }

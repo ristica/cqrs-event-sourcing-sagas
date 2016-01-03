@@ -44,10 +44,10 @@
   <ItemGroup>
     <Compile Include="Base\BaseBankAccountCommandHandler.cs" />
     <Compile Include="ChangeContactDetailsCommandHandler.cs" />
-    <Compile Include="ChangeCustomerDetailsCommandHandler.cs" />
+    <Compile Include="ChangePersonDetailsCommandHandler.cs" />
     <Compile Include="ChangeAddressDetailsCommandHandler.cs" />
     <Compile Include="ChangeCurrencyCommandHandler.cs" />
-    <Compile Include="CreateBankAccountCommandHandler.cs" />
+    <Compile Include="CreateCustomerCommandHandler.cs" />
     <Compile Include="DeleteBankAccountCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransferMoneyDetailsCommandHandler.cs" />

@@ -6,14 +6,14 @@ using BankAccount.Infrastructure.Storage;
 
 namespace BankAccount.CommandHandlers
 {
-    public class CreateBankAccountCommandHandler : BaseBankAccountCommandHandler, ICommandHandler<CreateBankAccountCommand>
+    public class CreateCustomerCommandHandler : BaseBankAccountCommandHandler, ICommandHandler<CreateCustomerCommand>
     {
-        public CreateBankAccountCommandHandler(ICommandStackRepository<Domain.BankAccount> repository) 
+        public CreateCustomerCommandHandler(ICommandStackRepository<Domain.BankAccount> repository) 
             : base(repository)
         {
         }
 
-        public void Execute(CreateBankAccountCommand command)
+        public void Execute(CreateCustomerCommand command)
         {
             if (command == null)
             {
@@ -23,21 +23,19 @@ namespace BankAccount.CommandHandlers
             var aggregate = new Domain.BankAccount();
             aggregate.CreateNewBankAccount(
                 command.Id, 
-                command.Customer.FirstName, 
-                command.Customer.LastName, 
-                command.Customer.IdCard,
-                command.Customer.IdNumber,
-                command.Customer.Dob, 
+                command.Person.FirstName, 
+                command.Person.LastName, 
+                command.Person.IdCard,
+                command.Person.IdNumber,
+                command.Person.Dob, 
                 command.Contact.Email, 
                 command.Contact.PhoneNumber,
-                command.Money.Balance,
-                command.Money.Currency,
                 command.Address.Street,
                 command.Address.Zip,
                 command.Address.Hausnumber,
                 command.Address.City,
                 command.Address.State);
-            aggregate.Version = -1;
+            aggregate.Version = 0;
 
             this.Repository.Save(aggregate, aggregate.Version);
         }

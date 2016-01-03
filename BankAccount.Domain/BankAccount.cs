@@ -7,19 +7,16 @@ using BankAccount.ValueTypes;
 namespace BankAccount.Domain
 {
     public class BankAccount : AggregateRoot,
-        IHandle<BankAccountCreatedEvent>,
+        IHandle<CustomerCreatedEvent>,
         IHandle<BankAccountDeletedEvent>,
-        IHandle<CustomerChangedEvent>,
+        IHandle<PersonChangedEvent>,
         IHandle<ContactChangedEvent>,
-        IHandle<AddressChangedEvent>,
-        IHandle<CurrencyChangedEvent>,
-        IHandle<BalanceChangedEvent>
+        IHandle<AddressChangedEvent>
     {
         #region Properties
 
-        public Customer Customer { get; set; }
+        public Person Person { get; set; }
         public Contact Contact { get; set; }
-        public Money Money { get; set; }
         public Address Address { get; set; }
 
         #endregion
@@ -35,8 +32,6 @@ namespace BankAccount.Domain
             DateTime dob,
             string email, 
             string phone,
-            int balance,
-            string currency,
             string street,
             string zip,
             string hausnumber,
@@ -44,11 +39,11 @@ namespace BankAccount.Domain
             string state)
         {
             ApplyChange(
-                new BankAccountCreatedEvent
+                new CustomerCreatedEvent
                 {
                     AggregateId         = id,
                     Version             = this.Version,
-                    Customer = new Customer
+                    Person = new Person
                     {
                         FirstName       = firstName,
                         LastName        = lastName,
@@ -68,23 +63,18 @@ namespace BankAccount.Domain
                         State           = state,
                         City            = city,
                         Zip             = zip
-                    },
-                    Money = new Money
-                    {
-                        Balance         = balance,
-                        Currency        = currency
                     }
                 });
         }
 
-        public void ChangeCustomer(
+        public void ChangePerson(
             string firstName, 
             string lastName, 
             string idCard, 
             string idNumber)
         {
             ApplyChange(
-                new CustomerChangedEvent
+                new PersonChangedEvent
                 {
                     AggregateId         = this.Id,
                     Version             = this.Version,
@@ -129,30 +119,6 @@ namespace BankAccount.Domain
                 });
         }
 
-        public void ChangeBalance(
-            int amount)
-        {
-            ApplyChange(
-                new BalanceChangedEvent
-                {
-                    AggregateId         = this.Id,
-                    Version             = this.Version,
-                    Amount              = amount
-                });
-        }
-
-        public void ChangeCurrency(
-            string currency)
-        {
-            ApplyChange(
-                new CurrencyChangedEvent
-                {
-                    AggregateId         = this.Id,
-                    Version             = this.Version,
-                    Currency            = currency
-                });
-        }
-
         public void DeleteBankAccount()
         {
             ApplyChange(
@@ -167,23 +133,22 @@ namespace BankAccount.Domain
 
         #region IHandle implementation of events
 
-        public void Handle(BankAccountCreatedEvent e)
+        public void Handle(CustomerCreatedEvent e)
         {
             this.Id                     = e.AggregateId;
             this.Version                = e.Version;
-            this.Customer               = e.Customer;
+            this.Person                 = e.Person;
             this.Contact                = e.Contact;
             this.Address                = e.Address;
-            this.Money                  = e.Money;
         }
 
-        public void Handle(CustomerChangedEvent e)
+        public void Handle(PersonChangedEvent e)
         {
             this.Version                = e.Version;
-            this.Customer.FirstName     = e.FirstName;
-            this.Customer.LastName      = e.LastName;
-            this.Customer.IdCard        = e.IdCard;
-            this.Customer.IdNumber      = e.IdNumber;
+            this.Person.FirstName       = e.FirstName;
+            this.Person.LastName        = e.LastName;
+            this.Person.IdCard          = e.IdCard;
+            this.Person.IdNumber        = e.IdNumber;
         }
 
         public void Handle(ContactChangedEvent e)
@@ -201,18 +166,6 @@ namespace BankAccount.Domain
             this.Address.Zip            = e.Zip;
             this.Address.City           = e.City;
             this.Address.State          = e.State;
-        }
-
-        public void Handle(BalanceChangedEvent e)
-        {
-            this.Version                = e.Version;
-            this.Money.Balance          = this.Money.Balance + e.Amount;
-        }
-
-        public void Handle(CurrencyChangedEvent e)
-        {
-            this.Version                = e.Version;
-            this.Money.Currency         = e.Currency;
         }
 
         public void Handle(BankAccountDeletedEvent e)
@@ -236,19 +189,17 @@ namespace BankAccount.Domain
                 DateTime dob,
                 string email,
                 string phone,
-                int balance,
-                string currency,
                 string street,
                 string zip,
                 string hausnumber,
                 string city,
                 string state)
             {
-                var @event = new BankAccountCreatedEvent
+                var @event = new CustomerCreatedEvent
                 {
                     AggregateId         = id,
                     Version             = version,
-                    Customer = new Customer
+                    Person = new Person
                     {
                         FirstName       = firstName,
                         LastName        = lastName,
@@ -268,11 +219,6 @@ namespace BankAccount.Domain
                         State           = state,
                         City            = city,
                         Zip             = zip
-                    },
-                    Money = new Money
-                    {
-                        Balance         = balance,
-                        Currency        = currency
                     }
                 };
                 var ba = new BankAccount();

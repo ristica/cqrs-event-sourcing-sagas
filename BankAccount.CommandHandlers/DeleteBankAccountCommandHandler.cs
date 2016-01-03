@@ -6,14 +6,14 @@ using BankAccount.Infrastructure.Storage;
 
 namespace BankAccount.CommandHandlers
 {
-    public class DeleteBankAccountCommandHandler : BaseBankAccountCommandHandler, ICommandHandler<DeleteBankAccountCommand>
+    public class DeleteBankAccountCommandHandler : BaseBankAccountCommandHandler, ICommandHandler<DeleteCustomerCommand>
     {
         public DeleteBankAccountCommandHandler(ICommandStackRepository<Domain.BankAccount> repository) 
             : base(repository)
         {
         }
 
-        public void Execute(DeleteBankAccountCommand command)
+        public void Execute(DeleteCustomerCommand command)
         {
             if (command == null)
             {
