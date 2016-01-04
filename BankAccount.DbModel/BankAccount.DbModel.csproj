@@ -51,7 +51,6 @@
   <ItemGroup>
     <Compile Include="Entities\CustomerEntity.cs" />
     <Compile Include="Entities\AccountEntity.cs" />
-    <Compile Include="Entities\State.cs" />
     <Compile Include="ItemDb\BankAccountInitializer.cs" />
     <Compile Include="ItemDb\BankAccountDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -60,6 +59,12 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankAccount.ValueTypes\BankAccount.ValueTypes.csproj">
+      <Project>{3f44e1cd-cb5c-4df5-81fa-6220ae0effa7}</Project>
+      <Name>BankAccount.ValueTypes</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

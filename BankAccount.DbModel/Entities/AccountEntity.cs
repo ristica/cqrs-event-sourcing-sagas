@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.ComponentModel.DataAnnotations;
+using BankAccount.ValueTypes;
 
 namespace BankAccount.DbModel.Entities
 {

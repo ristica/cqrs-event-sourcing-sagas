@@ -72,7 +72,7 @@ namespace BankAccount.QueryStackDal
                             Currency = a.Currency,
                             CustomerId = a.CustomerAggregateId,
                             AggregateId = a.AggregateId,
-                            AccountState = ConvertState(a.AccountState)
+                            AccountState = a.AccountState
                         });
                 }
                 return list;
@@ -108,22 +108,6 @@ namespace BankAccount.QueryStackDal
                     FirstName           = e.FirstName,
                     LastName            = e.LastName
                 }).ToList();
-            }
-        }
-
-        private State ConvertState(DbModel.Entities.State state)
-        {
-            switch (state)
-            {
-                case DbModel.Entities.State.Open:
-                    return State.Open;
-                case DbModel.Entities.State.Closed:
-                    return State.Closed;
-                case DbModel.Entities.State.Locked:
-                    return State.Locked;
-                default:
-                    return State.Unlocked;
-
             }
         }
     }

@@ -7,6 +7,7 @@ using BankAccount.CommandStackDal.Exceptions;
 using BankAccount.DbModel.Entities;
 using BankAccount.DbModel.ItemDb;
 using BankAccount.Domain;
+using BankAccount.ValueTypes;
 
 namespace BankAccount.CommandStackDal
 {
@@ -144,25 +145,10 @@ namespace BankAccount.CommandStackDal
                 entity.Version              = item.Version;
                 entity.FirstName            = item.Person.FirstName;
                 entity.LastName             = item.Person.LastName;
-                entity.CustomerState        = ConvertState(item.State);
+                entity.CustomerState        = item.State;
 
                 ctx.Entry(entity).State     = EntityState.Modified;
                 ctx.SaveChanges();
-            }
-        }
-
-        private State ConvertState(ValueTypes.State state)
-        {
-            switch (state)
-            {
-                case ValueTypes.State.Open:
-                    return State.Open;
-                case ValueTypes.State.Closed:
-                    return State.Closed;
-                case ValueTypes.State.Locked:
-                    return State.Locked;
-                default:
-                    return State.Unlocked;
             }
         }
 
@@ -211,7 +197,7 @@ namespace BankAccount.CommandStackDal
                 entity.Currency = item.Currency;
                 entity.CustomerEntityId = customerEntityId.CustomerEntityId;
                 entity.CustomerAggregateId = item.CustomerId;
-                entity.AccountState = ConvertState(item.State);
+                entity.AccountState = item.State;
 
                 ctx.Entry(entity).State = EntityState.Modified;
                 ctx.SaveChanges();
