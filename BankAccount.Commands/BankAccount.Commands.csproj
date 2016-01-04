@@ -46,6 +46,9 @@
     <Compile Include="ChangePersonDetailsCommand.cs" />
     <Compile Include="ChangeCurrencyCommand.cs" />
     <Compile Include="CreateCustomerCommand.cs" />
+    <Compile Include="UnlockAccountCommand.cs" />
+    <Compile Include="LockAccountCommand.cs" />
+    <Compile Include="DeleteAccountCommand.cs" />
     <Compile Include="DeleteCustomerCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ChangeBalanceCommand.cs" />

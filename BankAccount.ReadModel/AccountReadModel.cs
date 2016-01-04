@@ -1,4 +1,5 @@
 ﻿using System;
+using BankAccount.ValueTypes;
 
 namespace BankAccount.ReadModel
 {
@@ -6,8 +7,8 @@ namespace BankAccount.ReadModel
     {
         public Guid CustomerId { get; set; }
         public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public int Version { get; set; }
         public string Currency { get; set; }
+        public State State { get; set; }
     }
 }

@@ -24,12 +24,12 @@ namespace BankAccount.EventHandlers
 
         public void Handle(PersonChangedEvent handle)
         {
-            var ba = this._repository.GetById(handle.AggregateId);
+            //var ba = this._repository.GetById(handle.AggregateId);
 
-            ba.Person.FirstName   = handle.FirstName;
-            ba.Person.LastName    = handle.LastName;
+            //ba.Person.FirstName   = handle.FirstName;
+            //ba.Person.LastName    = handle.LastName;
 
-            this.Database.AddToCache(ba);
+            //this.Database.AddToCache(ba);
         }
     }
 }

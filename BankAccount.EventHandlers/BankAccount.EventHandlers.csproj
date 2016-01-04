@@ -43,9 +43,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountAddedEventHandler.cs" />
+    <Compile Include="AccountUnlockedEventHandler.cs" />
+    <Compile Include="AccountLockedEventHandler.cs" />
     <Compile Include="Base\BaseAccountEventHandler.cs" />
     <Compile Include="CustomerCreatedEventHandler.cs" />
-    <Compile Include="BankAccountDeletedEventHandler.cs" />
+    <Compile Include="AccountDeletedEventHandler.cs" />
+    <Compile Include="CustomerDeletedEventHandler.cs" />
     <Compile Include="ContactChangedEventHandler.cs" />
     <Compile Include="PersonChangedEventHandler.cs" />
     <Compile Include="Base\BaseCustomerEventHandler.cs" />

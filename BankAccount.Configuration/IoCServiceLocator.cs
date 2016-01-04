@@ -82,7 +82,7 @@ namespace BankAccount.Configuration
             var bus = container.Resolve<IEventBus>();
             
             bus.RegisterHandler<CustomerCreatedEventHandler>();
-            bus.RegisterHandler<BankAccountDeletedEventHandler>();
+            bus.RegisterHandler<CustomerDeletedEventHandler>();
             bus.RegisterHandler<PersonChangedEventHandler>();
             bus.RegisterHandler<ContactChangedEventHandler>();
             bus.RegisterHandler<CurrencyChangedEventHandler>();
@@ -90,6 +90,9 @@ namespace BankAccount.Configuration
 
             bus.RegisterHandler<AccountAddedEventHandler>();
             bus.RegisterHandler<BalanceChangedEventHandler>();
+            bus.RegisterHandler<AccountDeletedEventHandler>();
+            bus.RegisterHandler<AccountLockedEventHandler>();
+            bus.RegisterHandler<AccountUnlockedEventHandler>();
         }
 
         private static void RegisterCommandHandlers(IUnityContainer container)
@@ -97,7 +100,7 @@ namespace BankAccount.Configuration
             var bus = container.Resolve<ICommandBus>();
 
             bus.RegisterHandler<CreateCustomerCommandHandler>();
-            bus.RegisterHandler<DeleteBankAccountCommandHandler>();
+            bus.RegisterHandler<DeleteCustomerCommandHandler>();
             bus.RegisterHandler<ChangeAddressDetailsCommandHandler>();
             bus.RegisterHandler<ChangeCurrencyCommandHandler>();
             bus.RegisterHandler<ChangePersonDetailsCommandHandler>();
@@ -105,6 +108,9 @@ namespace BankAccount.Configuration
 
             bus.RegisterHandler<AddAccountCommandHandler>();
             bus.RegisterHandler<ChangeBalanceCommandHandler>();
+            bus.RegisterHandler<DeleteAccountCommandHandler>();
+            bus.RegisterHandler<LockAccountCommandHandler>();
+            bus.RegisterHandler<UnlockAccountCommandHandler>();
         }
 
         private static void RegisterSagasHandlers(IUnityContainer container)

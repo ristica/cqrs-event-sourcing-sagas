@@ -360,6 +360,10 @@
       <Project>{b08af9bc-675b-414d-8fc2-a2d06393b377}</Project>
       <Name>BankAccount.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BankAccount.ValueTypes\BankAccount.ValueTypes.csproj">
+      <Project>{3f44e1cd-cb5c-4df5-81fa-6220ae0effa7}</Project>
+      <Name>BankAccount.ValueTypes</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

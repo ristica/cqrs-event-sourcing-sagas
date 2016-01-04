@@ -45,7 +45,7 @@ namespace BankAccount.ApplicationLayer.Services
             };
         }
 
-        public static List<BalanceHistoryViewModel> GetBankAccountHistory(Guid id)
+        public static List<BalanceHistoryViewModel> GetAccountHistory(Guid id)
         {
             var commits = IoCServiceLocator.Container.Resolve<IStoreEvents>().Advanced.GetFrom(id, 0, int.MaxValue);
             var transactions = new List<BalanceHistoryViewModel>();
@@ -126,6 +126,7 @@ namespace BankAccount.ApplicationLayer.Services
                 {
                     Currency = acc.Currency,
                     AggregateId = acc.Id,
+                    AccountState = acc.State,
                     CurrentBalance = transactions.Sum(b => b)
                 });
             }
@@ -139,7 +140,8 @@ namespace BankAccount.ApplicationLayer.Services
             return new TransferViewModel
             {
                 AggregateId = account.Id,
-                CustomerId = account.CustomerId
+                CustomerId = account.CustomerId,
+                Version = account.Version
             };
         }
     }

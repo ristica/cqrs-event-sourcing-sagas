@@ -12,7 +12,7 @@ namespace BankAccount.CommandStackDal
 {
     public sealed class CommandStackDatabase : ICommandStackDatabase
     {
-        private static readonly List<CustomerDomainModel> Cache = new List<CustomerDomainModel>();
+        //private static readonly List<CustomerDomainModel> Cache = new List<CustomerDomainModel>();
 
         #region ICommandStackDatabase implementation
 
@@ -52,46 +52,64 @@ namespace BankAccount.CommandStackDal
             }
         }
 
-        public void Delete(Guid id)
-        {
-            using (var ctx = new BankAccountDbContext())
-            {
-                var entity = ctx.CustomerSet.SingleOrDefault(b => b.AggregateId == id);
-                if (entity == null)
-                {
-                    throw new AggregateNotFoundException($"Aggregate with the id {id} was not found");
-                }
-                ctx.CustomerSet.Remove(entity);
-                ctx.SaveChanges();
-            }
-        }
+        //public void DeleteCustomer(Guid id)
+        //{
+        //    using (var ctx = new BankAccountDbContext())
+        //    {
+        //        var entity = ctx.CustomerSet.SingleOrDefault(b => b.AggregateId == id);
+        //        if (entity == null)
+        //        {
+        //            throw new AggregateNotFoundException($"Aggregate with the id {id} was not found");
+        //        }
+        //        entity.CustomerState = State.Closed;
 
-        public void AddToCache(CustomerDomainModel ba)
-        {
-            var acc = Cache.SingleOrDefault(b => b.Id == ba.Id);
-            if (acc == null)
-            {
-                Cache.Add(ba);
-            }
-            else
-            {
-                Cache.Remove(acc);
-                Cache.Add(ba);
-            }
-        }
+        //        ctx.Entry(entity).State = EntityState.Modified;
+        //        ctx.SaveChanges();
+        //    }
+        //}
 
-        public void UpdateFromCache()
-        {
-            if (!Cache.Any())
-                return;
+        //public void DeleteAccount(Guid id)
+        //{
+        //    using (var ctx = new BankAccountDbContext())
+        //    {
+        //        var entity = ctx.AccountSet.SingleOrDefault(b => b.AggregateId == id);
+        //        if (entity == null)
+        //        {
+        //            throw new AggregateNotFoundException($"Aggregate with the id {id} was not found");
+        //        }
+        //        entity.AccountState = State.Closed;
 
-            foreach (var entity in Cache)
-            {
-                this.UpdateCustomer(entity);
-            }
+        //        ctx.Entry(entity).State = EntityState.Modified;
+        //        ctx.SaveChanges();
+        //    }
+        //}
 
-            Cache.Clear();
-        }
+        //public void AddToCache(CustomerDomainModel ba)
+        //{
+        //    var acc = Cache.SingleOrDefault(b => b.Id == ba.Id);
+        //    if (acc == null)
+        //    {
+        //        Cache.Add(ba);
+        //    }
+        //    else
+        //    {
+        //        Cache.Remove(acc);
+        //        Cache.Add(ba);
+        //    }
+        //}
+
+        //public void UpdateFromCache()
+        //{
+        //    if (!Cache.Any())
+        //        return;
+
+        //    foreach (var entity in Cache)
+        //    {
+        //        this.UpdateCustomer(entity);
+        //    }
+
+        //    Cache.Clear();
+        //}
 
         #endregion
 
@@ -105,8 +123,9 @@ namespace BankAccount.CommandStackDal
                 {
                     AggregateId         = item.Id,
                     Version             = item.Version,
-                    FirstName = item.Person.FirstName,
-                    LastName = item.Person.LastName
+                    FirstName           = item.Person.FirstName,
+                    LastName            = item.Person.LastName,
+                    CustomerState       = State.Open
                 });
                 ctx.SaveChanges();
             }
@@ -125,9 +144,25 @@ namespace BankAccount.CommandStackDal
                 entity.Version              = item.Version;
                 entity.FirstName            = item.Person.FirstName;
                 entity.LastName             = item.Person.LastName;
+                entity.CustomerState        = ConvertState(item.State);
 
                 ctx.Entry(entity).State     = EntityState.Modified;
                 ctx.SaveChanges();
+            }
+        }
+
+        private State ConvertState(ValueTypes.State state)
+        {
+            switch (state)
+            {
+                case ValueTypes.State.Open:
+                    return State.Open;
+                case ValueTypes.State.Closed:
+                    return State.Closed;
+                case ValueTypes.State.Locked:
+                    return State.Locked;
+                default:
+                    return State.Unlocked;
             }
         }
 
@@ -144,11 +179,12 @@ namespace BankAccount.CommandStackDal
 
                 ctx.AccountSet.Add(new AccountEntity
                 {
-                    AggregateId = item.Id,
-                    Version = item.Version,
-                    CustomerEntityId = customerEntityId.CustomerEntityId,
-                    CustomerAggregateId = item.CustomerId,
-                    Currency = item.Currency
+                    AggregateId             = item.Id,
+                    Version                 = item.Version,
+                    CustomerEntityId        = customerEntityId.CustomerEntityId,
+                    CustomerAggregateId     = item.CustomerId,
+                    Currency                = item.Currency,
+                    AccountState            = State.Open
                 });
                 ctx.SaveChanges();
             }
@@ -175,6 +211,7 @@ namespace BankAccount.CommandStackDal
                 entity.Currency = item.Currency;
                 entity.CustomerEntityId = customerEntityId.CustomerEntityId;
                 entity.CustomerAggregateId = item.CustomerId;
+                entity.AccountState = ConvertState(item.State);
 
                 ctx.Entry(entity).State = EntityState.Modified;
                 ctx.SaveChanges();

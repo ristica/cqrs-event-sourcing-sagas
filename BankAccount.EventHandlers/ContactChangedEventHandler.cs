@@ -24,12 +24,12 @@ namespace BankAccount.EventHandlers
 
         public void Handle(ContactChangedEvent handle)
         {
-            var ba = this._repository.GetById(handle.AggregateId);
+            //var ba = this._repository.GetById(handle.AggregateId);
 
-            ba.Contact.Email        = handle.Email;
-            ba.Contact.PhoneNumber  = handle.Phone;
+            //ba.Contact.Email        = handle.Email;
+            //ba.Contact.PhoneNumber  = handle.Phone;
 
-            this.Database.AddToCache(ba);
+            //this.Database.AddToCache(ba);
         }
     }
 }

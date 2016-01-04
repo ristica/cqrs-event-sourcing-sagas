@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BankAccount.DbModel.ItemDb;
 using BankAccount.ReadModel;
+using BankAccount.ValueTypes;
 using EventStore;
 
 namespace BankAccount.QueryStackDal
@@ -61,11 +62,37 @@ namespace BankAccount.QueryStackDal
         {
             using (var ctx = new BankAccountDbContext())
             {
-                return ctx.AccountSet.Where(a => a.CustomerAggregateId == customerId).Select(e => new AccountReadModel
+                var model = ctx.AccountSet.Where(a => a.CustomerAggregateId == customerId);
+                var list = new List<AccountReadModel>();
+                foreach (var a in model)
                 {
-                    Currency = e.Currency,
-                    Id = e.AggregateId
-                }).ToList();
+                    list.Add(
+                        new AccountReadModel
+                        {
+                            Version = a.Version,
+                            Currency = a.Currency,
+                            CustomerId = a.CustomerAggregateId,
+                            Id = a.AggregateId,
+                            State = ConvertState(a.AccountState)
+                        });
+                }
+                return list;
+            }
+        }
+
+        private State ConvertState(DbModel.Entities.State state)
+        {
+            switch (state)
+            {
+                case DbModel.Entities.State.Open:
+                    return State.Open;
+                case DbModel.Entities.State.Closed:
+                    return State.Closed;
+                case DbModel.Entities.State.Locked:
+                    return State.Locked;
+                default:
+                    return State.Unlocked;
+
             }
         }
 
@@ -83,7 +110,8 @@ namespace BankAccount.QueryStackDal
                 {
                     Currency = model.Currency,
                     Id = model.AggregateId,
-                    CustomerId = model.CustomerAggregateId
+                    CustomerId = model.CustomerAggregateId,
+                    Version = model.Version
                 };
             }
         }

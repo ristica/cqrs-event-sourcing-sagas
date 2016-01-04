@@ -133,6 +133,10 @@
       <Project>{bf4019fd-eb2e-4f52-be73-31b1f37f94a8}</Project>
       <Name>BankAccount.ReadModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BankAccount.ValueTypes\BankAccount.ValueTypes.csproj">
+      <Project>{3f44e1cd-cb5c-4df5-81fa-6220ae0effa7}</Project>
+      <Name>BankAccount.ValueTypes</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

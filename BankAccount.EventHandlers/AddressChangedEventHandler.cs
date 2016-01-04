@@ -24,15 +24,15 @@ namespace BankAccount.EventHandlers
 
         public void Handle(AddressChangedEvent handle)
         {
-            var ba = this._repository.GetById(handle.AggregateId);
+            //var ba = this._repository.GetById(handle.AggregateId);
 
-            ba.Address.Street       = handle.Street;
-            ba.Address.Hausnumber   = handle.Hausnumber;
-            ba.Address.Zip          = handle.Zip;
-            ba.Address.City         = handle.City;
-            ba.Address.State        = handle.State;
+            //ba.Address.Street       = handle.Street;
+            //ba.Address.Hausnumber   = handle.Hausnumber;
+            //ba.Address.Zip          = handle.Zip;
+            //ba.Address.City         = handle.City;
+            //ba.Address.State        = handle.State;
 
-            this.Database.AddToCache(ba);
+            //this.Database.AddToCache(ba);
         }
     }
 }

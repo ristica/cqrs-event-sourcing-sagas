@@ -1,4 +1,5 @@
 ﻿using BankAccount.Infrastructure.Eventing;
+using BankAccount.ValueTypes;
 
 namespace BankAccount.Events
 {
@@ -8,5 +9,6 @@ namespace BankAccount.Events
         public string LastName { get; set; }
         public string IdCard { get; set; }
         public string IdNumber { get; set; }
+        public State State { get; set; }
     }
 }

@@ -10,8 +10,7 @@ namespace BankAccount.CommandStackDal.Abstraction
         void Save(Domain.CustomerDomainModel item);
         void Save(Domain.AccountDomainModel item);
 
-        void Delete(Guid id);
-        void AddToCache(Domain.CustomerDomainModel ba);
-        void UpdateFromCache();
+        //void AddToCache(Domain.CustomerDomainModel ba);
+        //void UpdateFromCache();
     }
 }

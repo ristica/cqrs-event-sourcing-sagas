@@ -8,7 +8,7 @@ namespace BankAccount.Domain
 {
     public class CustomerDomainModel : AggregateRoot,
         IHandle<CustomerCreatedEvent>,
-        IHandle<BankAccountDeletedEvent>,
+        IHandle<CustomerDeletedEvent>,
         IHandle<PersonChangedEvent>,
         IHandle<ContactChangedEvent>,
         IHandle<AddressChangedEvent>
@@ -18,6 +18,7 @@ namespace BankAccount.Domain
         public Person Person { get; set; }
         public Contact Contact { get; set; }
         public Address Address { get; set; }
+        public State State { get; set; }
 
         #endregion
 
@@ -81,7 +82,8 @@ namespace BankAccount.Domain
                     FirstName = firstName,
                     LastName = lastName,
                     IdCard = idCard,
-                    IdNumber = idNumber
+                    IdNumber = idNumber,
+                    State = State.Open
                 });
         }
 
@@ -122,10 +124,11 @@ namespace BankAccount.Domain
         public void DeleteBankAccount()
         {
             ApplyChange(
-                new BankAccountDeletedEvent
+                new CustomerDeletedEvent
                 {
-                    AggregateId = this.Id,
-                    Version = this.Version
+                    AggregateId     = this.Id,
+                    Version         = this.Version,
+                    State           = State.Closed
                 });
         }
 
@@ -140,6 +143,7 @@ namespace BankAccount.Domain
             this.Person = e.Person;
             this.Contact = e.Contact;
             this.Address = e.Address;
+            this.State = e.State;
         }
 
         public void Handle(PersonChangedEvent e)
@@ -160,17 +164,18 @@ namespace BankAccount.Domain
 
         public void Handle(AddressChangedEvent e)
         {
-            this.Version = e.Version;
-            this.Address.Street = e.Street;
-            this.Address.Hausnumber = e.Hausnumber;
-            this.Address.Zip = e.Zip;
-            this.Address.City = e.City;
-            this.Address.State = e.State;
+            this.Version                = e.Version;
+            this.Address.Street         = e.Street;
+            this.Address.Hausnumber     = e.Hausnumber;
+            this.Address.Zip            = e.Zip;
+            this.Address.City           = e.City;
+            this.Address.State          = e.State;
         }
 
-        public void Handle(BankAccountDeletedEvent e)
+        public void Handle(CustomerDeletedEvent e)
         {
-            this.Version = e.Version;
+            this.Version    = e.Version;
+            this.State      = e.State;
         }
 
         #endregion
@@ -219,7 +224,8 @@ namespace BankAccount.Domain
                         State = state,
                         City = city,
                         Zip = zip
-                    }
+                    },
+                    State = State.Open
                 };
                 var ba = new CustomerDomainModel();
                 ba.ApplyChange(@event);

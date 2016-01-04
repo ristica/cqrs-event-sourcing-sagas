@@ -50,7 +50,10 @@
     <Compile Include="ChangeAddressDetailsCommandHandler.cs" />
     <Compile Include="ChangeCurrencyCommandHandler.cs" />
     <Compile Include="CreateCustomerCommandHandler.cs" />
-    <Compile Include="DeleteBankAccountCommandHandler.cs" />
+    <Compile Include="UnlockAccountCommandHandler.cs" />
+    <Compile Include="LockAccountCommandHandler.cs" />
+    <Compile Include="DeleteAccountCommandHandler.cs" />
+    <Compile Include="DeleteCustomerCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ChangeBalanceCommandHandler.cs" />
   </ItemGroup>

@@ -6,14 +6,14 @@ using BankAccount.Infrastructure.Storage;
 
 namespace BankAccount.CommandHandlers
 {
-    public class DeleteBankAccountCommandHandler : BaseCustomerCommandHandler, ICommandHandler<DeleteCustomerCommand>
+    public class UnlockAccountCommandHandler : BaseAccountCommandHandler, ICommandHandler<UnlockAccountCommand>
     {
-        public DeleteBankAccountCommandHandler(ICommandStackRepository<Domain.CustomerDomainModel> repository) 
+        public UnlockAccountCommandHandler(ICommandStackRepository<Domain.AccountDomainModel> repository) 
             : base(repository)
         {
         }
 
-        public void Execute(DeleteCustomerCommand command)
+        public void Execute(UnlockAccountCommand command)
         {
             if (command == null)
             {
@@ -22,7 +22,7 @@ namespace BankAccount.CommandHandlers
 
             var aggregate = this.Repository.GetById(command.Id);
 
-            aggregate.DeleteBankAccount();
+            aggregate.UnlockAccount();
 
             this.Repository.Save(aggregate, aggregate.Version);
         } 

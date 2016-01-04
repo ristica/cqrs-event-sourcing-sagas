@@ -70,17 +70,34 @@ namespace BankAccount.Client.Controllers
             return View(model);
         }
 
-        public ActionResult Delete(Guid id)
+        public ActionResult DeleteCustomer(Guid id)
         {
-            var model = QueryStackWorkerService.GetDetails(id);
-            CommandStackWorkerService.DeleteBankAccount(model.AggregateId, model.Version);
-            return RedirectToAction("Index");
+            CommandStackWorkerService.DeleteCustomer(id);
+            return RedirectToAction("Details", new { id = id });
+        }
+
+        public ActionResult DeleteAccount(Guid accountId, Guid customerId)
+        {
+            CommandStackWorkerService.DeleteAccount(accountId);
+            return RedirectToAction("Details", new { id = customerId });
+        }
+
+        public ActionResult LockAccount(Guid accountId, Guid customerId)
+        {
+            CommandStackWorkerService.LockAccount(accountId);
+            return RedirectToAction("Details", new { id = customerId });
+        }
+
+        public ActionResult UnlockAccount(Guid accountId, Guid customerId)
+        {
+            CommandStackWorkerService.UnlockAccount(accountId);
+            return RedirectToAction("Details", new { id = customerId });
         }
 
         public ActionResult History(Guid id, string name, Guid customerId, string currency)
         {
             ViewBag.AccountName = name;
-            var model = QueryStackWorkerService.GetBankAccountHistory(id);
+            var model = QueryStackWorkerService.GetAccountHistory(id);
             ViewBag.CurrentBalance = model.Sum(b => b.Amount);
             ViewBag.CustomerId = customerId;
             ViewBag.AccountId = id;
@@ -88,9 +105,9 @@ namespace BankAccount.Client.Controllers
             return View(model);
         }
 
-        public ActionResult TransferMoney(Guid aggregateId)
+        public ActionResult TransferMoney(Guid id)
         {
-            var account = QueryStackWorkerService.GetAccountById(aggregateId);
+            var account = QueryStackWorkerService.GetAccountById(id);
             return View(account);
         }
 

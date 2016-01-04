@@ -1,5 +1,6 @@
 ﻿@using BankAccount.ApplicationLayer.Models
-@model BankAccount.ApplicationLayer.Models.DetailsBankAccountViewModel
+@using BankAccount.ValueTypes
+@model DetailsBankAccountViewModel
 
 @{
     ViewBag.Title = "Bank account details";
@@ -117,8 +118,23 @@
                     <td style="width: 400px; font-weight: bold;">@a.AggregateId</td>
                     <td>@a.Currency @a.CurrentBalance</td>
                     <td style="text-align: right;">
-                        @Html.ActionLink("Money transfer", "TransferMoney", new { aggregateId = a.AggregateId }, new { @class = "btn btn-default" })
-                        @Html.ActionLink("Bank statement", "History", new { id = a.AggregateId, name = Model.FirstName + " " + Model.LastName, customerId = Model.AggregateId, currency = a.Currency }, new { @class = "btn btn-default" })
+                        @switch (a.AccountState)
+                        {
+                            case State.Closed:
+                                // ...
+                                break;
+                            case State.Locked:
+                                @Html.ActionLink("Unlock account", "UnlockAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-primary", style = "margin-right: 5px;" })
+                                @Html.ActionLink("Delete account", "DeleteAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-default", style = "margin-right: 5px;" })
+                                break;
+                            default:
+                                @Html.ActionLink("Money transfer", "TransferMoney", new { id = a.AggregateId }, new { @class = "btn btn-default", style = "margin-right: 5px;" })
+                                @Html.ActionLink("Lock account", "LockAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-default", style = "margin-right: 5px;" })
+                                @Html.ActionLink("Delete account", "DeleteAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-default", style = "margin-right: 5px;" })
+                                break;
+                        }
+
+                        @Html.ActionLink("Bank statement", "History", new { id = a.AggregateId, name = Model.FirstName + " " + Model.LastName, customerId = Model.AggregateId, currency = a.Currency}, new {@class = "btn btn-default"})
                     </td>
                 </tr>
             }
@@ -129,6 +145,6 @@
 <p>
     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
     
-    @Html.ActionLink("Delete", "Delete", new { id = Model.AggregateId }, new { @class = "btn btn-danger pull-right" })
+    @Html.ActionLink("Delete customer", "DeleteCustomer", new { id = Model.AggregateId }, new { @class = "btn btn-default pull-right" })
     @Html.ActionLink("Add new account", "Create", new { customerId = Model.AggregateId }, new { @class = "btn btn-default pull-right", style = "margin-right: 5px;" })
 </p>

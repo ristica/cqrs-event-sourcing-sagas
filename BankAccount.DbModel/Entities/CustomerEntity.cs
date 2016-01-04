@@ -12,6 +12,7 @@ namespace BankAccount.DbModel.Entities
         public int Version { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public State CustomerState { get; set; }
 
         public virtual ICollection<AccountEntity> Accounts { get; set; } 
     }

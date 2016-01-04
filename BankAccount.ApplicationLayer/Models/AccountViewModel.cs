@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using BankAccount.ValueTypes;
 
 namespace BankAccount.ApplicationLayer.Models
 {
@@ -23,5 +24,8 @@ namespace BankAccount.ApplicationLayer.Models
 
         [HiddenInput(DisplayValue = false)]
         public int CurrentBalance { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public State AccountState { get; set; }
     }
 }

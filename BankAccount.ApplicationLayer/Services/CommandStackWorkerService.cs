@@ -34,12 +34,10 @@ namespace BankAccount.ApplicationLayer.Services
                     vm.State));
         }
 
-        public static void DeleteBankAccount(Guid id, int version)
+        public static void DeleteCustomer(Guid id)
         {
             IoCServiceLocator.CommandBus.Send(
-                new DeleteCustomerCommand(
-                    id, 
-                    version));
+                new DeleteCustomerCommand(id, -1));
         }
 
         public static void EditPersonDetails(PersonViewModel vm)
@@ -94,6 +92,24 @@ namespace BankAccount.ApplicationLayer.Services
                     0,
                     vm.CustomerId,
                     vm.Currency));
+        }
+
+        public static void DeleteAccount(Guid id)
+        {
+            IoCServiceLocator.CommandBus.Send(
+                new DeleteAccountCommand(id, -1));
+        }
+
+        public static void LockAccount(Guid id)
+        {
+            IoCServiceLocator.CommandBus.Send(
+                new LockAccountCommand(id, -1));
+        }
+
+        public static void UnlockAccount(Guid id)
+        {
+            IoCServiceLocator.CommandBus.Send(
+                new UnlockAccountCommand(id, -1));
         }
     }
 }
