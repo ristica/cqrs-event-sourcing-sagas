@@ -44,7 +44,6 @@
     <Compile Include="ChangeAddressDetailsCommand.cs" />
     <Compile Include="ChangeContactDetailsCommand.cs" />
     <Compile Include="ChangePersonDetailsCommand.cs" />
-    <Compile Include="ChangeCurrencyCommand.cs" />
     <Compile Include="CreateCustomerCommand.cs" />
     <Compile Include="UnlockAccountCommand.cs" />
     <Compile Include="LockAccountCommand.cs" />

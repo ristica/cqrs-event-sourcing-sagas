@@ -53,7 +53,6 @@
     <Compile Include="PersonChangedEventHandler.cs" />
     <Compile Include="Base\BaseCustomerEventHandler.cs" />
     <Compile Include="BalanceChangedEventHandler.cs" />
-    <Compile Include="CurrencyChangedEventHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AddressChangedEventHandler.cs" />
   </ItemGroup>

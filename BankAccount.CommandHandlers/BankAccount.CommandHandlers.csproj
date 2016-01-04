@@ -48,7 +48,6 @@
     <Compile Include="ChangeContactDetailsCommandHandler.cs" />
     <Compile Include="ChangePersonDetailsCommandHandler.cs" />
     <Compile Include="ChangeAddressDetailsCommandHandler.cs" />
-    <Compile Include="ChangeCurrencyCommandHandler.cs" />
     <Compile Include="CreateCustomerCommandHandler.cs" />
     <Compile Include="UnlockAccountCommandHandler.cs" />
     <Compile Include="LockAccountCommandHandler.cs" />

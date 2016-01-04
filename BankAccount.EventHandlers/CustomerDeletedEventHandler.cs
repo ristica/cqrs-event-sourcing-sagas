@@ -1,18 +1,20 @@
 ﻿using System;
 using BankAccount.CommandStackDal.Abstraction;
+using BankAccount.Domain;
 using BankAccount.EventHandlers.Base;
 using BankAccount.Events;
 using BankAccount.Infrastructure.EventHandling;
 using BankAccount.Infrastructure.Storage;
+using BankAccount.ValueTypes;
 
 namespace BankAccount.EventHandlers
 {
-    public class CurrencyChangedEventHandler : BaseCustomerEventHandler, IEventHandler<CurrencyChangedEvent>
+    public class CustomerDeletedEventHandler : BaseCustomerEventHandler, IEventHandler<CustomerDeletedEvent>
     {
         private readonly ICommandStackRepository<Domain.CustomerDomainModel> _repository;
 
-        public CurrencyChangedEventHandler(ICommandStackRepository<Domain.CustomerDomainModel> repository, ICommandStackDatabase database)
-            : base(database)
+        public CustomerDeletedEventHandler(ICommandStackDatabase database, ICommandStackRepository<CustomerDomainModel> repository) 
+            : base (database)
         {
             if (repository == null)
             {
@@ -22,13 +24,11 @@ namespace BankAccount.EventHandlers
             this._repository = repository;
         }
 
-        public void Handle(CurrencyChangedEvent handle)
+        public void Handle(CustomerDeletedEvent handle)
         {
-            //var ba = this._repository.GetById(handle.AggregateId);
-
-            //ba.Money.Currency = handle.Currency;
-
-            //this.Database.AddToCache(ba);
+            var account = this._repository.GetById(handle.AggregateId);
+            account.State = State.Closed;
+            this.Database.Save(account);
         }
     }
 }

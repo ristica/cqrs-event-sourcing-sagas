@@ -49,7 +49,6 @@
     <Compile Include="ContactChangedevent.cs" />
     <Compile Include="PersonChangedEvent.cs" />
     <Compile Include="BalanceChangedEvent.cs" />
-    <Compile Include="CurrencyChangedEvent.cs" />
     <Compile Include="AddressChangedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

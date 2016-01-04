@@ -85,7 +85,6 @@ namespace BankAccount.Configuration
             bus.RegisterHandler<CustomerDeletedEventHandler>();
             bus.RegisterHandler<PersonChangedEventHandler>();
             bus.RegisterHandler<ContactChangedEventHandler>();
-            bus.RegisterHandler<CurrencyChangedEventHandler>();
             bus.RegisterHandler<AddressChangedEventHandler>();
 
             bus.RegisterHandler<AccountAddedEventHandler>();
@@ -102,7 +101,6 @@ namespace BankAccount.Configuration
             bus.RegisterHandler<CreateCustomerCommandHandler>();
             bus.RegisterHandler<DeleteCustomerCommandHandler>();
             bus.RegisterHandler<ChangeAddressDetailsCommandHandler>();
-            bus.RegisterHandler<ChangeCurrencyCommandHandler>();
             bus.RegisterHandler<ChangePersonDetailsCommandHandler>();
             bus.RegisterHandler<ChangeContactDetailsCommandHandler>();
 
