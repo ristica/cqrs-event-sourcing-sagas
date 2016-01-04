@@ -1,17 +1,11 @@
 ﻿using System;
 using BankAccount.Events;
 using BankAccount.Infrastructure.Domain;
-using BankAccount.Infrastructure.EventHandling;
 using BankAccount.ValueTypes;
 
 namespace BankAccount.Domain
 {
-    public class AccountDomainModel : AggregateRoot,
-        IHandle<AccountAddedEvent>,
-        IHandle<BalanceChangedEvent>,
-        IHandle<AccountDeletedEvent>,
-        IHandle<AccountLockedEvent>,
-        IHandle<AccountUnlockedEvent>
+    public class AccountDomainModel : AggregateRoot
     {
         #region Properties
 
@@ -88,41 +82,39 @@ namespace BankAccount.Domain
 
         #region Handles
 
-        public void Handle(AccountAddedEvent e)
-        {
-            this.Id             = e.AggregateId;
-            this.Version        = e.Version;
-            this.CustomerId     = e.CustomerId;
-            this.Currency       = e.Currency;
-            this.Balance        = 0;
-        }
+        //public void Handle(AccountAddedEvent e)
+        //{
+        //    this.Id             = e.AggregateId;
+        //    this.Version        = e.Version;
+        //    this.CustomerId     = e.CustomerId;
+        //    this.Currency       = e.Currency;
+        //    this.Balance        = 0;
+        //}
 
-        public void Handle(BalanceChangedEvent e)
-        {
-            this.Version        = e.Version;
-            this.Balance        += e.Amount;
-        }
+        //public void Handle(BalanceChangedEvent e)
+        //{
+        //    this.Version        = e.Version;
+        //    this.Balance        += e.Amount;
+        //}
 
-        public void Handle(AccountDeletedEvent e)
-        {
-            this.Version        = e.Version;
-            this.State          = e.State;
-        }
+        //public void Handle(AccountDeletedEvent e)
+        //{
+        //    this.Version        = e.Version;
+        //    this.State          = e.State;
+        //}
 
-        public void Handle(AccountLockedEvent e)
-        {
-            this.Version        = e.Version;
-            this.State          = e.State;
-        }
+        //public void Handle(AccountLockedEvent e)
+        //{
+        //    this.Version        = e.Version;
+        //    this.State          = e.State;
+        //}
 
-        public void Handle(AccountUnlockedEvent e)
-        {
-            this.Version        = e.Version;
-            this.State          = e.State;
-        }
+        //public void Handle(AccountUnlockedEvent e)
+        //{
+        //    this.Version        = e.Version;
+        //    this.State          = e.State;
+        //}
 
         #endregion
-
-
     }
 }

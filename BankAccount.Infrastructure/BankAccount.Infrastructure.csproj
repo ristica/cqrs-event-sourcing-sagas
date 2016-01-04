@@ -58,28 +58,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buses\Bus.cs" />
-    <Compile Include="Buses\IBus.cs" />
     <Compile Include="Buses\ISagaBus.cs" />
-    <Compile Include="Commanding\IAmStartedBy.cs" />
-    <Compile Include="Commanding\IHandleMessage.cs" />
+    <Compile Include="IAmStartedBy.cs" />
+    <Compile Include="IHandleMessage.cs" />
     <Compile Include="Domain\AggregateRoot.cs" />
     <Compile Include="Commanding\Command.cs" />
     <Compile Include="Converter.cs" />
-    <Compile Include="Eventing\Event.cs" />
-    <Compile Include="Commanding\ICommand.cs" />
-    <Compile Include="Buses\ICommandBus.cs" />
-    <Compile Include="CommandHandling\ICommandHandler.cs" />
-    <Compile Include="CommandHandling\ICommandHandlerFactory.cs" />
-    <Compile Include="Eventing\IEvent.cs" />
-    <Compile Include="Buses\IEventBus.cs" />
-    <Compile Include="EventHandling\IEventHandler.cs" />
-    <Compile Include="EventHandling\IEventHandlerFactory.cs" />
-    <Compile Include="Eventing\IEventProvider.cs" />
-    <Compile Include="EventHandling\IHandle.cs" />
+    <Compile Include="Eventing\DomainEvent.cs" />
     <Compile Include="Exceptions\ConcurrencyException.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Storage\ICommandStackRepository.cs" />
-    <Compile Include="Storage\IEventStore.cs" />
     <Compile Include="Exceptions\UnregisteredDomainCommandException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

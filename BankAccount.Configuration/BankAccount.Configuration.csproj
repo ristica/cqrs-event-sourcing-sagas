@@ -64,8 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buses\CommandBus.cs" />
-    <Compile Include="Buses\EventBus.cs" />
     <Compile Include="Buses\SagaBus.cs" />
     <Compile Include="IoCServiceLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,17 +72,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BankAccount.CommandHandlers\BankAccount.CommandHandlers.csproj">
-      <Project>{f479d4be-0ce7-4aed-8bd1-72c08501c91e}</Project>
-      <Name>BankAccount.CommandHandlers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BankAccount.CommandStackDal\BankAccount.CommandStackDal.csproj">
       <Project>{00e4f0c6-6135-4c03-ad6d-7da42d1aefa4}</Project>
       <Name>BankAccount.CommandStackDal</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BankAccount.EventHandlers\BankAccount.EventHandlers.csproj">
-      <Project>{fbcaa02b-5416-451e-9ab6-5333ced5e737}</Project>
-      <Name>BankAccount.EventHandlers</Name>
+    <ProjectReference Include="..\BankAccount.Denormalizers\BankAccount.Denormalizers.csproj">
+      <Project>{4dbd4b78-d84f-477f-ae8a-6c547351d420}</Project>
+      <Name>BankAccount.Denormalizers</Name>
     </ProjectReference>
     <ProjectReference Include="..\BankAccount.EventStore\BankAccount.EventStore.csproj">
       <Project>{21230a46-0b24-413e-b89a-cf1a2ee4a17b}</Project>

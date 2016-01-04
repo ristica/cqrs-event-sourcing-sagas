@@ -3,7 +3,7 @@ using BankAccount.ValueTypes;
 
 namespace BankAccount.Events
 {
-    public class PersonChangedEvent : Event
+    public class PersonChangedEvent : DomainEvent
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

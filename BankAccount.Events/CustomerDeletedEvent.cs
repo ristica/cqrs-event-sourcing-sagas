@@ -3,7 +3,7 @@ using BankAccount.ValueTypes;
 
 namespace BankAccount.Events
 {
-    public class CustomerDeletedEvent : Event
+    public class CustomerDeletedEvent : DomainEvent
     {
         public State State { get; set; }
     }

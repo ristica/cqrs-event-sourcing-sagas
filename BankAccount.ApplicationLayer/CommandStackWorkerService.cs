@@ -8,7 +8,7 @@ namespace BankAccount.ApplicationLayer
     /// <summary>
     /// here we can decide to go all over the 
     /// command bus / command handler / event bus / event handler
-    ///     IoCServiceLocator.CommandBus.Send (....)
+    ///     IoCServiceLocator.SagaBus.Send (....)
     /// or we are going to use process manager (aka Saga) to handle commands / events 
     ///     IoCServiceLocator.SagaBus.Send (....)
     /// </summary>
@@ -16,7 +16,8 @@ namespace BankAccount.ApplicationLayer
     {
         public static void AddCustomer(CustomerViewModel vm)
         {
-            IoCServiceLocator.CommandBus.Send(
+            //IoCServiceLocator.SagaBus.Send(
+            IoCServiceLocator.SagaBus.Send(
                 new CreateCustomerCommand(
                     Guid.NewGuid(),
                     0,
@@ -36,13 +37,13 @@ namespace BankAccount.ApplicationLayer
 
         public static void DeleteCustomer(Guid id)
         {
-            IoCServiceLocator.CommandBus.Send(
+            IoCServiceLocator.SagaBus.Send(
                 new DeleteCustomerCommand(id, -1));
         }
 
         public static void EditPersonDetails(PersonViewModel vm)
         {
-            IoCServiceLocator.CommandBus.Send(
+            IoCServiceLocator.SagaBus.Send(
                 new ChangePersonDetailsCommand(
                     vm.AggregateId,
                     vm.Version,
@@ -54,7 +55,7 @@ namespace BankAccount.ApplicationLayer
 
         public static void EditContactDetails(ContactViewModel vm)
         {
-            IoCServiceLocator.CommandBus.Send(
+            IoCServiceLocator.SagaBus.Send(
                 new ChangeContactDetailsCommand(
                     vm.AggregateId,
                     vm.Version,
@@ -64,7 +65,7 @@ namespace BankAccount.ApplicationLayer
 
         public static void EditAddressDetails(AddressViewModel vm)
         {
-            IoCServiceLocator.CommandBus.Send(
+            IoCServiceLocator.SagaBus.Send(
                 new ChangeAddressDetailsCommand(
                     vm.AggregateId,
                     vm.Version,
@@ -77,7 +78,7 @@ namespace BankAccount.ApplicationLayer
 
         public static void TransferMoney(TransferViewModel vm)
         {
-            IoCServiceLocator.CommandBus.Send(
+            IoCServiceLocator.SagaBus.Send(
                 new ChangeBalanceCommand(
                     vm.AggregateId,
                     vm.Version,
@@ -86,7 +87,7 @@ namespace BankAccount.ApplicationLayer
 
         public static void AddAccount(AccountViewModel vm)
         {
-            IoCServiceLocator.CommandBus.Send(
+            IoCServiceLocator.SagaBus.Send(
                 new AddAccountCommand(
                     Guid.NewGuid(),
                     0,
@@ -96,19 +97,19 @@ namespace BankAccount.ApplicationLayer
 
         public static void DeleteAccount(Guid id)
         {
-            IoCServiceLocator.CommandBus.Send(
+            IoCServiceLocator.SagaBus.Send(
                 new DeleteAccountCommand(id, -1));
         }
 
         public static void LockAccount(Guid id)
         {
-            IoCServiceLocator.CommandBus.Send(
+            IoCServiceLocator.SagaBus.Send(
                 new LockAccountCommand(id, -1));
         }
 
         public static void UnlockAccount(Guid id)
         {
-            IoCServiceLocator.CommandBus.Send(
+            IoCServiceLocator.SagaBus.Send(
                 new UnlockAccountCommand(id, -1));
         }
     }

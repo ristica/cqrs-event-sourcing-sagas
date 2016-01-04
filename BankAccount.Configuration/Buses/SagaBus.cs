@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BankAccount.Infrastructure;
 using BankAccount.Infrastructure.Buses;
 using BankAccount.Infrastructure.Commanding;
 using BankAccount.Infrastructure.Eventing;
-using Infrastructure;
 using Microsoft.Practices.Unity;
 
 namespace BankAccount.Configuration.Buses
@@ -33,7 +33,7 @@ namespace BankAccount.Configuration.Buses
             this._Send(command);
         }
 
-        public void RaiseEvent<T>(T @event) where T : Event
+        public void RaiseEvent<T>(T @event) where T : DomainEvent
         {
             this._Send(@event);
         }
@@ -66,38 +66,38 @@ namespace BankAccount.Configuration.Buses
 
         private void _Send<T>(T message)
         {
-            DeliverMessageToSagas(message);
+            BootRegisteredSagas(message);
+            DeliverMessageToRunningSagas(message);
             DeliverMessageToHandlers(message);
         }
 
-        private void DeliverMessageToSagas<T>(T message)
+        private void BootRegisteredSagas<T>(T message)
         {
             var messageType = message.GetType();
-
             var openInterface = typeof(IAmStartedBy<>);
             var closedInterface = openInterface.MakeGenericType(messageType);
-            var sagasToStartup = (from s in RegisteredSagas.Values
-                                  where closedInterface.IsAssignableFrom(s)
-                                  select s).ToList();
-
-            if (sagasToStartup.Any())
+            var sagasToStartup = from s in RegisteredSagas.Values
+                                 where closedInterface.IsAssignableFrom(s)
+                                 select s;
+            foreach (var s in sagasToStartup)
             {
-                foreach (var sagaInstance in sagasToStartup.Select(s => IoCServiceLocator.Container.Resolve(s)))
-                {
-                    ((dynamic)sagaInstance).Handle((dynamic)message);
-                }
+                dynamic sagaInstance = IoCServiceLocator.Container.Resolve(s);
+                sagaInstance.Handle((dynamic)message);
             }
-            else
+        }
+
+        private void DeliverMessageToRunningSagas<T>(T message)
+        {
+            var messageType = message.GetType();
+            var openInterface = typeof(IHandleMessage<>);
+            var closedInterface = openInterface.MakeGenericType(messageType);
+            var sagasToNotify = from s in RegisteredSagas.Values
+                                where closedInterface.IsAssignableFrom(s)
+                                select s;
+            foreach (var s in sagasToNotify)
             {
-                openInterface = typeof(IHandleMessage<>);
-                closedInterface = openInterface.MakeGenericType(messageType);
-                var sagasToNotify = from s in RegisteredSagas.Values
-                                    where closedInterface.IsAssignableFrom(s)
-                                    select s;
-                foreach (var sagaInstance in sagasToNotify.Select(s => IoCServiceLocator.Container.Resolve(s)))
-                {
-                    ((dynamic)sagaInstance).Handle((dynamic)message);
-                }
+                dynamic sagaInstance = IoCServiceLocator.Container.Resolve(s);
+                sagaInstance.Handle((dynamic)message);
             }
         }
 

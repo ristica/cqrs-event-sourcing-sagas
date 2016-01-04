@@ -1,17 +1,17 @@
 ﻿using BankAccount.Commands;
+using BankAccount.Infrastructure;
 using BankAccount.Infrastructure.Buses;
-using BankAccount.Infrastructure.Commanding;
 using BankAccount.Infrastructure.Storage;
 using BankAccount.ProcessManager.Base;
 
 namespace BankAccount.ProcessManager
 {
-    public class CreateBankAccountSaga : Saga,
+    public class CreateCustomerSaga : Saga,
         IAmStartedBy<CreateCustomerCommand>
     {
         #region C-Tor
 
-        public CreateBankAccountSaga(
+        public CreateCustomerSaga(
             ISagaBus bus, 
             ICommandStackRepository<Domain.CustomerDomainModel> repository) 
             : base(bus, repository)
@@ -34,8 +34,6 @@ namespace BankAccount.ProcessManager
                 message.Person.Dob,
                 message.Contact.Email,
                 message.Contact.PhoneNumber,
-                //message.Money.Balance,
-                //message.Money.Currency,
                 message.Address.Street,
                 message.Address.Zip,
                 message.Address.Hausnumber,

@@ -3,10 +3,11 @@ using BankAccount.Infrastructure.Eventing;
 
 namespace BankAccount.Infrastructure.Buses
 {
-    public interface ISagaBus : IBus
+    public interface ISagaBus
     {
         void Send<T>(T command) where T : Command;
-        void RaiseEvent<T>(T @event) where T : Event;
+        void RaiseEvent<T>(T @event) where T : DomainEvent;
         void RegisterSaga<T>();
+        void RegisterHandler<T>();
     }
 }

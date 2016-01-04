@@ -1,17 +1,11 @@
 ﻿using System;
 using BankAccount.Events;
 using BankAccount.Infrastructure.Domain;
-using BankAccount.Infrastructure.EventHandling;
 using BankAccount.ValueTypes;
 
 namespace BankAccount.Domain
 {
-    public class CustomerDomainModel : AggregateRoot,
-        IHandle<CustomerCreatedEvent>,
-        IHandle<CustomerDeletedEvent>,
-        IHandle<PersonChangedEvent>,
-        IHandle<ContactChangedEvent>,
-        IHandle<AddressChangedEvent>
+    public class CustomerDomainModel : AggregateRoot
     {
         #region Properties
 
@@ -146,37 +140,37 @@ namespace BankAccount.Domain
             this.State = e.State;
         }
 
-        public void Handle(PersonChangedEvent e)
-        {
-            this.Version = e.Version;
-            this.Person.FirstName = e.FirstName;
-            this.Person.LastName = e.LastName;
-            this.Person.IdCard = e.IdCard;
-            this.Person.IdNumber = e.IdNumber;
-        }
+        //public void Handle(PersonChangedEvent e)
+        //{
+        //    this.Version = e.Version;
+        //    this.Person.FirstName = e.FirstName;
+        //    this.Person.LastName = e.LastName;
+        //    this.Person.IdCard = e.IdCard;
+        //    this.Person.IdNumber = e.IdNumber;
+        //}
 
-        public void Handle(ContactChangedEvent e)
-        {
-            this.Version = e.Version;
-            this.Contact.Email = e.Email;
-            this.Contact.PhoneNumber = e.Phone;
-        }
+        //public void Handle(ContactChangedEvent e)
+        //{
+        //    this.Version = e.Version;
+        //    this.Contact.Email = e.Email;
+        //    this.Contact.PhoneNumber = e.Phone;
+        //}
 
-        public void Handle(AddressChangedEvent e)
-        {
-            this.Version                = e.Version;
-            this.Address.Street         = e.Street;
-            this.Address.Hausnumber     = e.Hausnumber;
-            this.Address.Zip            = e.Zip;
-            this.Address.City           = e.City;
-            this.Address.State          = e.State;
-        }
+        //public void Handle(AddressChangedEvent e)
+        //{
+        //    this.Version                = e.Version;
+        //    this.Address.Street         = e.Street;
+        //    this.Address.Hausnumber     = e.Hausnumber;
+        //    this.Address.Zip            = e.Zip;
+        //    this.Address.City           = e.City;
+        //    this.Address.State          = e.State;
+        //}
 
-        public void Handle(CustomerDeletedEvent e)
-        {
-            this.Version    = e.Version;
-            this.State      = e.State;
-        }
+        //public void Handle(CustomerDeletedEvent e)
+        //{
+        //    this.Version    = e.Version;
+        //    this.State      = e.State;
+        //}
 
         #endregion
 

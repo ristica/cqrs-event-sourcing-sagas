@@ -2,7 +2,7 @@
 
 namespace BankAccount.DbModel.ItemDb
 {
-    public class BankAccountInitializer : DropCreateDatabaseIfModelChanges<BankAccountDbContext>
+    public class BankAccountInitializer : DropCreateDatabaseAlways<BankAccountDbContext>
     {
         protected override void Seed(BankAccountDbContext context)
         {

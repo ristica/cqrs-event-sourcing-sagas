@@ -1,4 +1,4 @@
-﻿namespace Infrastructure
+﻿namespace BankAccount.Infrastructure
 {
     public interface IHandleMessage<in T>
     {

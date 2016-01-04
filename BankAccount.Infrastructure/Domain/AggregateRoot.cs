@@ -6,11 +6,11 @@ using EventStore;
 
 namespace BankAccount.Infrastructure.Domain
 {
-    public abstract class AggregateRoot : IEventProvider
+    public abstract class AggregateRoot
     {
         #region Fields
 
-        private readonly List<Event> _changes;
+        private readonly List<DomainEvent> _changes;
 
         #endregion
 
@@ -26,12 +26,12 @@ namespace BankAccount.Infrastructure.Domain
 
         protected AggregateRoot()
         {
-            this._changes = new List<Event>();
+            this._changes = new List<DomainEvent>();
         }
 
         #endregion
 
-        public IEnumerable<Event> GetUncommittedChanges()
+        public IEnumerable<DomainEvent> GetUncommittedChanges()
         {
             return this._changes;
         }
@@ -53,7 +53,7 @@ namespace BankAccount.Infrastructure.Domain
             Version = @event.Version;
         }
 
-        protected void ApplyChange(Event @event, bool addToUncommitedChanges = true)
+        protected void ApplyChange(DomainEvent @event, bool addToUncommitedChanges = true)
         {
             dynamic d = this;
             d.Handle(Converter.ChangeTo(@event, @event.GetType()));

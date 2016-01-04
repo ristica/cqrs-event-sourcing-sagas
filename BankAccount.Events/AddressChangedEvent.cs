@@ -2,7 +2,7 @@
 
 namespace BankAccount.Events
 {
-    public class AddressChangedEvent : Event
+    public class AddressChangedEvent : DomainEvent
     {
         public string Street { get; set; }
         public string Hausnumber { get; set; }
