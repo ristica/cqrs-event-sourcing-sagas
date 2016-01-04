@@ -1,48 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BankAccount.ApplicationLayer.Models;
 using BankAccount.Configuration;
 using BankAccount.Events;
 using BankAccount.Infrastructure;
+using BankAccount.ViewModels;
 using EventStore;
 using Microsoft.Practices.Unity;
 
-namespace BankAccount.ApplicationLayer.Services
+namespace BankAccount.ApplicationLayer
 {
     public sealed class QueryStackWorkerService
     {
         public static List<BankAccountViewModel> GetAllBankAccounts()
         {
-            var accounts = IoCServiceLocator.QueryStackRepository.GetCustomers();
-            return accounts.Select(acc => new BankAccountViewModel
-            {
-                Id              = acc.AggregateId,
-                FirstName       = acc.FirstName,
-                LastName        = acc.LastName
-            }).ToList();
+            return IoCServiceLocator.QueryStackRepository.GetCustomers().ToList();
         }
 
         public static DetailsBankAccountViewModel GetDetails(Guid id)
         {
-            var account = IoCServiceLocator.QueryStackRepository.GetCustomerById(id);
-            return new DetailsBankAccountViewModel
-            {
-                AggregateId = account.AggregateId,
-                Version = account.Version,
-                LastName = account.LastName,
-                FirstName = account.FirstName,
-                IdCard = account.IdCard,
-                IdNumber = account.IdNumber,
-                Dob = account.Dob,
-                Phone = account.Phone,
-                Email = account.Email,
-                Street = account.Street,
-                Hausnumber = account.Hausnumber,
-                Zip = account.Zip,
-                State = account.State,
-                City = account.City
-            };
+            return IoCServiceLocator.QueryStackRepository.GetCustomerById(id);
         }
 
         public static List<BalanceHistoryViewModel> GetAccountHistory(Guid id)
@@ -111,7 +88,7 @@ namespace BankAccount.ApplicationLayer.Services
             foreach (var acc in accounts)
             {
                 // find all events for the 
-                var commits = IoCServiceLocator.Container.Resolve<IStoreEvents>().Advanced.GetFrom(acc.Id, 0, int.MaxValue);
+                var commits = IoCServiceLocator.Container.Resolve<IStoreEvents>().Advanced.GetFrom(acc.AggregateId, 0, int.MaxValue);
                 var transactions = new List<int>();
                 foreach (var c in commits)
                 {
@@ -125,8 +102,8 @@ namespace BankAccount.ApplicationLayer.Services
                 list.Add(new AccountViewModel
                 {
                     Currency = acc.Currency,
-                    AggregateId = acc.Id,
-                    AccountState = acc.State,
+                    AggregateId = acc.AggregateId,
+                    AccountState = acc.AccountState,
                     CurrentBalance = transactions.Sum(b => b)
                 });
             }
@@ -136,13 +113,7 @@ namespace BankAccount.ApplicationLayer.Services
 
         public static TransferViewModel GetAccountById(Guid aggregateId)
         {
-            var account = IoCServiceLocator.QueryStackRepository.GetAccountById(aggregateId);
-            return new TransferViewModel
-            {
-                AggregateId = account.Id,
-                CustomerId = account.CustomerId,
-                Version = account.Version
-            };
+            return IoCServiceLocator.QueryStackRepository.GetAccountById(aggregateId);
         }
     }
 }

@@ -76,13 +76,13 @@
       <Project>{4631996a-9ef1-481c-8fd8-bb895890973e}</Project>
       <Name>BankAccount.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BankAccount.ReadModel\BankAccount.ReadModel.csproj">
-      <Project>{bf4019fd-eb2e-4f52-be73-31b1f37f94a8}</Project>
-      <Name>BankAccount.ReadModel</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BankAccount.ValueTypes\BankAccount.ValueTypes.csproj">
       <Project>{3f44e1cd-cb5c-4df5-81fa-6220ae0effa7}</Project>
       <Name>BankAccount.ValueTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankAccount.ViewModels\BankAccount.ViewModels.csproj">
+      <Project>{77f57f45-c20a-4ac9-ac9e-7d08242b9da4}</Project>
+      <Name>BankAccount.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

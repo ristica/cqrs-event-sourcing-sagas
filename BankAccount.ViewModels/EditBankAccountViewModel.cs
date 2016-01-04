@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace BankAccount.ApplicationLayer.Models
+namespace BankAccount.ViewModels
 {
     public class EditBankAccountViewModel
     {

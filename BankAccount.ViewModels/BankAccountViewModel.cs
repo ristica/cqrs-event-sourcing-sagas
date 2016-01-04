@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BankAccount.ApplicationLayer.Models
+namespace BankAccount.ViewModels
 {
     public class BankAccountViewModel
     {

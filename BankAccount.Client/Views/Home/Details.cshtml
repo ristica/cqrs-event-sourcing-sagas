@@ -1,11 +1,11 @@
-﻿@using BankAccount.ApplicationLayer.Models
-@using BankAccount.ValueTypes
+﻿@using BankAccount.ValueTypes
+@using BankAccount.ViewModels
 @model DetailsBankAccountViewModel
 
 @{
     ViewBag.Title = "Bank account details";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var accounts = ViewBag.Accounts as IEnumerable<AccountViewModel>;
+    var accounts = ViewBag.Accounts as List<AccountViewModel>;
 }
 
 <style>
@@ -111,7 +111,7 @@
     }
     else
     {
-        <table style="width: 100%;">
+        <table style="width: 100%;" cellpadding="5">
             @foreach (var a in accounts.ToList())
             {
                 <tr>
@@ -124,17 +124,17 @@
                                 // ...
                                 break;
                             case State.Locked:
-                                @Html.ActionLink("Unlock account", "UnlockAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-primary", style = "margin-right: 5px;" })
-                                @Html.ActionLink("Delete account", "DeleteAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-default", style = "margin-right: 5px;" })
+                                @Html.ActionLink("Unlock account", "UnlockAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-primary btn-xs", style = "margin-right: 5px;" })
+                                @Html.ActionLink("Delete account", "DeleteAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-default btn-xs", style = "margin-right: 5px;" })
                                 break;
                             default:
-                                @Html.ActionLink("Money transfer", "TransferMoney", new { id = a.AggregateId }, new { @class = "btn btn-default", style = "margin-right: 5px;" })
-                                @Html.ActionLink("Lock account", "LockAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-default", style = "margin-right: 5px;" })
-                                @Html.ActionLink("Delete account", "DeleteAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-default", style = "margin-right: 5px;" })
+                                @Html.ActionLink("Money transfer", "TransferMoney", new { id = a.AggregateId }, new { @class = "btn btn-default btn-xs", style = "margin-right: 5px;" })
+                                @Html.ActionLink("Lock account", "LockAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-default btn-xs", style = "margin-right: 5px;" })
+                                @Html.ActionLink("Delete account", "DeleteAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-default btn-xs", style = "margin-right: 5px;" })
                                 break;
                         }
 
-                        @Html.ActionLink("Bank statement", "History", new { id = a.AggregateId, name = Model.FirstName + " " + Model.LastName, customerId = Model.AggregateId, currency = a.Currency}, new {@class = "btn btn-default"})
+                        @Html.ActionLink("Bank statement", "History", new { id = a.AggregateId, name = Model.FirstName + " " + Model.LastName, customerId = Model.AggregateId, currency = a.Currency}, new {@class = "btn btn-default btn-xs"})
                     </td>
                 </tr>
             }

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using BankAccount.DbModel.ItemDb;
-using BankAccount.ReadModel;
 using BankAccount.ValueTypes;
+using BankAccount.ViewModels;
 using EventStore;
 
 namespace BankAccount.QueryStackDal
@@ -17,7 +17,7 @@ namespace BankAccount.QueryStackDal
             _eventStore = eventStore;
         }
 
-        public CustomerReadModel GetCustomerById(Guid aggregateId)
+        public DetailsBankAccountViewModel GetCustomerById(Guid aggregateId)
         {
             var obj = new Domain.CustomerDomainModel();
 
@@ -39,7 +39,7 @@ namespace BankAccount.QueryStackDal
                 obj.LoadsFromHistory(c.Events);
             }
 
-            return new CustomerReadModel
+            return new DetailsBankAccountViewModel
             {
                 AggregateId = aggregateId,
                 Version = obj.Version,
@@ -58,25 +58,56 @@ namespace BankAccount.QueryStackDal
             };
         }
 
-        public IEnumerable<AccountReadModel> GetAccountsByCustomerId(Guid customerId)
+        public IEnumerable<AccountViewModel> GetAccountsByCustomerId(Guid customerId)
         {
             using (var ctx = new BankAccountDbContext())
             {
                 var model = ctx.AccountSet.Where(a => a.CustomerAggregateId == customerId);
-                var list = new List<AccountReadModel>();
+                var list = new List<AccountViewModel>();
                 foreach (var a in model)
                 {
                     list.Add(
-                        new AccountReadModel
+                        new AccountViewModel
                         {
-                            Version = a.Version,
                             Currency = a.Currency,
                             CustomerId = a.CustomerAggregateId,
-                            Id = a.AggregateId,
-                            State = ConvertState(a.AccountState)
+                            AggregateId = a.AggregateId,
+                            AccountState = ConvertState(a.AccountState)
                         });
                 }
                 return list;
+            }
+        }
+
+        public TransferViewModel GetAccountById(Guid aggregateId)
+        {
+            using (var ctx = new BankAccountDbContext())
+            {
+                var model = ctx.AccountSet.SingleOrDefault(a => a.AggregateId == aggregateId);
+                if (model == null)
+                {
+                    throw new ArgumentNullException("account");
+                }
+
+                return new TransferViewModel
+                {
+                    AggregateId = model.AggregateId,
+                    CustomerId = model.CustomerAggregateId,
+                    Version = model.Version
+                };
+            }
+        }
+
+        public IEnumerable<BankAccountViewModel> GetCustomers()
+        {
+            using (var ctx = new BankAccountDbContext())
+            {
+                return ctx.CustomerSet.Select(e => new BankAccountViewModel
+                {
+                    Id                  = e.AggregateId,
+                    FirstName           = e.FirstName,
+                    LastName            = e.LastName
+                }).ToList();
             }
         }
 
@@ -93,40 +124,6 @@ namespace BankAccount.QueryStackDal
                 default:
                     return State.Unlocked;
 
-            }
-        }
-
-        public AccountReadModel GetAccountById(Guid aggregateId)
-        {
-            using (var ctx = new BankAccountDbContext())
-            {
-                var model = ctx.AccountSet.SingleOrDefault(a => a.AggregateId == aggregateId);
-                if (model == null)
-                {
-                    throw new ArgumentNullException("account");
-                }
-
-                return new AccountReadModel
-                {
-                    Currency = model.Currency,
-                    Id = model.AggregateId,
-                    CustomerId = model.CustomerAggregateId,
-                    Version = model.Version
-                };
-            }
-        }
-
-        public IEnumerable<CustomerReadModel> GetCustomers()
-        {
-            using (var ctx = new BankAccountDbContext())
-            {
-                return ctx.CustomerSet.Select(e => new CustomerReadModel
-                {
-                    AggregateId         = e.AggregateId,
-                    Version             = e.Version,
-                    FirstName           = e.FirstName,
-                    LastName            = e.LastName
-                }).ToList();
             }
         }
     }

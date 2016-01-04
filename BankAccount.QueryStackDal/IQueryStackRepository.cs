@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using BankAccount.ReadModel;
+using BankAccount.ViewModels;
 
 namespace BankAccount.QueryStackDal
 {
@@ -9,9 +9,9 @@ namespace BankAccount.QueryStackDal
     /// </summary>
     public interface IQueryStackRepository
     {
-        CustomerReadModel GetCustomerById(Guid aggregateId);
-        IEnumerable<CustomerReadModel> GetCustomers();
-        IEnumerable<AccountReadModel> GetAccountsByCustomerId(Guid customerId);
-        AccountReadModel GetAccountById(Guid aggregateId);
+        DetailsBankAccountViewModel GetCustomerById(Guid aggregateId);
+        IEnumerable<BankAccountViewModel> GetCustomers();
+        IEnumerable<AccountViewModel> GetAccountsByCustomerId(Guid customerId);
+        TransferViewModel GetAccountById(Guid aggregateId);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BankAccount.ApplicationLayer.Models
+namespace BankAccount.ViewModels
 {
     public class UserViewModel
     {

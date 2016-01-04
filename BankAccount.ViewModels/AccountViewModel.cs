@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using BankAccount.ValueTypes;
 
-namespace BankAccount.ApplicationLayer.Models
+namespace BankAccount.ViewModels
 {
     public class AccountViewModel
     {

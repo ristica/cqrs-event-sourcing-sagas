@@ -1,9 +1,9 @@
 ﻿using System;
-using BankAccount.ApplicationLayer.Models;
 using BankAccount.Commands;
 using BankAccount.Configuration;
+using BankAccount.ViewModels;
 
-namespace BankAccount.ApplicationLayer.Services
+namespace BankAccount.ApplicationLayer
 {
     /// <summary>
     /// here we can decide to go all over the 

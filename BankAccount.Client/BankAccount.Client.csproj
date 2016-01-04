@@ -335,7 +335,6 @@
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\EditCustomer.cshtml" />
     <Content Include="Views\Home\EditAddress.cshtml" />
-    <Content Include="Views\Home\EditMoney.cshtml" />
     <Content Include="Views\Home\TransferMoney.cshtml" />
     <Content Include="Views\Home\EditContact.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
@@ -363,6 +362,10 @@
     <ProjectReference Include="..\BankAccount.ValueTypes\BankAccount.ValueTypes.csproj">
       <Project>{3f44e1cd-cb5c-4df5-81fa-6220ae0effa7}</Project>
       <Name>BankAccount.ValueTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankAccount.ViewModels\BankAccount.ViewModels.csproj">
+      <Project>{77f57f45-c20a-4ac9-ac9e-7d08242b9da4}</Project>
+      <Name>BankAccount.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

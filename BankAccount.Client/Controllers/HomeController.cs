@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using BankAccount.ApplicationLayer.Models;
-using BankAccount.ApplicationLayer.Services;
+using BankAccount.ApplicationLayer;
+using BankAccount.ViewModels;
 
 namespace BankAccount.Client.Controllers
 {
@@ -31,7 +31,7 @@ namespace BankAccount.Client.Controllers
         public ActionResult Details(Guid id)
         {
             var model = QueryStackWorkerService.GetDetails(id);
-            var accounts = QueryStackWorkerService.GetAccountsByCustomerId(model.AggregateId);
+            var accounts = QueryStackWorkerService.GetAccountsByCustomerId(model.AggregateId).ToList();
             ViewBag.User = _user;
             ViewBag.Accounts = accounts;
             return View(model);

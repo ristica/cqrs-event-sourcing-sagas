@@ -1,4 +1,4 @@
-﻿namespace BankAccount.ApplicationLayer.Models
+﻿namespace BankAccount.ViewModels
 {
     public class BalanceHistoryViewModel
     {

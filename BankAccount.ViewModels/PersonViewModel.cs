@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace BankAccount.ApplicationLayer.Models
+namespace BankAccount.ViewModels
 {
     public class PersonViewModel
     {
