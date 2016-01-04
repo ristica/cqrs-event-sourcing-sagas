@@ -167,7 +167,6 @@ namespace BankAccount.CommandStackDal
                 {
                     AggregateId             = item.Id,
                     Version                 = item.Version,
-                    CustomerEntityId        = customerEntityId.CustomerEntityId,
                     CustomerAggregateId     = item.CustomerId,
                     Currency                = item.Currency,
                     AccountState            = State.Open
@@ -195,7 +194,6 @@ namespace BankAccount.CommandStackDal
 
                 entity.Version = item.Version;
                 entity.Currency = item.Currency;
-                entity.CustomerEntityId = customerEntityId.CustomerEntityId;
                 entity.CustomerAggregateId = item.CustomerId;
                 entity.AccountState = item.State;
 

@@ -124,7 +124,7 @@
                                 // ...
                                 break;
                             case State.Locked:
-                                @Html.ActionLink("Unlock account", "UnlockAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-primary btn-xs", style = "margin-right: 5px;" })
+                                @Html.ActionLink("Unlock account", "UnlockAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-default btn-xs", style = "margin-right: 5px;" })
                                 @Html.ActionLink("Delete account", "DeleteAccount", new { accountId = a.AggregateId, customerId = Model.AggregateId }, new { @class = "btn btn-default btn-xs", style = "margin-right: 5px;" })
                                 break;
                             default:
