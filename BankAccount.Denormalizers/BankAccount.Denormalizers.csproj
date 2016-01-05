@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Db\Database.cs" />
     <Compile Include="Db\IDatabase.cs" />
+    <Compile Include="Denormalizer\UpdateCustomerDenormalizer.cs" />
     <Compile Include="Denormalizer\CreateCustomerDenormalizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

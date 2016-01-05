@@ -16,7 +16,6 @@ namespace BankAccount.ApplicationLayer
     {
         public static void AddCustomer(CustomerViewModel vm)
         {
-            //IoCServiceLocator.SagaBus.Send(
             IoCServiceLocator.SagaBus.Send(
                 new CreateCustomerCommand(
                     Guid.NewGuid(),

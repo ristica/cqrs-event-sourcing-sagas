@@ -78,6 +78,9 @@ namespace BankAccount.Configuration
             var bus = container.Resolve<ISagaBus>();
 
             bus.RegisterSaga<CreateCustomerSaga>();
+            bus.RegisterSaga<ChangePersonDetailsSaga>();
+            bus.RegisterSaga<ChangeContactDetailsSaga>();
+            bus.RegisterSaga<ChangeAddressDetailsSaga>();
         }
 
         private static void RegisterDenormalizer(IUnityContainer container)
@@ -85,6 +88,7 @@ namespace BankAccount.Configuration
             var bus = container.Resolve<ISagaBus>();
 
             bus.RegisterHandler<CreateCustomerDenormalizer>();
+            bus.RegisterHandler<UpdateCustomerDenormalizer>();
         }
 
         private static IStoreEvents CreateEventStore(IDispatchCommits bus)
