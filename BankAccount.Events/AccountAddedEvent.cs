@@ -1,5 +1,6 @@
 ﻿using System;
 using BankAccount.Infrastructure.Eventing;
+using BankAccount.ValueTypes;
 
 namespace BankAccount.Events
 {
@@ -7,5 +8,6 @@ namespace BankAccount.Events
     {
         public Guid CustomerId { get; set; }
         public string Currency { get; set; }
+        public State AccountState { get; set; }
     }
 }

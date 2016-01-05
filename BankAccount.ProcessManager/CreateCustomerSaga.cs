@@ -12,8 +12,8 @@ namespace BankAccount.ProcessManager
         #region C-Tor
 
         public CreateCustomerSaga(
-            ISagaBus bus, 
-            ICommandStackRepository<Domain.CustomerDomainModel> repository) 
+            IBus bus, 
+            ICommandStackRepository repository) 
             : base(bus, repository)
         {
         }
@@ -40,7 +40,7 @@ namespace BankAccount.ProcessManager
                 message.Address.City,
                 message.Address.State);
 
-            this.Repository.Save(aggregate, aggregate.Version);
+            this.Repository.Save(aggregate);
         }
 
         #endregion

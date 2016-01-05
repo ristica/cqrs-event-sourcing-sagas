@@ -9,16 +9,16 @@ namespace BankAccount.ProcessManager.Base
         #region Properties
 
         protected Guid SagaId { get; set; }
-        protected ISagaBus Bus { get; private set; }
-        protected ICommandStackRepository<Domain.CustomerDomainModel> Repository { get; private set; }
+        protected IBus Bus { get; private set; }
+        protected ICommandStackRepository Repository { get; private set; }
 
         #endregion
 
         #region C-Tor
 
         protected Saga(
-            ISagaBus bus, 
-            ICommandStackRepository<Domain.CustomerDomainModel> repository)
+            IBus bus, 
+            ICommandStackRepository repository)
         {
             if (bus == null)
             {

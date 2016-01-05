@@ -1,4 +1,5 @@
 ﻿using BankAccount.Commands;
+using BankAccount.Domain;
 using BankAccount.Infrastructure;
 using BankAccount.Infrastructure.Buses;
 using BankAccount.Infrastructure.Storage;
@@ -6,14 +7,12 @@ using BankAccount.ProcessManager.Base;
 
 namespace BankAccount.ProcessManager
 {
-    public class DeleteCustomerSaga : Saga,
-        IAmStartedBy<DeleteCustomerCommand>
+    public class MoneyTransferSaga : Saga,
+        IAmStartedBy<ChangeBalanceCommand>
     {
         #region C-Tor
 
-        public DeleteCustomerSaga(
-            IBus bus, 
-            ICommandStackRepository repository) 
+        public MoneyTransferSaga(IBus bus, ICommandStackRepository repository) 
             : base(bus, repository)
         {
         }
@@ -22,13 +21,14 @@ namespace BankAccount.ProcessManager
 
         #region Handling commands
 
-        public void Handle(DeleteCustomerCommand message)
+        public void Handle(ChangeBalanceCommand message)
         {
-            var aggregate = this.Repository.GetById<Domain.CustomerDomainModel>(message.Id);
-            aggregate.DeleteCustomer();
+            var aggregate = this.Repository.GetById<AccountDomainModel>(message.Id);
+            aggregate.ChangeBalance(message.Amount, message.Version);
             this.Repository.Save(aggregate);
         }
 
         #endregion
+
     }
 }

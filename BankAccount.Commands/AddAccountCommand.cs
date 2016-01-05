@@ -1,5 +1,6 @@
 ﻿using System;
 using BankAccount.Infrastructure.Commanding;
+using BankAccount.ValueTypes;
 
 namespace BankAccount.Commands
 {
@@ -7,12 +8,14 @@ namespace BankAccount.Commands
     {
         public Guid CustomerId { get; private set; }
         public string Currency { get; private set; }
+        public State AccountState { get; set; }
 
-        public AddAccountCommand(Guid id, int version, Guid customerId, string currency) 
+        public AddAccountCommand(Guid id, int version, Guid customerId, string currency, State acccountState) 
             : base(id, version)
         {
             this.Currency = currency;
             this.CustomerId = customerId;
+            this.AccountState = acccountState;
         }
     }
 }

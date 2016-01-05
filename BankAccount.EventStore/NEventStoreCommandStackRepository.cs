@@ -9,7 +9,7 @@ using EventStore;
 
 namespace BankAccount.EventStore
 {
-    public sealed class NEventStoreCommandStackRepository<T> : ICommandStackRepository<T> where T : AggregateRoot, new()
+    public sealed class NEventStoreCommandStackRepository : ICommandStackRepository
     {
         #region Fields
 
@@ -30,7 +30,7 @@ namespace BankAccount.EventStore
 
         #region ICommandStackRepository implementation
 
-        public void Save(AggregateRoot aggregate, int expectedVersion)
+        public void Save(AggregateRoot aggregate)
         {
             using (var scope = new TransactionScope())
             {
@@ -39,7 +39,7 @@ namespace BankAccount.EventStore
             }
         }
 
-        public T GetById(Guid id)
+        public T GetById<T>(Guid id) where T : AggregateRoot, new()
         {
             try
             {
@@ -65,7 +65,7 @@ namespace BankAccount.EventStore
 
                 return obj;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }

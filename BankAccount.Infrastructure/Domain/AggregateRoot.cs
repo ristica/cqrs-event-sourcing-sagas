@@ -6,7 +6,7 @@ using EventStore;
 
 namespace BankAccount.Infrastructure.Domain
 {
-    public abstract class AggregateRoot
+    public class AggregateRoot
     {
         #region Fields
 
@@ -18,13 +18,12 @@ namespace BankAccount.Infrastructure.Domain
 
         public Guid Id { get; set; }
         public int Version { get; set; }
-        //private int EventVersion { get; set; }
 
         #endregion
 
         #region C-Tor
 
-        protected AggregateRoot()
+        public AggregateRoot()
         {
             this._changes = new List<DomainEvent>();
         }

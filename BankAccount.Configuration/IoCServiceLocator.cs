@@ -34,7 +34,7 @@ namespace BankAccount.Configuration
             {
                 Bootstrapper.Initialize(Container);
 
-                SagaBus                 = _container.Resolve<ISagaBus>();
+                Bus                     = _container.Resolve<IBus>();
                 QueryStackRepository    = _container.Resolve<IQueryStackRepository>();
 
                 IsInitialized           = true;
@@ -46,7 +46,7 @@ namespace BankAccount.Configuration
         #region Properties
 
         public static IUnityContainer Container => _container;
-        public static ISagaBus SagaBus { get; }
+        public static IBus Bus { get; }
         public static IQueryStackRepository QueryStackRepository { get; }
 
         #endregion
@@ -56,10 +56,10 @@ namespace BankAccount.Configuration
     {
         public static void Initialize(IUnityContainer container)
         {
-            container.RegisterType <ISagaBus, SagaBus>();
+            container.RegisterType <IBus, Bus>();
 
             container.RegisterType <IQueryStackRepository, QueryStackRepository> ();
-            container.RegisterType(typeof(ICommandStackRepository<>), typeof(NEventStoreCommandStackRepository<>));
+            container.RegisterType <ICommandStackRepository, NEventStoreCommandStackRepository>();
 
             container.RegisterType <ICommandStackDatabase, CommandStackDatabase> ();
             container.RegisterType <IDatabase, Database>();
@@ -75,21 +75,26 @@ namespace BankAccount.Configuration
 
         private static void RegisterSagaHandlers(IUnityContainer container)
         {
-            var bus = container.Resolve<ISagaBus>();
+            var bus = container.Resolve<IBus>();
 
             bus.RegisterSaga<CreateCustomerSaga>();
             bus.RegisterSaga<ChangePersonDetailsSaga>();
             bus.RegisterSaga<ChangeContactDetailsSaga>();
             bus.RegisterSaga<ChangeAddressDetailsSaga>();
             bus.RegisterSaga<DeleteCustomerSaga>();
+
+            bus.RegisterSaga<AccountSaga>();
+            bus.RegisterSaga<MoneyTransferSaga>();
         }
 
         private static void RegisterDenormalizer(IUnityContainer container)
         {
-            var bus = container.Resolve<ISagaBus>();
+            var bus = container.Resolve<IBus>();
 
             bus.RegisterHandler<CreateCustomerDenormalizer>();
             bus.RegisterHandler<UpdateCustomerDenormalizer>();
+            bus.RegisterHandler<AccountDenormalizer>();
+            bus.RegisterHandler<MoneyTransferDenormalizer>();
         }
 
         private static IStoreEvents CreateEventStore(IDispatchCommits bus)

@@ -3,9 +3,9 @@ using BankAccount.Infrastructure.Domain;
 
 namespace BankAccount.Infrastructure.Storage
 {
-    public interface ICommandStackRepository<out T> where T : AggregateRoot, new()
+    public interface ICommandStackRepository
     {
-        void Save(AggregateRoot aggregate, int expectedVersion);
-        T GetById(Guid id);
+        void Save(AggregateRoot aggregate);
+        T GetById<T>(Guid id) where T : AggregateRoot, new();
     }
 }

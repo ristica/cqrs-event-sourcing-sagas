@@ -26,10 +26,10 @@ namespace BankAccount.Domain
         {
             ApplyChange(
                 new AccountAddedEvent { 
-                    AggregateId = aggregateId,
-                    CustomerId = customerId,
-                    Version = version,
-                    Currency = currency
+                    AggregateId     = aggregateId,
+                    CustomerId      = customerId,
+                    Version         = version,
+                    Currency        = currency
                 });
         }
 
@@ -40,9 +40,9 @@ namespace BankAccount.Domain
             ApplyChange(
                 new BalanceChangedEvent
                 {
-                    AggregateId = this.Id,
-                    Version = version,
-                    Amount = amount
+                    AggregateId     = this.Id,
+                    Version         = version,
+                    Amount          = amount
                 });
         }
 
@@ -53,9 +53,10 @@ namespace BankAccount.Domain
                 {
                     AggregateId     = this.Id,
                     Version         = this.Version,
-                    State           = State.Closed
+                    AccountState    = State.Closed
                 });
         }
+
         public void LockAccount()
         {
             ApplyChange(
@@ -63,7 +64,7 @@ namespace BankAccount.Domain
                 {
                     AggregateId     = this.Id,
                     Version         = this.Version,
-                    State           = State.Locked
+                    AccountState    = State.Locked
                 });
         }
 
@@ -74,7 +75,7 @@ namespace BankAccount.Domain
                 {
                     AggregateId     = this.Id,
                     Version         = this.Version,
-                    State           = State.Unlocked
+                    AccountState    = State.Unlocked
                 });
         }
 
@@ -82,38 +83,66 @@ namespace BankAccount.Domain
 
         #region Handles
 
-        //public void Handle(AccountAddedEvent e)
-        //{
-        //    this.Id             = e.AggregateId;
-        //    this.Version        = e.Version;
-        //    this.CustomerId     = e.CustomerId;
-        //    this.Currency       = e.Currency;
-        //    this.Balance        = 0;
-        //}
+        public void Handle(AccountAddedEvent e)
+        {
+            this.Id             = e.AggregateId;
+            this.Version        = e.Version;
+            this.CustomerId     = e.CustomerId;
+            this.Currency       = e.Currency;
+            this.Balance        = 0;
+            this.State          = e.AccountState;
+        }
 
-        //public void Handle(BalanceChangedEvent e)
-        //{
-        //    this.Version        = e.Version;
-        //    this.Balance        += e.Amount;
-        //}
+        public void Handle(BalanceChangedEvent e)
+        {
+            this.Version        = e.Version;
+            this.Balance        += e.Amount;
+        }
 
-        //public void Handle(AccountDeletedEvent e)
-        //{
-        //    this.Version        = e.Version;
-        //    this.State          = e.State;
-        //}
+        public void Handle(AccountDeletedEvent e)
+        {
+            this.Version        = e.Version;
+            this.State          = e.AccountState;
+        }
 
-        //public void Handle(AccountLockedEvent e)
-        //{
-        //    this.Version        = e.Version;
-        //    this.State          = e.State;
-        //}
+        public void Handle(AccountLockedEvent e)
+        {
+            this.Version        = e.Version;
+            this.State          = e.AccountState;
+        }
 
-        //public void Handle(AccountUnlockedEvent e)
-        //{
-        //    this.Version        = e.Version;
-        //    this.State          = e.State;
-        //}
+        public void Handle(AccountUnlockedEvent e)
+        {
+            this.Version        = e.Version;
+            this.State          = e.AccountState;
+        }
+
+        #endregion
+
+        #region Factory
+
+        public static class Factory
+        {
+            public static AccountDomainModel CreateNewInstance(
+                Guid id,
+                Guid customerId,
+                int version,
+                string currency,
+                State accountState)
+            {
+                var @event = new AccountAddedEvent
+                {
+                    AggregateId = id,
+                    CustomerId = customerId,
+                    Version = version,
+                    Currency = currency,
+                    AccountState = accountState
+                };
+                var account = new AccountDomainModel();
+                account.ApplyChange(@event);
+                return account;
+            }
+        }
 
         #endregion
     }

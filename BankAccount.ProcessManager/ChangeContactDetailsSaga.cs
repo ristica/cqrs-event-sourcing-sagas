@@ -12,8 +12,8 @@ namespace BankAccount.ProcessManager
         #region C-Tor
 
         public ChangeContactDetailsSaga(
-            ISagaBus bus, 
-            ICommandStackRepository<Domain.CustomerDomainModel> repository) 
+            IBus bus, 
+            ICommandStackRepository repository) 
             : base(bus, repository)
         {
         }
@@ -24,12 +24,12 @@ namespace BankAccount.ProcessManager
 
         public void Handle(ChangeContactDetailsCommand message)
         {
-            var aggregate = this.Repository.GetById(message.Id);
+            var aggregate = this.Repository.GetById<Domain.CustomerDomainModel>(message.Id);
             aggregate.ChangeContact(
                 message.Email,
                 message.Phone);
 
-            this.Repository.Save(aggregate, aggregate.Version);
+            this.Repository.Save(aggregate);
         }
 
         #endregion

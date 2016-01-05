@@ -12,13 +12,13 @@ namespace BankAccount.EventStore
         #region Fields
 
         //private readonly IEventBus _eventBus;
-        private readonly ISagaBus _bus;
+        private readonly IBus _bus;
 
         #endregion
 
         #region C-Tor
 
-        public CommitsDispatcher(ISagaBus us)
+        public CommitsDispatcher(IBus us)
         {
             this._bus = us;
         }
@@ -33,7 +33,6 @@ namespace BankAccount.EventStore
             {
                 foreach (var ev in commit.Events.Select(@event => Converter.ChangeTo(@event.Body, @event.Body.GetType())))
                 {
-                    //this._bus.Publish(ev);
                     this._bus.RaiseEvent(ev);
                 }
             }

@@ -46,12 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountSaga.cs" />
     <Compile Include="Base\Saga.cs" />
     <Compile Include="DeleteCustomerSaga.cs" />
     <Compile Include="ChangeAddressDetailsSaga.cs" />
     <Compile Include="ChangeContactDetailsSaga.cs" />
     <Compile Include="ChangePersonDetailsSaga.cs" />
     <Compile Include="CreateCustomerSaga.cs" />
+    <Compile Include="MoneyTransferSaga.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

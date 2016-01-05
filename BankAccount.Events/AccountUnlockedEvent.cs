@@ -5,6 +5,6 @@ namespace BankAccount.Events
 {
     public class AccountUnlockedEvent : DomainEvent
     {
-        public State State { get; set; }
+        public State AccountState { get; set; }
     }
 }

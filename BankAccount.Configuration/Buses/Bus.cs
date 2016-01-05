@@ -9,20 +9,12 @@ using Microsoft.Practices.Unity;
 
 namespace BankAccount.Configuration.Buses
 {
-    public sealed class SagaBus : ISagaBus
+    public sealed class Bus : IBus
     {
         #region Fields
 
         private static readonly IDictionary<Type, Type> RegisteredSagas = new Dictionary<Type, Type>();
         private static readonly IList<Type> RegisteredHandlers = new List<Type>();
-
-        #endregion
-
-        #region C-Tor
-
-        public SagaBus()
-        {
-        }
 
         #endregion
 

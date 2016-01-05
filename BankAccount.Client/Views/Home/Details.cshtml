@@ -40,7 +40,7 @@
         </tr>
         <tr>
             <td style="font-weight: bold;">@Html.DisplayNameFor(model => model.Dob)</td>
-            <td>@Html.DisplayFor(model => model.Dob)</td>
+            <td>@Model.Dob.ToShortDateString()</td>
         </tr>
     </table>
     <hr/>

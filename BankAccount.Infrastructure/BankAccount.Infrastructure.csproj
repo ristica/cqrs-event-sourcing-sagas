@@ -58,7 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buses\ISagaBus.cs" />
+    <Compile Include="Buses\IBus.cs" />
     <Compile Include="IAmStartedBy.cs" />
     <Compile Include="IHandleMessage.cs" />
     <Compile Include="Domain\AggregateRoot.cs" />

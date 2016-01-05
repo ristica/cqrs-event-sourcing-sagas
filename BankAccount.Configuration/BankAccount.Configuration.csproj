@@ -64,7 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buses\SagaBus.cs" />
+    <Compile Include="Buses\Bus.cs" />
     <Compile Include="IoCServiceLocator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

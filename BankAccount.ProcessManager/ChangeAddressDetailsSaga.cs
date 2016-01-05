@@ -12,8 +12,8 @@ namespace BankAccount.ProcessManager
         #region C-Tor
 
         public ChangeAddressDetailsSaga(
-            ISagaBus bus, 
-            ICommandStackRepository<Domain.CustomerDomainModel> repository) 
+            IBus bus, 
+            ICommandStackRepository repository) 
             : base(bus, repository)
         {
         }
@@ -24,7 +24,7 @@ namespace BankAccount.ProcessManager
 
         public void Handle(ChangeAddressDetailsCommand message)
         {
-            var aggregate = this.Repository.GetById(message.Id);
+            var aggregate = this.Repository.GetById<Domain.CustomerDomainModel>(message.Id);
             aggregate.ChangeAddress(
                 message.Street,
                 message.Hausnumber,
@@ -32,7 +32,7 @@ namespace BankAccount.ProcessManager
                 message.City,
                 message.State);
 
-            this.Repository.Save(aggregate, aggregate.Version);
+            this.Repository.Save(aggregate);
         }
 
         #endregion
