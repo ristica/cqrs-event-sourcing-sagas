@@ -32,20 +32,20 @@ namespace BankAccount.QueryStackDal
 
             return new DetailsBankAccountViewModel
             {
-                AggregateId = aggregateId,
-                Version = customer.Version,
-                LastName = customer.Person.LastName,
-                FirstName = customer.Person.FirstName,
-                IdCard = customer.Person.IdCard,
-                IdNumber = customer.Person.IdNumber,
-                Dob = customer.Person.Dob,
-                Phone = customer.Contact.PhoneNumber,
-                Email = customer.Contact.Email,
-                Street = customer.Address.Street,
-                Hausnumber = customer.Address.Hausnumber,
-                Zip = customer.Address.Zip,
-                State = customer.Address.State,
-                City = customer.Address.City
+                AggregateId             = aggregateId,
+                Version                 = customer.Version,
+                LastName                = customer.Person.LastName,
+                FirstName               = customer.Person.FirstName,
+                IdCard                  = customer.Person.IdCard,
+                IdNumber                = customer.Person.IdNumber,
+                Dob                     = customer.Person.Dob,
+                Phone                   = customer.Contact.PhoneNumber,
+                Email                   = customer.Contact.Email,
+                Street                  = customer.Address.Street,
+                Hausnumber              = customer.Address.Hausnumber,
+                Zip                     = customer.Address.Zip,
+                State                   = customer.Address.State,
+                City                    = customer.Address.City
             };
         }
 
@@ -60,10 +60,10 @@ namespace BankAccount.QueryStackDal
                     list.Add(
                         new AccountViewModel
                         {
-                            Currency = a.Currency,
-                            CustomerId = a.CustomerAggregateId,
-                            AggregateId = a.AggregateId,
-                            AccountState = a.AccountState
+                            Currency        = a.Currency,
+                            CustomerId      = a.CustomerAggregateId,
+                            AggregateId     = a.AggregateId,
+                            AccountState    = a.AccountState
                         });
                 }
                 return list;
@@ -82,9 +82,9 @@ namespace BankAccount.QueryStackDal
 
                 return new TransferViewModel
                 {
-                    AggregateId = model.AggregateId,
-                    CustomerId = model.CustomerAggregateId,
-                    Version = model.Version
+                    AggregateId         = model.AggregateId,
+                    CustomerId          = model.CustomerAggregateId,
+                    Version             = model.Version
                 };
             }
         }
@@ -103,9 +103,9 @@ namespace BankAccount.QueryStackDal
                 .Select(customer => 
                     new BankAccountViewModel
                         {
-                            FirstName = customer.Person.FirstName,
-                            LastName = customer.Person.LastName,
-                            Id = customer.Id
+                            FirstName       = customer.Person.FirstName,
+                            LastName        = customer.Person.LastName,
+                            Id              = customer.Id
                         })
                 .ToList();
         }
