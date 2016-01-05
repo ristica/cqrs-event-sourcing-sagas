@@ -10,8 +10,6 @@ namespace BankAccount.DbModel.Entities
         public Guid AggregateId { get; set; }
 
         public int Version { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public State CustomerState { get; set; }
     }
 }

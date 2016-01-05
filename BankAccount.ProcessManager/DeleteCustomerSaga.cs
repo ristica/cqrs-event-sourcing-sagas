@@ -6,12 +6,12 @@ using BankAccount.ProcessManager.Base;
 
 namespace BankAccount.ProcessManager
 {
-    public class ChangeContactDetailsSaga : Saga,
-        IAmStartedBy<ChangeContactDetailsCommand>
+    public class DeleteCustomerSaga : Saga,
+        IAmStartedBy<DeleteCustomerCommand>
     {
         #region C-Tor
 
-        public ChangeContactDetailsSaga(
+        public DeleteCustomerSaga(
             ISagaBus bus, 
             ICommandStackRepository<Domain.CustomerDomainModel> repository) 
             : base(bus, repository)
@@ -22,13 +22,10 @@ namespace BankAccount.ProcessManager
 
         #region Handling commands
 
-        public void Handle(ChangeContactDetailsCommand message)
+        public void Handle(DeleteCustomerCommand message)
         {
             var aggregate = this.Repository.GetById(message.Id);
-            aggregate.ChangeContact(
-                message.Email,
-                message.Phone);
-
+            aggregate.DeleteCustomer();
             this.Repository.Save(aggregate, aggregate.Version);
         }
 

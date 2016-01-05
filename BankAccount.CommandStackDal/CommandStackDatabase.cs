@@ -124,8 +124,6 @@ namespace BankAccount.CommandStackDal
                 {
                     AggregateId         = item.Id,
                     Version             = item.Version,
-                    FirstName           = item.Person.FirstName,
-                    LastName            = item.Person.LastName,
                     CustomerState       = State.Open
                 });
                 ctx.SaveChanges();
@@ -143,8 +141,6 @@ namespace BankAccount.CommandStackDal
                 }
 
                 entity.Version              = item.Version;
-                entity.FirstName            = item.Person.FirstName;
-                entity.LastName             = item.Person.LastName;
                 entity.CustomerState        = item.State;
 
                 ctx.Entry(entity).State     = EntityState.Modified;

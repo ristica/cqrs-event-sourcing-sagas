@@ -71,7 +71,7 @@ namespace BankAccount.Domain
                 });
         }
 
-        public void DeleteBankAccount()
+        public void DeleteCustomer()
         {
             ApplyChange(
                 new CustomerDeletedEvent

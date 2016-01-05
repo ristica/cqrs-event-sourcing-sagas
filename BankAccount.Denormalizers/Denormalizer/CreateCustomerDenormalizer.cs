@@ -16,8 +16,6 @@ namespace BankAccount.Denormalizers.Denormalizer
                 var c = new CustomerEntity
                 {
                     AggregateId = e.AggregateId,
-                    FirstName = e.Person.FirstName,
-                    LastName = e.Person.LastName,
                     Version = e.Version,
                     CustomerState = e.State
                 };

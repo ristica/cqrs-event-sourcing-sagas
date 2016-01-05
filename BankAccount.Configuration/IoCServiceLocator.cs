@@ -80,7 +80,8 @@ namespace BankAccount.Configuration
             bus.RegisterSaga<CreateCustomerSaga>();
             bus.RegisterSaga<ChangePersonDetailsSaga>();
             bus.RegisterSaga<ChangeContactDetailsSaga>();
-            bus.RegisterSaga<ChangeAddressDetailsSaga>(); 
+            bus.RegisterSaga<ChangeAddressDetailsSaga>();
+            bus.RegisterSaga<DeleteCustomerSaga>();
         }
 
         private static void RegisterDenormalizer(IUnityContainer container)

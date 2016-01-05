@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\Saga.cs" />
+    <Compile Include="DeleteCustomerSaga.cs" />
     <Compile Include="ChangeAddressDetailsSaga.cs" />
     <Compile Include="ChangeContactDetailsSaga.cs" />
     <Compile Include="ChangePersonDetailsSaga.cs" />

@@ -1,4 +1,8 @@
-﻿using BankAccount.Events;
+﻿using System;
+using System.Data.Entity;
+using System.Linq;
+using BankAccount.DbModel.ItemDb;
+using BankAccount.Events;
 using BankAccount.Infrastructure;
 
 namespace BankAccount.Denormalizers.Denormalizer
@@ -6,7 +10,8 @@ namespace BankAccount.Denormalizers.Denormalizer
     public class UpdateCustomerDenormalizer : 
         IHandleMessage<PersonChangedEvent>,
         IHandleMessage<ContactChangedEvent>,
-        IHandleMessage<AddressChangedEvent>
+        IHandleMessage<AddressChangedEvent>,
+        IHandleMessage<CustomerDeletedEvent>
     {
         public void Handle(PersonChangedEvent e)
         {
@@ -34,14 +39,32 @@ namespace BankAccount.Denormalizers.Denormalizer
         {
             //// we could save all chabges if we do CRUD
             //// but we are using ES 
-            /// // ...
+            //// ...
         }
 
         public void Handle(AddressChangedEvent message)
         {
             //// we could save all chabges if we do CRUD
             //// but we are using ES 
-            /// // ...
+            //// ...
+        }
+
+        public void Handle(CustomerDeletedEvent message)
+        {
+            using (var ctx = new BankAccountDbContext())
+            {
+                var entity = ctx.CustomerSet.SingleOrDefault(cust => cust.AggregateId == message.AggregateId);
+                if (entity == null)
+                {
+                    throw new ArgumentNullException($"customer");
+                }
+
+                entity.CustomerState = message.State;
+                entity.Version = message.Version;
+
+                ctx.Entry(entity).State = EntityState.Modified;
+                ctx.SaveChanges();
+            }
         }
     }
 }

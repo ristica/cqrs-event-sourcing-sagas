@@ -100,15 +100,44 @@ namespace BankAccount.QueryStackDal
 
         public IEnumerable<BankAccountViewModel> GetCustomers()
         {
+            var customers = new List<BankAccountViewModel>();
+            List<Guid> aggregates;
+
             using (var ctx = new BankAccountDbContext())
             {
-                return ctx.CustomerSet.Select(e => new BankAccountViewModel
-                {
-                    Id                  = e.AggregateId,
-                    FirstName           = e.FirstName,
-                    LastName            = e.LastName
-                }).ToList();
+                aggregates = ctx.CustomerSet.Select(c => c.AggregateId).ToList();
             }
+
+            foreach (var id in aggregates)
+            {
+                var customer = new Domain.CustomerDomainModel();
+                var latestSnapshot = this._eventStore.Advanced.GetSnapshot(id, int.MaxValue);
+                IEnumerable<Commit> commits;
+                if (latestSnapshot?.Payload != null)
+                {
+                    customer = (Domain.CustomerDomainModel)Convert.ChangeType(latestSnapshot.Payload, latestSnapshot.Payload.GetType());
+                    commits = this._eventStore.Advanced.GetFrom(id, latestSnapshot.StreamRevision + 1, int.MaxValue).ToList();
+                }
+                else
+                {
+                    commits = this._eventStore.Advanced.GetFrom(id, 0, int.MaxValue).ToList();
+                }
+
+                foreach (var c in commits)
+                {
+                    customer.LoadsFromHistory(c.Events);
+                }
+
+                customers.Add(
+                    new BankAccountViewModel
+                    {
+                        FirstName = customer.Person.FirstName,
+                        LastName = customer.Person.LastName,
+                        Id = customer.Id
+                    });
+            }
+
+            return customers;
         }
     }
 }
