@@ -27,13 +27,13 @@ namespace BankAccount.Domain
             ApplyChange(
                 new PersonChangedEvent
                 {
-                    AggregateId = this.Id,
-                    Version = this.Version,
-                    FirstName = firstName,
-                    LastName = lastName,
-                    IdCard = idCard,
-                    IdNumber = idNumber,
-                    State = State.Open
+                    AggregateId         = this.Id,
+                    Version             = this.Version,
+                    FirstName           = firstName,
+                    LastName            = lastName,
+                    IdCard              = idCard,
+                    IdNumber            = idNumber,
+                    State               = State.Open
                 });
         }
 
@@ -44,10 +44,10 @@ namespace BankAccount.Domain
             ApplyChange(
                 new ContactChangedEvent
                 {
-                    AggregateId = this.Id,
-                    Version = this.Version,
-                    Email = email,
-                    Phone = phone
+                    AggregateId         = this.Id,
+                    Version             = this.Version,
+                    Email               = email,
+                    Phone               = phone
                 });
         }
 
@@ -61,13 +61,13 @@ namespace BankAccount.Domain
             ApplyChange(
                 new AddressChangedEvent
                 {
-                    AggregateId = this.Id,
-                    Version = this.Version,
-                    Street = street,
-                    Hausnumber = hausnumber,
-                    Zip = zip,
-                    City = city,
-                    State = state
+                    AggregateId         = this.Id,
+                    Version             = this.Version,
+                    Street              = street,
+                    Hausnumber          = hausnumber,
+                    Zip                 = zip,
+                    City                = city,
+                    State               = state
                 });
         }
 
@@ -76,9 +76,9 @@ namespace BankAccount.Domain
             ApplyChange(
                 new CustomerDeletedEvent
                 {
-                    AggregateId     = this.Id,
-                    Version         = this.Version,
-                    State           = State.Closed
+                    AggregateId         = this.Id,
+                    Version             = this.Version,
+                    State               = State.Closed
                 });
         }
 
@@ -88,44 +88,44 @@ namespace BankAccount.Domain
 
         public void Handle(CustomerCreatedEvent e)
         {
-            this.Id = e.AggregateId;
-            this.Version = e.Version;
-            this.Person = e.Person;
-            this.Contact = e.Contact;
-            this.Address = e.Address;
-            this.CustomerState = e.State;
+            this.Id                     = e.AggregateId;
+            this.Version                = e.Version;
+            this.Person                 = e.Person;
+            this.Contact                = e.Contact;
+            this.Address                = e.Address;
+            this.CustomerState          = e.State;
         }
 
         public void Handle(PersonChangedEvent e)
         {
-            this.Version = e.Version;
-            this.Person.FirstName = e.FirstName;
-            this.Person.LastName = e.LastName;
-            this.Person.IdCard = e.IdCard;
-            this.Person.IdNumber = e.IdNumber;
+            this.Version                = e.Version;
+            this.Person.FirstName       = e.FirstName;
+            this.Person.LastName        = e.LastName;
+            this.Person.IdCard          = e.IdCard;
+            this.Person.IdNumber        = e.IdNumber;
         }
 
         public void Handle(ContactChangedEvent e)
         {
-            this.Version = e.Version;
-            this.Contact.Email = e.Email;
-            this.Contact.PhoneNumber = e.Phone;
+            this.Version                = e.Version;
+            this.Contact.Email          = e.Email;
+            this.Contact.PhoneNumber    = e.Phone;
         }
 
         public void Handle(AddressChangedEvent e)
         {
-            this.Version = e.Version;
-            this.Address.Street = e.Street;
-            this.Address.Hausnumber = e.Hausnumber;
-            this.Address.Zip = e.Zip;
-            this.Address.City = e.City;
-            this.Address.State = e.State;
+            this.Version                = e.Version;
+            this.Address.Street         = e.Street;
+            this.Address.Hausnumber     = e.Hausnumber;
+            this.Address.Zip            = e.Zip;
+            this.Address.City           = e.City;
+            this.Address.State          = e.State;
         }
 
         public void Handle(CustomerDeletedEvent e)
         {
-            this.Version = e.Version;
-            this.CustomerState = e.State;
+            this.Version                = e.Version;
+            this.CustomerState          = e.State;
         }
 
         #endregion
@@ -152,30 +152,30 @@ namespace BankAccount.Domain
             {
                 var @event = new CustomerCreatedEvent
                 {
-                    AggregateId = id,
-                    Version = version,
+                    AggregateId         = id,
+                    Version             = version,
                     Person = new Person
                     {
-                        FirstName = firstName,
-                        LastName = lastName,
-                        IdCard = idCard,
-                        IdNumber = idNumber,
-                        Dob = dob
+                        FirstName       = firstName,
+                        LastName        = lastName,
+                        IdCard          = idCard,
+                        IdNumber        = idNumber,
+                        Dob             = dob
                     },
                     Contact = new Contact
                     {
-                        Email = email,
-                        PhoneNumber = phone
+                        Email           = email,
+                        PhoneNumber     = phone
                     },
                     Address = new Address
                     {
-                        Street = street,
-                        Hausnumber = hausnumber,
-                        State = state,
-                        City = city,
-                        Zip = zip
+                        Street          = street,
+                        Hausnumber      = hausnumber,
+                        State           = state,
+                        City            = city,
+                        Zip             = zip
                     },
-                    State = State.Open
+                    State               = State.Open
                 };
                 var ba = new CustomerDomainModel();
                 ba.ApplyChange(@event);

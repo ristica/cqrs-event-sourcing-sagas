@@ -11,7 +11,6 @@ namespace BankAccount.EventStore
     {
         #region Fields
 
-        //private readonly IEventBus _eventBus;
         private readonly IBus _bus;
 
         #endregion

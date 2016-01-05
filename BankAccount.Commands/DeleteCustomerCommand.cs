@@ -5,7 +5,9 @@ namespace BankAccount.Commands
 {
     public class DeleteCustomerCommand : Command
     {
-        public DeleteCustomerCommand(Guid id, int version) 
+        public DeleteCustomerCommand(
+            Guid id, 
+            int version) 
             : base(id, version)
         {
         }

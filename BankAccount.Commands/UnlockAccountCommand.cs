@@ -5,7 +5,9 @@ namespace BankAccount.Commands
 {
     public class UnlockAccountCommand : Command
     {
-        public UnlockAccountCommand(Guid id, int version) 
+        public UnlockAccountCommand(
+            Guid id, 
+            int version) 
             : base(id, version)
         {
         }

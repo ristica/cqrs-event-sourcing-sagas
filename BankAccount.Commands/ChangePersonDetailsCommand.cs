@@ -10,7 +10,13 @@ namespace BankAccount.Commands
         public string IdCard { get; private set; }
         public string IdNumber { get; private set; }
 
-        public ChangePersonDetailsCommand(Guid id, int version, string firstName, string lastname, string idCard, string idNumber) 
+        public ChangePersonDetailsCommand(
+            Guid id, 
+            int version, 
+            string firstName, 
+            string lastname, 
+            string idCard, 
+            string idNumber) 
             : base(id, version)
         {
             this.FirstName      = firstName;

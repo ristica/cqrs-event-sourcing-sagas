@@ -13,8 +13,6 @@ namespace BankAccount.CommandStackDal
 {
     public sealed class CommandStackDatabase : ICommandStackDatabase
     {
-        //private static readonly List<CustomerDomainModel> Cache = new List<CustomerDomainModel>();
-
         #region ICommandStackDatabase implementation
 
         public void Save(CustomerDomainModel item)
@@ -52,65 +50,6 @@ namespace BankAccount.CommandStackDal
                 this.UpdateAccount(item);
             }
         }
-
-        //public void DeleteCustomer(Guid id)
-        //{
-        //    using (var ctx = new BankAccountDbContext())
-        //    {
-        //        var entity = ctx.CustomerSet.SingleOrDefault(b => b.AggregateId == id);
-        //        if (entity == null)
-        //        {
-        //            throw new AggregateNotFoundException($"Aggregate with the id {id} was not found");
-        //        }
-        //        entity.CustomerState = State.Closed;
-
-        //        ctx.Entry(entity).State = EntityState.Modified;
-        //        ctx.SaveChanges();
-        //    }
-        //}
-
-        //public void DeleteAccount(Guid id)
-        //{
-        //    using (var ctx = new BankAccountDbContext())
-        //    {
-        //        var entity = ctx.AccountSet.SingleOrDefault(b => b.AggregateId == id);
-        //        if (entity == null)
-        //        {
-        //            throw new AggregateNotFoundException($"Aggregate with the id {id} was not found");
-        //        }
-        //        entity.AccountState = State.Closed;
-
-        //        ctx.Entry(entity).State = EntityState.Modified;
-        //        ctx.SaveChanges();
-        //    }
-        //}
-
-        //public void AddToCache(CustomerDomainModel ba)
-        //{
-        //    var acc = Cache.SingleOrDefault(b => b.Id == ba.Id);
-        //    if (acc == null)
-        //    {
-        //        Cache.Add(ba);
-        //    }
-        //    else
-        //    {
-        //        Cache.Remove(acc);
-        //        Cache.Add(ba);
-        //    }
-        //}
-
-        //public void UpdateFromCache()
-        //{
-        //    if (!Cache.Any())
-        //        return;
-
-        //    foreach (var entity in Cache)
-        //    {
-        //        this.UpdateCustomer(entity);
-        //    }
-
-        //    Cache.Clear();
-        //}
 
         #endregion
 

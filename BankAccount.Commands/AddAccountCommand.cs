@@ -8,14 +8,19 @@ namespace BankAccount.Commands
     {
         public Guid CustomerId { get; private set; }
         public string Currency { get; private set; }
-        public State AccountState { get; set; }
+        public State AccountState { get; private set; }
 
-        public AddAccountCommand(Guid id, int version, Guid customerId, string currency, State acccountState) 
+        public AddAccountCommand(
+            Guid id, 
+            int version, 
+            Guid customerId, 
+            string currency, 
+            State acccountState) 
             : base(id, version)
         {
-            this.Currency = currency;
-            this.CustomerId = customerId;
-            this.AccountState = acccountState;
+            this.Currency           = currency;
+            this.CustomerId         = customerId;
+            this.AccountState       = acccountState;
         }
     }
 }

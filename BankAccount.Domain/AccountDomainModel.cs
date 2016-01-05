@@ -18,21 +18,6 @@ namespace BankAccount.Domain
 
         #region Public methods called by command handlers
 
-        public void CreateNewAccount(
-            Guid aggregateId,
-            Guid customerId,
-            int version,
-            string currency)
-        {
-            ApplyChange(
-                new AccountAddedEvent { 
-                    AggregateId     = aggregateId,
-                    CustomerId      = customerId,
-                    Version         = version,
-                    Currency        = currency
-                });
-        }
-
         public void ChangeBalance(
             int amount,
             int version)
@@ -85,36 +70,36 @@ namespace BankAccount.Domain
 
         public void Handle(AccountAddedEvent e)
         {
-            this.Id             = e.AggregateId;
-            this.Version        = e.Version;
-            this.CustomerId     = e.CustomerId;
-            this.Currency       = e.Currency;
-            this.Balance        = 0;
-            this.State          = e.AccountState;
+            this.Id                 = e.AggregateId;
+            this.Version            = e.Version;
+            this.CustomerId         = e.CustomerId;
+            this.Currency           = e.Currency;
+            this.Balance            = 0;
+            this.State              = e.AccountState;
         }
 
         public void Handle(BalanceChangedEvent e)
         {
-            this.Version        = e.Version;
-            this.Balance        += e.Amount;
+            this.Version            = e.Version;
+            this.Balance            += e.Amount;
         }
 
         public void Handle(AccountDeletedEvent e)
         {
-            this.Version        = e.Version;
-            this.State          = e.AccountState;
+            this.Version            = e.Version;
+            this.State              = e.AccountState;
         }
 
         public void Handle(AccountLockedEvent e)
         {
-            this.Version        = e.Version;
-            this.State          = e.AccountState;
+            this.Version            = e.Version;
+            this.State              = e.AccountState;
         }
 
         public void Handle(AccountUnlockedEvent e)
         {
-            this.Version        = e.Version;
-            this.State          = e.AccountState;
+            this.Version            = e.Version;
+            this.State              = e.AccountState;
         }
 
         #endregion
@@ -132,11 +117,11 @@ namespace BankAccount.Domain
             {
                 var @event = new AccountAddedEvent
                 {
-                    AggregateId = id,
-                    CustomerId = customerId,
-                    Version = version,
-                    Currency = currency,
-                    AccountState = accountState
+                    AggregateId         = id,
+                    CustomerId          = customerId,
+                    Version             = version,
+                    Currency            = currency,
+                    AccountState        = accountState
                 };
                 var account = new AccountDomainModel();
                 account.ApplyChange(@event);

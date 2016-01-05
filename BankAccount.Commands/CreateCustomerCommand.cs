@@ -8,7 +8,6 @@ namespace BankAccount.Commands
     {
         public Contact Contact { get; private set; }
         public Person Person { get; private set; }
-        //public Money Money { get; private set; }
         public Address Address { get; private set; }
 
         public CreateCustomerCommand(
@@ -21,7 +20,6 @@ namespace BankAccount.Commands
             DateTime dob, 
             string email,
             string phone,
-            //string currency,
             string street,
             string zip,
             string hausnumber,
@@ -42,11 +40,6 @@ namespace BankAccount.Commands
                 Email           = email,
                 PhoneNumber     = phone
             };
-            //this.Money = new Money
-            //{
-            //    Balance         = 0,
-            //    Currency        = currency
-            //};
             this.Address = new Address
             {
                 State           = state,

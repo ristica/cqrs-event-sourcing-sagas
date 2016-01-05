@@ -20,7 +20,9 @@ namespace BankAccount.EventStore
 
         #region C-Tor
 
-        public NEventStoreCommandStackRepository(IStoreEvents eventStore, ICommandStackDatabase database)
+        public NEventStoreCommandStackRepository(
+            IStoreEvents eventStore, 
+            ICommandStackDatabase database)
         {
             this._eventStore = eventStore;
             this._database = database;
@@ -99,10 +101,6 @@ namespace BankAccount.EventStore
             }
 
             aggregate.MarkChangesAsCommitted();
-
-            //// eventually save the current state to the db
-            //// as we did it before :)
-            //this._database.UpdateFromCache();
         }
 
         #endregion

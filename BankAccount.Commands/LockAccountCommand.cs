@@ -5,7 +5,9 @@ namespace BankAccount.Commands
 {
     public class LockAccountCommand : Command
     {
-        public LockAccountCommand(Guid id, int version) 
+        public LockAccountCommand(
+            Guid id, 
+            int version) 
             : base(id, version)
         {
         }

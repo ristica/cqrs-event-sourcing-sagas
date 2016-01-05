@@ -11,7 +11,14 @@ namespace BankAccount.Commands
         public string City { get; private set; }
         public string State { get; private set; }
 
-        public ChangeAddressDetailsCommand(Guid id, int version, string street, string zip, string hausnumber, string city, string state) 
+        public ChangeAddressDetailsCommand(
+            Guid id, 
+            int version, 
+            string street, 
+            string zip, 
+            string hausnumber, 
+            string city, 
+            string state) 
             : base(id, version)
         {
             this.City           = city;

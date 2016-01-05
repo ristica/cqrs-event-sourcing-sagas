@@ -8,7 +8,11 @@ namespace BankAccount.Commands
         public string Email { get; private set; }
         public string Phone { get; private set; }
 
-        public ChangeContactDetailsCommand(Guid id, int version, string email, string phone) 
+        public ChangeContactDetailsCommand(
+            Guid id, 
+            int version, 
+            string email, 
+            string phone) 
             : base(id, version)
         {
             this.Email = email;
