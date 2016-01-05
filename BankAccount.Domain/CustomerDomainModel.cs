@@ -9,10 +9,10 @@ namespace BankAccount.Domain
     {
         #region Properties
 
-        public Person Person { get; set; }
-        public Contact Contact { get; set; }
-        public Address Address { get; set; }
-        public State State { get; set; }
+        public Person Person { get; private set; }
+        public Contact Contact { get; private set; }
+        public Address Address { get; private set; }
+        public State State { get; private set; }
 
         #endregion
 
