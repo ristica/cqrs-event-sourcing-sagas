@@ -9,10 +9,10 @@ namespace BankAccount.Domain
     {
         #region Properties
 
-        public Guid CustomerId { get; set; }
-        public string Currency { get; set; }
-        public int Balance { get; set; }
-        public State State { get; set; }
+        public Guid CustomerId { get; private set; }
+        public string Currency { get; private set; }
+        public int Balance { get; private set; }
+        public State State { get; private set; }
 
         #endregion
 
@@ -142,6 +142,26 @@ namespace BankAccount.Domain
                 account.ApplyChange(@event);
                 return account;
             }
+        }
+
+        #endregion
+
+        #region Identity Management
+
+        public override bool Equals(object obj)
+        {
+            if (this == obj)
+                return true;
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+            var other = (AccountDomainModel)obj;
+
+            return Id == other.Id && CustomerId == other.CustomerId && Currency == other.Currency && State == other.State;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
 
         #endregion

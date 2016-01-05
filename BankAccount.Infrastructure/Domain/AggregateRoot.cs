@@ -16,19 +16,21 @@ namespace BankAccount.Infrastructure.Domain
 
         #region Properties
 
-        public Guid Id { get; set; }
+        public Guid Id { get; protected set; }
         public int Version { get; set; }
 
         #endregion
 
         #region C-Tor
 
-        public AggregateRoot()
+        protected AggregateRoot()
         {
             this._changes = new List<DomainEvent>();
         }
 
         #endregion
+
+        #region Aggregate's methods
 
         public IEnumerable<DomainEvent> GetUncommittedChanges()
         {
@@ -76,5 +78,7 @@ namespace BankAccount.Infrastructure.Domain
                 throw new ArgumentNullException($"@event is not of type EventMessage");
             }
         }
+
+        #endregion
     }
 }
