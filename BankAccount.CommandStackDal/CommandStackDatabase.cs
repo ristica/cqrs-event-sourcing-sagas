@@ -141,7 +141,7 @@ namespace BankAccount.CommandStackDal
                 }
 
                 entity.Version              = item.Version;
-                entity.CustomerState        = item.State;
+                entity.CustomerState        = item.CustomerState;
 
                 ctx.Entry(entity).State     = EntityState.Modified;
                 ctx.SaveChanges();

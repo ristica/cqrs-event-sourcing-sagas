@@ -12,7 +12,7 @@ namespace BankAccount.Domain
         public Person Person { get; private set; }
         public Contact Contact { get; private set; }
         public Address Address { get; private set; }
-        public State State { get; private set; }
+        public State CustomerState { get; private set; }
 
         #endregion
 
@@ -93,7 +93,7 @@ namespace BankAccount.Domain
             this.Person = e.Person;
             this.Contact = e.Contact;
             this.Address = e.Address;
-            this.State = e.State;
+            this.CustomerState = e.State;
         }
 
         public void Handle(PersonChangedEvent e)
@@ -125,7 +125,7 @@ namespace BankAccount.Domain
         public void Handle(CustomerDeletedEvent e)
         {
             this.Version = e.Version;
-            this.State = e.State;
+            this.CustomerState = e.State;
         }
 
         #endregion
@@ -195,7 +195,7 @@ namespace BankAccount.Domain
                 return false;
             var other = (CustomerDomainModel)obj;
 
-            return Id == other.Id && Person == other.Person && Contact == other.Contact && Address == other.Address && State == other.State;
+            return Id == other.Id && Person == other.Person && Contact == other.Contact && Address == other.Address && CustomerState == other.CustomerState;
         }
 
         public override int GetHashCode()
