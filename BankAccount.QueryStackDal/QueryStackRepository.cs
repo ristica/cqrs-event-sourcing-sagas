@@ -15,12 +15,16 @@ namespace BankAccount.QueryStackDal
 
         #endregion
 
-        #region IQueryStackRepository implementation
+        #region C-Tor
 
         public QueryStackRepository(IStoreEvents eventStore)
         {
             _eventStore = eventStore;
         }
+
+        #endregion
+
+        #region IQueryStackRepository implementation
 
         public DetailsBankAccountViewModel GetCustomerById(Guid aggregateId)
         {
