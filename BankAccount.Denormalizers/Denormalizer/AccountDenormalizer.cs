@@ -2,6 +2,7 @@
 using BankAccount.Denormalizers.Dal;
 using BankAccount.Events;
 using BankAccount.Infrastructure;
+using Microsoft.Practices.Unity;
 
 namespace BankAccount.Denormalizers.Denormalizer
 {
@@ -11,11 +12,11 @@ namespace BankAccount.Denormalizers.Denormalizer
         IHandleMessage<AccountUnlockedEvent>,
         IHandleMessage<AccountDeletedEvent>
     {
-        private readonly AccountDatabase _db;
+        private readonly IDatabase<AccountEntity> _db;
 
-        public AccountDenormalizer()
+        public AccountDenormalizer([Dependency("Account")] IDatabase<AccountEntity> db)
         {
-            this._db = new AccountDatabase();
+            this._db = db;
         }
 
         public void Handle(AccountAddedEvent message)

@@ -2,17 +2,18 @@
 using BankAccount.Denormalizers.Dal;
 using BankAccount.Events;
 using BankAccount.Infrastructure;
+using Microsoft.Practices.Unity;
 
 namespace BankAccount.Denormalizers.Denormalizer
 {
     public class CreateCustomerDenormalizer : 
         IHandleMessage<CustomerCreatedEvent>
     {
-        private readonly CustomerDatabase _db;
+        private readonly IDatabase<CustomerEntity> _db;
 
-        public CreateCustomerDenormalizer()
+        public CreateCustomerDenormalizer([Dependency("Customer")]  IDatabase<CustomerEntity> db)
         {
-            this._db = new CustomerDatabase();
+            this._db = db;
         }
 
         public void Handle(CustomerCreatedEvent e)

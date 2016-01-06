@@ -1,6 +1,8 @@
-﻿using BankAccount.Denormalizers.Dal;
+﻿using BankAccount.DbModel.Entities;
+using BankAccount.Denormalizers.Dal;
 using BankAccount.Events;
 using BankAccount.Infrastructure;
+using Microsoft.Practices.Unity;
 
 namespace BankAccount.Denormalizers.Denormalizer
 {
@@ -10,11 +12,11 @@ namespace BankAccount.Denormalizers.Denormalizer
         IHandleMessage<AddressChangedEvent>,
         IHandleMessage<CustomerDeletedEvent>
     {
-        private readonly CustomerDatabase _db;
+        private readonly IDatabase<CustomerEntity> _db;
 
-        public UpdateCustomerDenormalizer()
+        public UpdateCustomerDenormalizer([Dependency("Customer")]  IDatabase<CustomerEntity> db)
         {
-            this._db = new CustomerDatabase();
+            this._db = db;
         }
 
         public void Handle(PersonChangedEvent e)
