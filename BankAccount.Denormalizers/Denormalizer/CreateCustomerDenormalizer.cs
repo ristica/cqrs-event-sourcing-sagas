@@ -8,11 +8,11 @@ namespace BankAccount.Denormalizers.Denormalizer
     public class CreateCustomerDenormalizer : 
         IHandleMessage<CustomerCreatedEvent>
     {
-        private readonly IDatabase _db;
+        private readonly CustomerDatabase _db;
 
-        public CreateCustomerDenormalizer(IDatabase db)
+        public CreateCustomerDenormalizer()
         {
-            this._db = db;
+            this._db = new CustomerDatabase();
         }
 
         public void Handle(CustomerCreatedEvent e)

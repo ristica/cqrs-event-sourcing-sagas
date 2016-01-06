@@ -11,11 +11,11 @@ namespace BankAccount.Denormalizers.Denormalizer
         IHandleMessage<AccountUnlockedEvent>,
         IHandleMessage<AccountDeletedEvent>
     {
-        private readonly IDatabase _db;
+        private readonly AccountDatabase _db;
 
-        public AccountDenormalizer(IDatabase db)
+        public AccountDenormalizer()
         {
-            this._db = db;
+            this._db = new AccountDatabase();
         }
 
         public void Handle(AccountAddedEvent message)
@@ -33,17 +33,17 @@ namespace BankAccount.Denormalizers.Denormalizer
 
         public void Handle(AccountLockedEvent message)
         {
-            this._db.UpdateAccount(message.AggregateId, message.AccountState, message.Version);
+            this._db.Update(message.AggregateId, message.AccountState, message.Version);
         }
 
         public void Handle(AccountUnlockedEvent message)
         {
-            this._db.UpdateAccount(message.AggregateId, message.AccountState, message.Version);
+            this._db.Update(message.AggregateId, message.AccountState, message.Version);
         }
 
         public void Handle(AccountDeletedEvent message)
         {
-            this._db.UpdateAccount(message.AggregateId, message.AccountState, message.Version);
+            this._db.Update(message.AggregateId, message.AccountState, message.Version);
         }
     }
 }

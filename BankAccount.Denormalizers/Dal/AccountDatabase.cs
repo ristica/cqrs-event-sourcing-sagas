@@ -7,19 +7,8 @@ using BankAccount.ValueTypes;
 
 namespace BankAccount.Denormalizers.Dal
 {
-    public sealed class Database : IDatabase
+    public sealed class AccountDatabase : IDatabase<AccountEntity>
     {
-        #region ICommandStackDatabase implementation
-
-        public void Create(CustomerEntity item)
-        {
-            using (var ctx = new BankAccountDbContext())
-            {
-                ctx.CustomerSet.Add(item);
-                ctx.SaveChanges();
-            }
-        }
-
         public void Create(AccountEntity item)
         {
             using (var ctx = new BankAccountDbContext())
@@ -29,7 +18,7 @@ namespace BankAccount.Denormalizers.Dal
             }
         }
 
-        public void UpdateAccount(Guid aggregateId, State accountState, int version)
+        public void Update(Guid aggregateId, State state, int version)
         {
             using (var ctx = new BankAccountDbContext())
             {
@@ -46,31 +35,11 @@ namespace BankAccount.Denormalizers.Dal
                 }
 
                 entity.Version = version;
-                entity.AccountState = accountState;
+                entity.AccountState = state;
 
                 ctx.Entry(entity).State = EntityState.Modified;
                 ctx.SaveChanges();
             }
         }
-
-        public void UpdateCustomer(Guid aggregateId, State customerState, int version)
-        {
-            using (var ctx = new BankAccountDbContext())
-            {
-                var entity = ctx.CustomerSet.SingleOrDefault(cust => cust.AggregateId == aggregateId);
-                if (entity == null)
-                {
-                    throw new ArgumentNullException($"Customer entity not found");
-                }
-
-                entity.CustomerState = customerState;
-                entity.Version = version;
-
-                ctx.Entry(entity).State = EntityState.Modified;
-                ctx.SaveChanges();
-            }
-        }
-
-        #endregion
     }
 }

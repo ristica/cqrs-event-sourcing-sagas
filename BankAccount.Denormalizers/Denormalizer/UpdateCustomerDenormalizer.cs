@@ -1,8 +1,4 @@
-﻿using System;
-using System.Data.Entity;
-using System.Linq;
-using BankAccount.DbModel.ItemDb;
-using BankAccount.Denormalizers.Dal;
+﻿using BankAccount.Denormalizers.Dal;
 using BankAccount.Events;
 using BankAccount.Infrastructure;
 
@@ -14,11 +10,11 @@ namespace BankAccount.Denormalizers.Denormalizer
         IHandleMessage<AddressChangedEvent>,
         IHandleMessage<CustomerDeletedEvent>
     {
-        private readonly IDatabase _db;
+        private readonly CustomerDatabase _db;
 
-        public UpdateCustomerDenormalizer(IDatabase db)
+        public UpdateCustomerDenormalizer()
         {
-            this._db = db;
+            this._db = new CustomerDatabase();
         }
 
         public void Handle(PersonChangedEvent e)
@@ -44,7 +40,7 @@ namespace BankAccount.Denormalizers.Denormalizer
 
         public void Handle(CustomerDeletedEvent message)
         {
-            this._db.UpdateCustomer(message.AggregateId, message.State, message.Version);
+            this._db.Update(message.AggregateId, message.State, message.Version);
         }
     }
 }
