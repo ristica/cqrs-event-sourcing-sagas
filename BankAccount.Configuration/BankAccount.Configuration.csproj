@@ -72,10 +72,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BankAccount.CommandStackDal\BankAccount.CommandStackDal.csproj">
-      <Project>{00e4f0c6-6135-4c03-ad6d-7da42d1aefa4}</Project>
-      <Name>BankAccount.CommandStackDal</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BankAccount.Denormalizers\BankAccount.Denormalizers.csproj">
       <Project>{4dbd4b78-d84f-477f-ae8a-6c547351d420}</Project>
       <Name>BankAccount.Denormalizers</Name>

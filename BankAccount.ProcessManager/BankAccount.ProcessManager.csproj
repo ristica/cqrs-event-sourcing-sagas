@@ -57,10 +57,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BankAccount.CommandStackDal\BankAccount.CommandStackDal.csproj">
-      <Project>{00e4f0c6-6135-4c03-ad6d-7da42d1aefa4}</Project>
-      <Name>BankAccount.CommandStackDal</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BankAccount.Commands\BankAccount.Commands.csproj">
       <Project>{23b15498-75b1-4567-804d-6dc09b940c08}</Project>
       <Name>BankAccount.Commands</Name>

@@ -46,12 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Db\Database.cs" />
-    <Compile Include="Db\IDatabase.cs" />
+    <Compile Include="Dal\Database.cs" />
+    <Compile Include="Dal\IDatabase.cs" />
     <Compile Include="Denormalizer\AccountDenormalizer.cs" />
     <Compile Include="Denormalizer\MoneyTransferDenormalizer.cs" />
     <Compile Include="Denormalizer\UpdateCustomerDenormalizer.cs" />
     <Compile Include="Denormalizer\CreateCustomerDenormalizer.cs" />
+    <Compile Include="Exceptions\AggregateNotFoundException.cs" />
+    <Compile Include="Exceptions\UnregisteredDomainEventException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

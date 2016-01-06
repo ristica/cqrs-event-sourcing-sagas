@@ -1,7 +1,5 @@
-﻿using BankAccount.CommandStackDal;
-using BankAccount.CommandStackDal.Abstraction;
-using BankAccount.Configuration.Buses;
-using BankAccount.Denormalizers.Db;
+﻿using BankAccount.Configuration.Buses;
+using BankAccount.Denormalizers.Dal;
 using BankAccount.Denormalizers.Denormalizer;
 using BankAccount.EventStore;
 using BankAccount.Infrastructure.Buses;
@@ -61,8 +59,7 @@ namespace BankAccount.Configuration
             container.RegisterType <IQueryStackRepository, QueryStackRepository> ();
             container.RegisterType <ICommandStackRepository, NEventStoreCommandStackRepository>();
 
-            container.RegisterType <ICommandStackDatabase, CommandStackDatabase> ();
-            container.RegisterType <IDatabase, Database>();
+            container.RegisterType <IDatabase, Database> ();
 
             container.RegisterType <IDispatchCommits, CommitsDispatcher> ();
             container.RegisterInstance<IStoreEvents>(CreateEventStore(container.Resolve<IDispatchCommits>()));

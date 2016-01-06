@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
-using BankAccount.CommandStackDal.Abstraction;
 using BankAccount.Infrastructure.Domain;
 using BankAccount.Infrastructure.Storage;
 using EventStore;
@@ -14,18 +13,15 @@ namespace BankAccount.EventStore
         #region Fields
 
         private readonly IStoreEvents _eventStore;
-        private readonly ICommandStackDatabase _database;
 
         #endregion
 
         #region C-Tor
 
         public NEventStoreCommandStackRepository(
-            IStoreEvents eventStore, 
-            ICommandStackDatabase database)
+            IStoreEvents eventStore)
         {
             this._eventStore = eventStore;
-            this._database = database;
         }
 
         #endregion

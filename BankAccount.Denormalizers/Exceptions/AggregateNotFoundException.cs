@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BankAccount.CommandStackDal.Exceptions
+namespace BankAccount.Denormalizers.Exceptions
 {
     public class AggregateNotFoundException : Exception
     {
