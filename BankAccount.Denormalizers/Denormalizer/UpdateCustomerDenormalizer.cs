@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using BankAccount.DbModel.ItemDb;
+using BankAccount.Denormalizers.Dal;
 using BankAccount.Events;
 using BankAccount.Infrastructure;
 
@@ -13,58 +14,37 @@ namespace BankAccount.Denormalizers.Denormalizer
         IHandleMessage<AddressChangedEvent>,
         IHandleMessage<CustomerDeletedEvent>
     {
+        private readonly IDatabase _db;
+
+        public UpdateCustomerDenormalizer(IDatabase db)
+        {
+            this._db = db;
+        }
+
         public void Handle(PersonChangedEvent e)
         {
-            //// we could save all chabges if we do CRUD
-            //// but we are using ES 
-            //using (var ctx = new BankAccountDbContext())
-            //{
-            //    var entity = ctx.CustomerSet.SingleOrDefault(cust => cust.AggregateId == e.AggregateId);
-            //    if (entity == null)
-            //    {
-            //        throw new ArgumentNullException($"customer");
-            //    }
-
-            //    entity.FirstName = e.FirstName;
-            //    entity.LastName = e.LastName;
-            //    entity.CustomerState = e.State;
-            //    entity.Version = e.Version;
-
-            //    ctx.Entry(entity).State = EntityState.Modified;
-            //    ctx.SaveChanges();
-            //}
+            // we could save all chabges if we do CRUD
+            // but we are using ES 
+            // ...
         }
 
         public void Handle(ContactChangedEvent message)
         {
-            //// we could save all chabges if we do CRUD
-            //// but we are using ES 
-            //// ...
+            // we could save all chabges if we do CRUD
+            // but we are using ES 
+            // ...
         }
 
         public void Handle(AddressChangedEvent message)
         {
-            //// we could save all chabges if we do CRUD
-            //// but we are using ES 
-            //// ...
+            // we could save all chabges if we do CRUD
+            // but we are using ES 
+            // ...
         }
 
         public void Handle(CustomerDeletedEvent message)
         {
-            using (var ctx = new BankAccountDbContext())
-            {
-                var entity = ctx.CustomerSet.SingleOrDefault(cust => cust.AggregateId == message.AggregateId);
-                if (entity == null)
-                {
-                    throw new ArgumentNullException($"customer");
-                }
-
-                entity.CustomerState = message.State;
-                entity.Version = message.Version;
-
-                ctx.Entry(entity).State = EntityState.Modified;
-                ctx.SaveChanges();
-            }
+            this._db.UpdateCustomer(message.AggregateId, message.State, message.Version);
         }
     }
 }

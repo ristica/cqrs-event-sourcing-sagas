@@ -33,17 +33,17 @@ namespace BankAccount.Denormalizers.Denormalizer
 
         public void Handle(AccountLockedEvent message)
         {
-            this._db.Update(message.AggregateId, message.AccountState, message.Version);
+            this._db.UpdateAccount(message.AggregateId, message.AccountState, message.Version);
         }
 
         public void Handle(AccountUnlockedEvent message)
         {
-            this._db.Update(message.AggregateId, message.AccountState, message.Version);
+            this._db.UpdateAccount(message.AggregateId, message.AccountState, message.Version);
         }
 
         public void Handle(AccountDeletedEvent message)
         {
-            this._db.Update(message.AggregateId, message.AccountState, message.Version);
+            this._db.UpdateAccount(message.AggregateId, message.AccountState, message.Version);
         }
     }
 }
