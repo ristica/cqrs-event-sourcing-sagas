@@ -62,8 +62,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dal\CustomerDatabase.cs" />
-    <Compile Include="Dal\AccountDatabase.cs" />
+    <Compile Include="Dal\CustomerDenormalizerRepository.cs" />
+    <Compile Include="Dal\AccountDenormalizerRepository.cs" />
     <Compile Include="Dal\IDenormalizerRepository.cs" />
     <Compile Include="Denormalizer\AccountDenormalizer.cs" />
     <Compile Include="Denormalizer\MoneyTransferDenormalizer.cs" />
