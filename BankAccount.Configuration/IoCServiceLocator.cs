@@ -65,9 +65,7 @@ namespace BankAccount.Configuration
             container.RegisterType <IDispatchCommits, CommitsDispatcher> ();
             container.RegisterInstance<IStoreEvents>(CreateEventStore(container.Resolve<IDispatchCommits>()));
 
-            // Bus handlers
             RegisterDenormalizer(container);
-
             RegisterSagaHandlers(container);
         }
 
