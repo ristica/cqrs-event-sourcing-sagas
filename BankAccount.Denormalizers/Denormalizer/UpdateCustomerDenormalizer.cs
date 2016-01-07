@@ -12,9 +12,9 @@ namespace BankAccount.Denormalizers.Denormalizer
         IHandleMessage<AddressChangedEvent>,
         IHandleMessage<CustomerDeletedEvent>
     {
-        private readonly IDatabase<CustomerEntity> _db;
+        private readonly IDenormalizerRepository<CustomerEntity> _db;
 
-        public UpdateCustomerDenormalizer([Dependency("Customer")]  IDatabase<CustomerEntity> db)
+        public UpdateCustomerDenormalizer([Dependency("Customer")]  IDenormalizerRepository<CustomerEntity> db)
         {
             this._db = db;
         }

@@ -59,8 +59,8 @@ namespace BankAccount.Configuration
             container.RegisterType <IQueryStackRepository, QueryStackRepository> ();
             container.RegisterType <ICommandStackRepository, NEventStoreCommandStackRepository>();
 
-            container.RegisterType(typeof (IDatabase<>), typeof (AccountDatabase), "Account");
-            container.RegisterType(typeof (IDatabase<>), typeof(CustomerDatabase), "Customer");
+            container.RegisterType(typeof (IDenormalizerRepository<>), typeof (AccountDenormalizerRepository), "Account");
+            container.RegisterType(typeof (IDenormalizerRepository<>), typeof(CustomerDenormalizerRepository), "Customer");
 
             container.RegisterType <IDispatchCommits, CommitsDispatcher> ();
             container.RegisterInstance<IStoreEvents>(CreateEventStore(container.Resolve<IDispatchCommits>()));

@@ -7,7 +7,7 @@ using BankAccount.ValueTypes;
 
 namespace BankAccount.Denormalizers.Dal
 {
-    public sealed class CustomerDatabase : IDatabase<CustomerEntity>
+    public sealed class CustomerDenormalizerRepository : IDenormalizerRepository<CustomerEntity>
     {
         public void Create(CustomerEntity item)
         {

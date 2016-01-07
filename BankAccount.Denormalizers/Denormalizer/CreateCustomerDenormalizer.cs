@@ -9,9 +9,9 @@ namespace BankAccount.Denormalizers.Denormalizer
     public class CreateCustomerDenormalizer : 
         IHandleMessage<CustomerCreatedEvent>
     {
-        private readonly IDatabase<CustomerEntity> _db;
+        private readonly IDenormalizerRepository<CustomerEntity> _db;
 
-        public CreateCustomerDenormalizer([Dependency("Customer")]  IDatabase<CustomerEntity> db)
+        public CreateCustomerDenormalizer([Dependency("Customer")]  IDenormalizerRepository<CustomerEntity> db)
         {
             this._db = db;
         }

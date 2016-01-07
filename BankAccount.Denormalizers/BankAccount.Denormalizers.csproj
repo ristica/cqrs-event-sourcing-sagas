@@ -64,7 +64,7 @@
   <ItemGroup>
     <Compile Include="Dal\CustomerDatabase.cs" />
     <Compile Include="Dal\AccountDatabase.cs" />
-    <Compile Include="Dal\IDatabase.cs" />
+    <Compile Include="Dal\IDenormalizerRepository.cs" />
     <Compile Include="Denormalizer\AccountDenormalizer.cs" />
     <Compile Include="Denormalizer\MoneyTransferDenormalizer.cs" />
     <Compile Include="Denormalizer\UpdateCustomerDenormalizer.cs" />

@@ -12,9 +12,9 @@ namespace BankAccount.Denormalizers.Denormalizer
         IHandleMessage<AccountUnlockedEvent>,
         IHandleMessage<AccountDeletedEvent>
     {
-        private readonly IDatabase<AccountEntity> _db;
+        private readonly IDenormalizerRepository<AccountEntity> _db;
 
-        public AccountDenormalizer([Dependency("Account")] IDatabase<AccountEntity> db)
+        public AccountDenormalizer([Dependency("Account")] IDenormalizerRepository<AccountEntity> db)
         {
             this._db = db;
         }
