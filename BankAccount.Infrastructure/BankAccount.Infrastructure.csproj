@@ -59,6 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Buses\IBus.cs" />
+    <Compile Include="Exceptions\AggregateNotFoundException.cs" />
+    <Compile Include="Exceptions\UnregisteredDomainEventException.cs" />
     <Compile Include="IAmStartedBy.cs" />
     <Compile Include="IHandleMessage.cs" />
     <Compile Include="Domain\AggregateRoot.cs" />

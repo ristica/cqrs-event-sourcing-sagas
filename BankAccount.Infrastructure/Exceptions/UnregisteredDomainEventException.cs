@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BankAccount.Denormalizers.Exceptions
+namespace BankAccount.Infrastructure.Exceptions
 {
     public class UnregisteredDomainEventException : Exception
     {

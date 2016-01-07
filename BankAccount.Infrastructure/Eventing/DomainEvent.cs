@@ -8,7 +8,7 @@ namespace BankAccount.Infrastructure.Eventing
         public int Version { get; set; }
         public DateTime TimeStamp { get; private set; }
 
-        public DomainEvent()
+        protected DomainEvent()
         {
             this.TimeStamp = DateTime.Now;
         }
