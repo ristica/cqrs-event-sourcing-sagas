@@ -89,7 +89,7 @@ namespace BankAccount.ApplicationLayer
             {
                 // find all events for the 
                 var commits = IoCServiceLocator.Container.Resolve<IStoreEvents>().Advanced.GetFrom(acc.AggregateId, 0, int.MaxValue);
-                var transactions = new List<int>();
+                var transactions = new List<decimal>();
                 foreach (var c in commits)
                 {
                     transactions.AddRange(

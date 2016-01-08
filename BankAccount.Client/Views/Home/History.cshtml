@@ -10,14 +10,14 @@
 <div class="row">
     <fieldset>
         <legend>@accountName - @ViewBag.AccountId</legend>
-        <div style="margin-bottom: 15px;">Current balance: <b>@ViewBag.Currency @currentBalance</b></div>
+        <div style="margin-bottom: 15px;">Current balance: <b>@ViewBag.Currency @($"{currentBalance:#,###.##}")</b></div>
         <ul>
             @foreach (var st in Model)
             {
                 <li style="width: 100%; display: block; clear: left;">
                     <div style="float: left; font-weight: bold;">&nbsp;>&nbsp;&nbsp;</div>
                     <div style="width: 80px; float: left;">@st.Text</div>
-                    <div style="width: 100px; float: left;"><b>@ViewBag.Currency @st.Amount</b>
+                    <div style="width: 100px; float: left;"><b>@ViewBag.Currency @($"{st.Amount:#,###.##}")</b>
                     </div>
                 </li>
             }

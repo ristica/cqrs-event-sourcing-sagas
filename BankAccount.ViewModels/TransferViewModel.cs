@@ -16,6 +16,6 @@ namespace BankAccount.ViewModels
         public int Version { get; set; }
 
         [Required]
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
     }
 }

@@ -2,10 +2,10 @@
 {
     public class BalanceHistoryViewModel
     {
-        public int Amount { get; }
+        public decimal Amount { get; }
         public string Text { get; private set; }
 
-        public BalanceHistoryViewModel(int amount)
+        public BalanceHistoryViewModel(decimal amount)
         {
             this.Amount = amount;
             this.Text = amount > 0 ? "Deposit" : "Withdraw";

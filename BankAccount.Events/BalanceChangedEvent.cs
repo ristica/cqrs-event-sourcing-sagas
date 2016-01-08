@@ -4,6 +4,6 @@ namespace BankAccount.Events
 {
     public class BalanceChangedEvent : DomainEvent
     {
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
     }
 }

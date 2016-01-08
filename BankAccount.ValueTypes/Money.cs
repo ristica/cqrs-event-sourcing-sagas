@@ -3,6 +3,6 @@
     public class Money
     {
         public string Currency { get; set; }
-        public int Balance { get; set; }
+        public decimal Balance { get; set; }
     }
 }

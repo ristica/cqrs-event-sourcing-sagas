@@ -23,7 +23,7 @@ namespace BankAccount.ViewModels
         public string Currency { get; set; }
 
         [HiddenInput(DisplayValue = false)]
-        public int CurrentBalance { get; set; }
+        public decimal CurrentBalance { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         public State AccountState { get; set; }

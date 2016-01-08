@@ -11,7 +11,7 @@ namespace BankAccount.Domain
 
         public Guid CustomerId { get; private set; }
         public string Currency { get; private set; }
-        public int Balance { get; private set; }
+        public decimal Balance { get; private set; }
         public State State { get; private set; }
 
         #endregion
@@ -19,7 +19,7 @@ namespace BankAccount.Domain
         #region Public methods called by command handlers
 
         public void ChangeBalance(
-            int amount,
+            decimal amount,
             int version)
         {
             ApplyChange(

@@ -23,7 +23,7 @@ namespace BankAccount.ViewModels
 
         public string Currency { get; set; }
 
-        public int Amount { get; set; }
+        public decimal Amount { get; set; }
 
         public int Version { get; set; }
     }

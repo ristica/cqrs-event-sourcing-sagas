@@ -116,7 +116,7 @@
             {
                 <tr>
                     <td style="width: 400px; font-weight: bold;">@a.AggregateId</td>
-                    <td>@a.Currency @a.CurrentBalance</td>
+                    <td>@a.Currency @($"{a.CurrentBalance:#,###.##}")</td>
                     <td style="text-align: right;">
                         @switch (a.AccountState)
                         {
