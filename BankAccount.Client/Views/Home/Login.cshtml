@@ -25,7 +25,7 @@
                 <br/>
                 <div class="form-group">
                     <label>Employee ID</label>
-                    @Html.EditorFor(model => model.EmployeeId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.PasswordFor(model => model.EmployeeId, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
                 </div>
                 <br/>
