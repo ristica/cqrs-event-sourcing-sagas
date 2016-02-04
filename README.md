@@ -1,4 +1,4 @@
-# cqrs with es and saga(s) as process manager
+# Cqrs with Event Sourcing and Saga(s) as process manager
 
 As event store / snapshoting => NEventStore (in my case I'm using SQL Server as the DB)
 
