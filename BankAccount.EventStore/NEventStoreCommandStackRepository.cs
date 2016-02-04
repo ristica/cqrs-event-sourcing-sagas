@@ -42,19 +42,16 @@ namespace BankAccount.EventStore
             try
             {
                 var obj = new T();
-                IEnumerable<Commit> commits;
+                int version = 0;
 
-                // check for last snapshot (if there are any)
                 var latestSnapshot = this._eventStore.Advanced.GetSnapshot(id, int.MaxValue);
                 if (latestSnapshot?.Payload != null)
                 {
                     obj = (T)Convert.ChangeType(latestSnapshot.Payload, latestSnapshot.Payload.GetType());
-                    commits = this._eventStore.Advanced.GetFrom(id, latestSnapshot.StreamRevision + 1, int.MaxValue).ToList();
+                    version = latestSnapshot.StreamRevision + 1;
                 }
-                else
-                {
-                    commits = this._eventStore.Advanced.GetFrom(id, 0, int.MaxValue).ToList();
-                }
+
+                IEnumerable<Commit> commits = this._eventStore.Advanced.GetFrom(id, version, int.MaxValue).ToList();
 
                 foreach (var c in commits)
                 {
@@ -75,9 +72,9 @@ namespace BankAccount.EventStore
 
         private void OpenCreateStream(IStoreEvents store, AggregateRoot aggregate)
         {
-            if (!aggregate.GetUncommittedChanges().Any()) return;
+            var changes = aggregate.GetUncommittedChanges();
+            if (!changes.Any()) return;
 
-            var changes = aggregate.GetUncommittedChanges().ToList();
             using (var stream = store.OpenStream(aggregate.Id, 0, int.MaxValue))
             {
                 var version = aggregate.Version;

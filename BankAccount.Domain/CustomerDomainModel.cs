@@ -16,7 +16,7 @@ namespace BankAccount.Domain
 
         #endregion
 
-        #region Public methods called by command handlers
+        #region Public methods called by saga
 
         public void ChangePerson(
             string firstName,

@@ -21,21 +21,21 @@ namespace BankAccount.Denormalizers.Denormalizer
 
         public void Handle(PersonChangedEvent e)
         {
-            // we could save all chabges if we do CRUD
+            // we could save all changes if we do CRUD
             // but we are using ES 
             // ...
         }
 
         public void Handle(ContactChangedEvent message)
         {
-            // we could save all chabges if we do CRUD
+            // we could save all changes if we do CRUD
             // but we are using ES 
             // ...
         }
 
         public void Handle(AddressChangedEvent message)
         {
-            // we could save all chabges if we do CRUD
+            // we could save all changes if we do CRUD
             // but we are using ES 
             // ...
         }

@@ -6,13 +6,6 @@ using BankAccount.ViewModels;
 
 namespace BankAccount.ApplicationLayer
 {
-    /// <summary>
-    /// here we can decide to go all over the 
-    /// command bus / command handler / event bus / event handler
-    ///     IoCServiceLocator.Bus.Send (....)
-    /// or we are going to use process manager (aka Saga) to handle commands / events 
-    ///     IoCServiceLocator.Bus.Send (....)
-    /// </summary>
     public sealed class CommandStackWorkerService
     {
         #region CustomerDomainModel

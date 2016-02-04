@@ -36,6 +36,5 @@ namespace BankAccount.ProcessManager
         }
 
         #endregion
-
     }
 }

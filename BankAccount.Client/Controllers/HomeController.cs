@@ -132,7 +132,7 @@ namespace BankAccount.Client.Controllers
             _user = new UserViewModel
             {
                 EmployeeId = vm.EmployeeId,
-                Name = "Mr. Pingo",
+                Name = "Mr. User",
                 UserName = vm.UserName
             };
             return RedirectToAction("Index");
