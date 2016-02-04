@@ -15,5 +15,4 @@ Build the solution (enable restoring of the nuget packages in visual studio).
 That's it!
 
 --------------------------------------------------------------------------------------
-It is the "same" project as the one under "cqrs-event-sourcing" repository (about bank accounts) 
-but with a process manager (aka Saga) instead of CommandHandler and EventHandler as workflow manager
+It is the "same" project as the one under "cqrs-event-sourcing" repository except that I used a in-memory process manager (aka Saga), instead of CommandHandler and EventHandler, as workflow manager.
