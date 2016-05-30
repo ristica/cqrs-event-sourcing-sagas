@@ -72,7 +72,7 @@ namespace BankAccount.EventStore
 
         private void OpenCreateStream(IStoreEvents store, AggregateRoot aggregate)
         {
-            var changes = aggregate.GetUncommittedChanges();
+            var changes = aggregate.GetUncommittedChanges().ToList();
             if (!changes.Any()) return;
 
             using (var stream = store.OpenStream(aggregate.Id, 0, int.MaxValue))
