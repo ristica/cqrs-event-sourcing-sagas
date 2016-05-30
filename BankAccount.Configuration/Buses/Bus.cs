@@ -36,7 +36,7 @@ namespace BankAccount.Configuration.Buses
         /// <summary>
         /// this one raises events that have been already saved by event store
         /// and are dispatched by the dispatcher,
-        /// and now the corresponding event handler (denormalizer) have to notified
+        /// and now the corresponding event handler (denormalizer) have to be notified
         /// about the aggregate changes so that the presentation layer
         /// could update it's stale data
         /// </summary>
