@@ -35,11 +35,7 @@ namespace BankAccount.Commands
                 IdNumber        = idNumber,
                 Dob             = dob
             };
-            this.Contact = new Contact
-            {
-                Email           = email,
-                PhoneNumber     = phone
-            };
+            this.Contact = new Contact(email, phone);
             this.Address = new Address(street, zip, hausnumber, city, state);
         }
     }

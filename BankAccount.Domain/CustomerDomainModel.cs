@@ -108,8 +108,7 @@ namespace BankAccount.Domain
         public void Handle(ContactChangedEvent e)
         {
             this.Version                = e.Version;
-            this.Contact.Email          = e.Email;
-            this.Contact.PhoneNumber    = e.Phone;
+            this.Contact                = new Contact(e.Email, e.Phone);
         }
 
         public void Handle(AddressChangedEvent e)
@@ -158,11 +157,7 @@ namespace BankAccount.Domain
                         IdNumber        = idNumber,
                         Dob             = dob
                     },
-                    Contact = new Contact
-                    {
-                        Email           = email,
-                        PhoneNumber     = phone
-                    },
+                    Contact             = new Contact(email, phone),
                     Address             = new Address(street, zip, hausnumber, city, state),
                     State               = State.Open
                 };
@@ -176,21 +171,21 @@ namespace BankAccount.Domain
 
         #region Identity Management
 
-        public override bool Equals(object obj)
-        {
-            if (this == obj)
-                return true;
-            if (obj == null || GetType() != obj.GetType())
-                return false;
-            var other = (CustomerDomainModel)obj;
+        //public override bool Equals(object obj)
+        //{
+        //    if (this == obj)
+        //        return true;
+        //    if (obj == null || GetType() != obj.GetType())
+        //        return false;
+        //    var other = (CustomerDomainModel)obj;
 
-            return Id == other.Id && Person == other.Person && Contact == other.Contact && Address == other.Address && CustomerState == other.CustomerState;
-        }
+        //    return Id == other.Id && Person == other.Person && Contact == other.Contact && Address == other.Address && CustomerState == other.CustomerState;
+        //}
 
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
-        }
+        //public override int GetHashCode()
+        //{
+        //    return Id.GetHashCode();
+        //}
 
         #endregion
     }
