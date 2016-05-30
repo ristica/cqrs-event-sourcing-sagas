@@ -115,11 +115,7 @@ namespace BankAccount.Domain
         public void Handle(AddressChangedEvent e)
         {
             this.Version                = e.Version;
-            this.Address.Street         = e.Street;
-            this.Address.Hausnumber     = e.Hausnumber;
-            this.Address.Zip            = e.Zip;
-            this.Address.City           = e.City;
-            this.Address.State          = e.State;
+            this.Address                = new Address(e.Street, e.Zip, e.Hausnumber, e.City, e.State);
         }
 
         public void Handle(CustomerDeletedEvent e)
@@ -167,14 +163,7 @@ namespace BankAccount.Domain
                         Email           = email,
                         PhoneNumber     = phone
                     },
-                    Address = new Address
-                    {
-                        Street          = street,
-                        Hausnumber      = hausnumber,
-                        State           = state,
-                        City            = city,
-                        Zip             = zip
-                    },
+                    Address             = new Address(street, zip, hausnumber, city, state),
                     State               = State.Open
                 };
                 var ba = new CustomerDomainModel();

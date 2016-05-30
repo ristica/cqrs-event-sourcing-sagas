@@ -40,14 +40,7 @@ namespace BankAccount.Commands
                 Email           = email,
                 PhoneNumber     = phone
             };
-            this.Address = new Address
-            {
-                State           = state,
-                Hausnumber      = hausnumber,
-                City            = city,
-                Zip             = zip,
-                Street          = street
-            };
+            this.Address = new Address(street, zip, hausnumber, city, state);
         }
     }
 }
