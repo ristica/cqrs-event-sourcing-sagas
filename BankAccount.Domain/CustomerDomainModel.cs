@@ -149,14 +149,7 @@ namespace BankAccount.Domain
                 {
                     AggregateId         = id,
                     Version             = version,
-                    Person = new Person
-                    {
-                        FirstName       = firstName,
-                        LastName        = lastName,
-                        IdCard          = idCard,
-                        IdNumber        = idNumber,
-                        Dob             = dob
-                    },
+                    Person              = new Person(firstName, lastName, dob, idCard, idNumber),
                     Contact             = new Contact(email, phone),
                     Address             = new Address(street, zip, hausnumber, city, state),
                     State               = State.Open

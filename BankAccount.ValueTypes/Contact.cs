@@ -41,9 +41,9 @@ namespace BankAccount.ValueTypes
                 return false;
             }
 
-            var other = (Address)obj;
-            return this.Email == other.Street &&
-                   this.PhoneNumber == other.State;
+            var other = (Contact)obj;
+            return this.Email == other.Email &&
+                   this.PhoneNumber == other.PhoneNumber;
         }
 
         public override int GetHashCode()
