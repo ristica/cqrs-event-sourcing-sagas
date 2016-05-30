@@ -6,6 +6,10 @@ using EventStore;
 
 namespace BankAccount.Infrastructure.Domain
 {
+    /// <summary>
+    /// aggregate root is responsible for all operations on an aggregate
+    /// act upon model changes and replaying the model if needed
+    /// </summary>
     public class AggregateRoot
     {
         #region Fields

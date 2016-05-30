@@ -28,6 +28,12 @@ namespace BankAccount.EventStore
 
         #region ICommandStackRepository implementation
 
+        /// <summary>
+        /// here we are saving aggregate's event into event store
+        /// in the next step the dispatcher will notify the bus
+        /// about the saved events, so that the bus can raisse them
+        /// </summary>
+        /// <param name="aggregate"></param>
         public void Save(AggregateRoot aggregate)
         {
             using (var scope = new TransactionScope())
@@ -37,6 +43,12 @@ namespace BankAccount.EventStore
             }
         }
 
+        /// <summary>
+        /// replaying the aggregate
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public T GetById<T>(Guid id) where T : AggregateRoot, new()
         {
             try

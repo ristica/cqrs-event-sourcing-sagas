@@ -6,6 +6,11 @@ using Microsoft.Practices.Unity;
 
 namespace BankAccount.Denormalizers.Denormalizer
 {
+    /// <summary>
+    /// denormalizer are responsible for saving the data to the read db
+    /// so that the presentation layer have ready to show data and
+    /// do not have to work with some kind of dto's or something else
+    /// </summary>
     public class AccountDenormalizer :
         IHandleMessage<AccountAddedEvent>,
         IHandleMessage<AccountLockedEvent>,

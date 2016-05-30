@@ -26,6 +26,11 @@ namespace BankAccount.EventStore
 
         #region IDispatchCommits impementation
 
+        /// <summary>
+        /// dispatches the saved events (in the commit) to the bus
+        /// so that they can be proceeded to the corresponding event handler
+        /// </summary>
+        /// <param name="commit"></param>
         public void Dispatch(Commit commit)
         {
             try

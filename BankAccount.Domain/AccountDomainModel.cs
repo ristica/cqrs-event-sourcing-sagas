@@ -5,6 +5,13 @@ using BankAccount.ValueTypes;
 
 namespace BankAccount.Domain
 {
+    /// <summary>
+    /// represents current model of the currently used domain
+    /// implements methods that saga can call
+    /// implements a factory that saga can call to create the first snapshot
+    /// and handles changes that are saved/replayed by aggregate root
+    /// in other words - it is some kind of transaction object
+    /// </summary>
     public class AccountDomainModel : AggregateRoot
     {
         #region Properties
