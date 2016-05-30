@@ -6,7 +6,7 @@ namespace BankAccount.DbModel.ItemDb
 {
     public class BankAccountDbContext : DbContext
     {
-        public BankAccountDbContext() : base("Name=BankAccountStoreConnectionString")
+        public BankAccountDbContext() : base("name=BankAccountStoreConnectionString")
         {
             Database.SetInitializer(new BankAccountInitializer());
         }

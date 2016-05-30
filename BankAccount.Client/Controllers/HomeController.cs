@@ -118,6 +118,12 @@ namespace BankAccount.Client.Controllers
         [HttpPost]
         public ActionResult Index(string Account)
         {
+            if (string.IsNullOrWhiteSpace(Account) || Account.Equals("Please choose a customer"))
+            {
+                var model = QueryStackWorkerService.GetAllBankAccounts();
+                ViewBag.User = _user;
+                return View(model);
+            }
             return RedirectToAction("Details", new { id = new Guid(Account) });
         }
 
@@ -132,7 +138,7 @@ namespace BankAccount.Client.Controllers
             _user = new UserViewModel
             {
                 EmployeeId = vm.EmployeeId,
-                Name = "Mr. User",
+                Name = "Administrator",
                 UserName = vm.UserName
             };
             return RedirectToAction("Index");

@@ -98,7 +98,7 @@ namespace BankAccount.Configuration
             return Wireup.Init()
                          .LogToOutputWindow()
                          //.UsingInMemoryPersistence()
-                         .UsingSqlPersistence("NEventStore") // Connection string is in app.config
+                         .UsingSqlPersistence("NEventStoreConnectionString") // Connection string is in app.config
                             .WithDialect(new MsSqlDialect())
                             .EnlistInAmbientTransaction() // two-phase commit
                             .InitializeStorageEngine()
