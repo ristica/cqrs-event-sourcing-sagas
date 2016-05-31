@@ -93,6 +93,12 @@ namespace BankAccount.EventStore
 
                     // this is where the changes are being saved
                     // and the dispatcher starts dispatching it to the bus
+                    // NOTE: this operation happens synchronous in a transaction!!!
+                    // that means - we are waiting here for:
+                    //      dispatcher to notify the bus
+                    //      then the bus raises event on denormalizer(s)
+                    //      denormalizer saves the current state in the db
+                    // and after these operations we can go further with the workflow
                     stream.CommitChanges(Guid.NewGuid());
 
                     // make a snapshot every 10th event
