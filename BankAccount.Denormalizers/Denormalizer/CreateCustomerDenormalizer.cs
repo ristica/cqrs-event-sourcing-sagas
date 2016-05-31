@@ -11,7 +11,7 @@ namespace BankAccount.Denormalizers.Denormalizer
     {
         private readonly IDenormalizerRepository<CustomerEntity> _db;
 
-        public CreateCustomerDenormalizer([Dependency("Customer")]  IDenormalizerRepository<CustomerEntity> db)
+        public CreateCustomerDenormalizer([Dependency("Customer")] IDenormalizerRepository<CustomerEntity> db)
         {
             this._db = db;
         }

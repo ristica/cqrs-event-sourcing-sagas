@@ -28,6 +28,13 @@ namespace BankAccount.EventStore
 
         #region ICommandStackRepository implementation
 
+        /// <summary>
+        /// this has to wrapped in the transaction so we can be sure
+        /// that the dispatcher dispatches the message to th bus
+        /// and the bus raises event on the denormalizer
+        /// and that means - the data in the separate db-s is in sync
+        /// </summary>
+        /// <param name="aggregate"></param>
         public void Save(AggregateRoot aggregate)
         {
             using (var scope = new TransactionScope())
@@ -83,6 +90,9 @@ namespace BankAccount.EventStore
                     version++;
                     @event.Version = version;
                     stream.Add(new EventMessage { Body = @event });
+
+                    // this is where the changes are being saved
+                    // and the dispatcher starts dispatching it to the bus
                     stream.CommitChanges(Guid.NewGuid());
 
                     // make a snapshot every 10th event

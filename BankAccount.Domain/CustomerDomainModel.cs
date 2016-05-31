@@ -161,25 +161,5 @@ namespace BankAccount.Domain
         }
 
         #endregion
-
-        #region Identity Management
-
-        //public override bool Equals(object obj)
-        //{
-        //    if (this == obj)
-        //        return true;
-        //    if (obj == null || GetType() != obj.GetType())
-        //        return false;
-        //    var other = (CustomerDomainModel)obj;
-
-        //    return Id == other.Id && Person == other.Person && Contact == other.Contact && Address == other.Address && CustomerState == other.CustomerState;
-        //}
-
-        //public override int GetHashCode()
-        //{
-        //    return Id.GetHashCode();
-        //}
-
-        #endregion
     }
 }
