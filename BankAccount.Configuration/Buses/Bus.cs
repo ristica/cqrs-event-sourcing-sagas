@@ -9,6 +9,9 @@ using Microsoft.Practices.Unity;
 
 namespace BankAccount.Configuration.Buses
 {
+    /// <summary>
+    /// this is the heart and soul of the application
+    /// </summary>
     public sealed class Bus : IBus
     {
         #region Fields
@@ -20,11 +23,25 @@ namespace BankAccount.Configuration.Buses
 
         #region ISagaBus
 
+        /// <summary>
+        /// this one is responsible for sending commands to the corresponding saga
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="command"></param>
         public void Send<T>(T command) where T : Command
         {
             this._Send(command);
         }
 
+        /// <summary>
+        /// this one raises events that have been already saved by event store
+        /// and are dispatched by the dispatcher,
+        /// and now the corresponding event handler (denormalizer) have to be notified
+        /// about the aggregate changes so that the presentation layer
+        /// could update it's stale data
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="event"></param>
         public void RaiseEvent<T>(T @event) where T : DomainEvent
         {
             this._Send(@event);

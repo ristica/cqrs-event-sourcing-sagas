@@ -33,6 +33,8 @@ namespace BankAccount.ProcessManager
                 message.Currency,
                 message.AccountState);
 
+            // here we are sending the aggregate to the NEventStore
+            // to serialize the current state or current delta
             this.Repository.Save(aggregate);
         }
 
@@ -40,6 +42,9 @@ namespace BankAccount.ProcessManager
         {
             var aggregate = this.Repository.GetById<AccountDomainModel>(message.Id);
             aggregate.LockAccount();
+
+            // here we are sending the aggregate to the NEventStore
+            // to serialize the current state or current delta
             this.Repository.Save(aggregate);
         }
 
@@ -47,6 +52,9 @@ namespace BankAccount.ProcessManager
         {
             var aggregate = this.Repository.GetById<AccountDomainModel>(message.Id);
             aggregate.UnlockAccount();
+
+            // here we are sending the aggregate to the NEventStore
+            // to serialize the current state or current delta
             this.Repository.Save(aggregate);
         }
 
@@ -54,6 +62,9 @@ namespace BankAccount.ProcessManager
         {
             var aggregate = this.Repository.GetById<AccountDomainModel>(message.Id);
             aggregate.DeleteAccount();
+
+            // here we are sending the aggregate to the NEventStore
+            // to serialize the current state or current delta
             this.Repository.Save(aggregate);
         }
 
